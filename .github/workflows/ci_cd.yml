@@ -1,0 +1,225 @@
+
+name: GitHub CI
+on:
+  pull_request:
+  push:
+    tags:
+      - "*"
+    branches:
+      - main
+
+env:
+  MAIN_PYTHON_VERSION: '3.12'
+  DOCUMENTATION_CNAME: 'upgraded-adventure-j5lkjqp.pages.github.io'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  style:
+    name: Code style
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install required tools
+      run : |
+        sudo apt install golang-golang-x-tools
+        sudo snap install golangci-lint
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Python for pre-commit hook
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+    - name: Run pre-commit hook
+      uses: pre-commit/action@v3.0.1
+
+  build:
+    name: Build project
+    needs: [style]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: 'go.mod'
+        cache-dependency-path: 'go.sum'
+
+    - name: Verify library builds
+      run: |
+        go build pkg/sharedtypes
+
+  doc-style:
+    name: "Documentation style"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ansys/actions/doc-style@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  doc-build:
+    name: "Build project documentation"
+    needs: [doc-style]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Build project documentation"
+        uses: ansys/actions/doc-build@v5
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          use-python-cache: false
+          skip-install: true
+          requirements-file: doc/requirements.txt
+          check-links: false
+
+  doc-api-reference:
+    name: "Build API reference documentation"
+    needs: [doc-build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+
+      - name: Build GoPages
+        run: |
+          go install github.com/johnstarich/go/gopages@latest
+          gopages -internal -source-link "https://github.com/ansys-internal/pyconv-sharedtypes/blob/main/{{.Path}}{{if .Line}}#L{{.Line}}{{end}}"
+
+      - name: Download HTML documentation artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: documentation-html
+          path: documentation-html
+
+      - name: Run Bash script
+        run: |
+          # Set environment variables for file paths
+          DOC_BUILD_HTML="documentation-html"
+          SOURCE_FILE="$DOC_BUILD_HTML/api_reference/test/index.html"
+          SOURCE_DIRECTORY="dist/pkg/github.com/ansys-internal/pyconv-sharedtypes/pkg/"
+          REPLACEMENT_DIRECTORY="$DOC_BUILD_HTML/api_reference/pkg"
+          ACTUAL_DIR="$DOC_BUILD_HTML/api_reference/"
+          # Check if REPLACEMENT_DIRECTORY exists, if not, create it
+          if [ ! -d "$REPLACEMENT_DIRECTORY" ]; then
+            mkdir -p "$REPLACEMENT_DIRECTORY"
+          fi
+          # Remove existing content in the replacement directory
+          rm -rf "$REPLACEMENT_DIRECTORY"/*
+          # Move the source_directory content to the replacement_directory
+          mv "$SOURCE_DIRECTORY"* "$REPLACEMENT_DIRECTORY"
+          # Remove the index.html file in the replacement_directory
+          rm "$REPLACEMENT_DIRECTORY/index.html"
+          # Process each HTML file in the replacement directory
+          find "$REPLACEMENT_DIRECTORY" -type f -name "*.html" | while IFS= read -r replacement_file; do
+            replacementBodyContent=$(sed -n '/<body>/,/<\/body>/p' "$replacement_file" | \
+            sed '/<div class="top-heading" id="heading-wide"><a href="\/pkg\/github.com\/ansys-internal\/pyconv-sharedtypes\/">GoPages | Auto-generated docs<\/a><\/div>/,/<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;<\/span><\/a>/d' | \
+            sed 's/\//\\\//g')
+            # Use awk to replace content between specific HTML tags
+            awk -v repl="$replacementBodyContent" '
+              /<article class="bd-article" role="main">/,/<\/article>/ {
+                if ($0 ~ /<article class="bd-article" role="main">/) {
+                  print $0
+                  print repl
+                  while ($0 !~ /<\/article>/) getline
+                  next
+                }
+              }
+              { print $0 }
+            ' "$SOURCE_FILE" > "$replacement_file"
+          done
+          # Move the modified files back to the actual directory
+          mv "$REPLACEMENT_DIRECTORY"/* "$ACTUAL_DIR"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation-html-with-api
+          path: documentation-html
+
+  release:
+    name: Generate GitHub release
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    needs: [doc-api-reference]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Release to GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          fail_on_unmatched_files: false
+          generate_release_notes: true
+
+  main-repo-release:
+    name: Update main pyconv repo and create release
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    needs: [release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pyconv repository
+        run: |
+          git clone --branch main https://${{ secrets.PYCONV_RELEASE_TOKEN }}@github.com/ansys-internal/pyconv.git
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'pyconv/scripts/releasehelper/go.mod'
+
+      - name: Run tag script
+        run: |
+          cd pyconv/scripts/releasehelper
+          go run main.go "tag" ${{ github.ref_name }} ${{ secrets.PYCONV_RELEASE_TOKEN }}
+
+      - name: Commit and push to pyconv
+        run: |
+          cd pyconv
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git config --global user.name '${{ github.actor }}'
+          git commit -a -m 'New release triggered by ${{ github.event.repository.name }}'
+          git push origin main
+
+      - name: Run release script
+        run: |
+          cd pyconv/scripts/releasehelper
+          go run main.go "release" ${{ github.ref_name }} ${{ secrets.PYCONV_RELEASE_TOKEN }}
+
+  upload_dev_docs:
+    name: Upload dev documentation
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: [doc-api-reference]
+    steps:
+      - name: Deploy the latest documentation
+        uses: ansys/actions/doc-deploy-dev@v5
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          doc-artifact-name: documentation-html-with-api
+
+  upload_docs_release:
+    name: Upload release documentation
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    needs: [release]
+    steps:
+      - name: Deploy the stable documentation
+        uses: ansys/actions/doc-deploy-stable@v5
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          doc-artifact-name: documentation-html-with-api

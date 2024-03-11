@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/doc/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "maintenance"
+    commit-message:
+      prefix: "MAINT"
+    groups:
+       doc-deps:
+          patterns:
+            - "*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "maintenance"
+    commit-message:
+      prefix: "MAINT"
+    groups:
+       actions:
+          patterns:
+            - "*"
