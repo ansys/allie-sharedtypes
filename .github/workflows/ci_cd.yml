@@ -59,7 +59,7 @@ jobs:
 
     - name: Verify library builds
       run: |
-        go build pkg/sharedtypes
+        go build ./pkg/sharedtypes
 
   doc-style:
     name: "Documentation style"
