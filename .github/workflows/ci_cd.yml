@@ -160,7 +160,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Release to GitHub
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           fail_on_unmatched_files: false
           generate_release_notes: true
