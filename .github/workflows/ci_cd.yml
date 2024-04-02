@@ -25,7 +25,7 @@ jobs:
     - name: Install required tools
       run : |
         sudo apt install golang-golang-x-tools
-        sudo snap install golangci-lint
+        sudo snap install golangci-lint --classic
 
     - name: Checkout repository
       uses: actions/checkout@v4
