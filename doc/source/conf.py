@@ -3,7 +3,7 @@
 from datetime import datetime
 import os
 
-from ansys_sphinx_theme import pyansys_logo_black, ansys_favicon, get_version_match
+from ansys_sphinx_theme import ansys_logo_black, ansys_favicon, get_version_match
 
 # Project information
 project = "pyconv-sharedtypes"
@@ -22,7 +22,7 @@ cname = os.getenv("DOCUMENTATION_CNAME", "noname.com")
 # Select desired logo, theme, and declare the html title
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = project
-html_logo = pyansys_logo_black
+html_logo = ansys_logo_black
 html_favicon = ansys_favicon
 html_context = {
     "github_user": "ansys",
