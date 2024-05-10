@@ -1,4 +1,5 @@
 """Sphinx documentation configuration file."""
+
 from datetime import datetime
 import os
 
@@ -24,13 +25,13 @@ html_short_title = html_title = project
 html_logo = pyansys_logo_black
 html_favicon = ansys_favicon
 html_context = {
-    "github_user": "ansys-internal",
+    "github_user": "ansys",
     "github_repo": "pyconv-sharedtypes",
     "github_version": "main",
     "doc_path": "doc/source",
 }
 html_theme_options = {
-    "github_url": "https://github.com/ansys-internal/pyconv-sharedtypes",
+    "github_url": "https://github.com/ansys/pyconv-sharedtypes",
     "additional_breadcrumbs": [
         ("PyConv", "https://pyconv.docs.pyansys.com/"),
     ],
@@ -49,7 +50,6 @@ extensions = [
     "sphinx_design",
     "sphinx_copybutton",
 ]
-
 
 
 # Add any paths that contain templates here, relative to this directory.
