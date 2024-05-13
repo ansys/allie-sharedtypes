@@ -1,2 +1,2 @@
-# PyConv Shared types
-Shared types used in the PyConv project
+# AllieFlowKit Shared types
+Shared types used in the AllieFlowKit project
