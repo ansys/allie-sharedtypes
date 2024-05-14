@@ -1,8 +1,6 @@
 Allie Shared types
-ANSYS
-Ansys
-ansys
+[Aa]llie
+(?i)Ansys
 API
 knowledgedb
 llmhandler
-PyConv
