@@ -96,7 +96,7 @@ jobs:
       - name: Build GoPages
         run: |
           go install github.com/johnstarich/go/gopages@latest
-          gopages -internal -source-link "https://github.com/ansys/allieflowkit-sharedtypes/blob/main/{{.Path}}{{if .Line}}#L{{.Line}}{{end}}"
+          gopages -internal -source-link "https://github.com/ansys/allie-sharedtypes/blob/main/{{.Path}}{{if .Line}}#L{{.Line}}{{end}}"
 
       - name: Download HTML documentation artifacts
         uses: actions/download-artifact@v4
@@ -109,7 +109,7 @@ jobs:
           # Set environment variables for file paths
           DOC_BUILD_HTML="documentation-html"
           SOURCE_FILE="$DOC_BUILD_HTML/api_reference/test/index.html"
-          SOURCE_DIRECTORY="dist/pkg/github.com/ansys/allieflowkit-sharedtypes/pkg/"
+          SOURCE_DIRECTORY="dist/pkg/github.com/ansys/allie-sharedtypes/pkg/"
           REPLACEMENT_DIRECTORY="$DOC_BUILD_HTML/api_reference/pkg"
           ACTUAL_DIR="$DOC_BUILD_HTML/api_reference/"
           # Check if REPLACEMENT_DIRECTORY exists, if not, create it
@@ -125,7 +125,7 @@ jobs:
           # Process each HTML file in the replacement directory
           find "$REPLACEMENT_DIRECTORY" -type f -name "*.html" | while IFS= read -r replacement_file; do
             replacementBodyContent=$(sed -n '/<body>/,/<\/body>/p' "$replacement_file" | \
-            sed '/<div class="top-heading" id="heading-wide"><a href="\/pkg\/github.com\/ansys\/allieflowkit-sharedtypes\/">GoPages | Auto-generated docs<\/a><\/div>/,/<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;<\/span><\/a>/d' | \
+            sed '/<div class="top-heading" id="heading-wide"><a href="\/pkg\/github.com\/ansys\/allie-sharedtypes\/">GoPages | Auto-generated docs<\/a><\/div>/,/<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;<\/span><\/a>/d' | \
             sed 's/\//\\\//g')
             # Use awk to replace content between specific HTML tags
             awk -v repl="$replacementBodyContent" '

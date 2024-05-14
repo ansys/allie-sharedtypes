@@ -6,7 +6,7 @@ import os
 from ansys_sphinx_theme import ansys_logo_black, ansys_favicon, get_version_match
 
 # Project information
-project = "allieflowkit-sharedtypes"
+project = "allie-sharedtypes"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "ANSYS, Inc."
 
@@ -26,14 +26,14 @@ html_logo = ansys_logo_black
 html_favicon = ansys_favicon
 html_context = {
     "github_user": "ansys",
-    "github_repo": "allieflowkit-sharedtypes",
+    "github_repo": "allie-sharedtypes",
     "github_version": "main",
     "doc_path": "doc/source",
 }
 html_theme_options = {
-    "github_url": "https://github.com/ansys/allieflowkit-sharedtypes",
+    "github_url": "https://github.com/ansys/allie-sharedtypes",
     "additional_breadcrumbs": [
-        ("AllieFlowKit", "https://allieflowkit.docs.pyansys.com/"),
+        ("Allie", "https://allie.docs.pyansys.com/"),
     ],
     "switcher": {
         "json_url": f"https://{cname}/versions.json",
