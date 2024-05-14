@@ -1,4 +1,4 @@
-AllieFlowKit Shared types
+Allie Shared types
 ANSYS
 Ansys
 ansys
