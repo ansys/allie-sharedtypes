@@ -16,8 +16,16 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v4
 
+        - name: Setup Go
+          uses: actions/setup-go@v5
+          with:
+            go-version-file: 'go.mod'
+            cache-dependency-path: 'go.sum'
+
         - name: Install Protoc
-          uses: arduino/setup-protoc@v3
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y protobuf-compiler
 
         - name: Navigate to root folder and run Protoc
           run: |
@@ -29,5 +37,6 @@ jobs:
             cd $GITHUB_WORKSPACE
             git config --global user.email '${{ github.actor }}@users.noreply.github.com'
             git config --global user.name '${{ github.actor }}'
-            git commit -a -m 'Auto-generate gRPC files'
+            git add -f pkg/allieflowkitgrpc/
+            git commit -a -m 'Auto-generate gRPC files' || echo "No changes to commit"
             git push origin main
