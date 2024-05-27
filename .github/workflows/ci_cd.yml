@@ -81,6 +81,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y protobuf-compiler
 
+      - name: Install protoc-gen-go and protoc-gen-go-grpc
+        run: |
+          cd $GITHUB_WORKSPACE
+          ls
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
       - name: Add Go bin to PATH
         run: echo "${{ runner.tool_cache }}/go/bin" >> $GITHUB_PATH
 
