@@ -26,6 +26,3 @@ dist
 # Extra
 .venv
 doc/_build
-
-# protobuf
-/allieflowkitgrpc
