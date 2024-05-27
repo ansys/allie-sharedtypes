@@ -25,3 +25,16 @@ updates:
        actions:
           patterns:
             - "*"
+
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "maintenance"
+    commit-message:
+      prefix: "MAINT"
+    groups:
+       golang-deps:
+          patterns:
+            - "*"
