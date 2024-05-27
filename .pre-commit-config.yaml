@@ -18,4 +18,8 @@ repos:
   - id: go-fmt
   - id: go-imports
   - id: no-go-testing
+
+- repo: https://github.com/golangci/golangci-lint
+  rev: v1.59.0
+  hooks:
   - id: golangci-lint
