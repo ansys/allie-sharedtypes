@@ -130,4 +130,7 @@ message StreamOutput {
 
     // Value of the output.
     string value = 3;
+
+    // Code validation of the output. Only relevant for code generation.
+    string code_validation = 4;
 }
