@@ -1,37 +1,56 @@
 package typeconverters
 
 import (
+	"fmt"
 	"strings"
 )
 
-// JSONToGo converts a JSON data type to a Go data type
-func JSONToGo(jsonType string) string {
+// JSONToGo converts a JSON data type to a Go data type.
+//
+// Parameters:
+//
+//	jsonType: The JSON data type to convert.
+//
+// Returns:
+//
+//	string: The Go data type.
+//	error: An error if the JSON data type is not supported.
+func JSONToGo(jsonType string) (string, error) {
 	if strings.HasPrefix(jsonType, "array<") && strings.HasSuffix(jsonType, ">") {
 		elementType := jsonType[6 : len(jsonType)-1]
-		return "[]" + JSONToGo(elementType)
+		arrayType, err := JSONToGo(elementType)
+		if err != nil {
+			return "", err
+		}
+
+		return "[]" + arrayType, nil
 	}
 
 	switch {
 	case jsonType == "string":
-		return "string"
+		return "string", nil
 	case jsonType == "string(binary)":
-		return "[]byte"
+		return "[]byte", nil
 	case jsonType == "number":
-		return "float64" // Default to float64 for general numeric values
+		return "float64", nil // Default to float64 for general numeric values
 	case jsonType == "integer":
-		return "int"
+		return "int", nil
 	case jsonType == "boolean":
-		return "bool"
-	case jsonType == "object":
-		return "map[string]interface{}"
-	case jsonType == "null":
-		return "interface{}"
+		return "bool", nil
 	default:
-		return "interface{}"
+		return "", fmt.Errorf("not supported JSON type: %s", jsonType)
 	}
 }
 
-// GoToJSON converts a Go data type to a JSON data type
+// GoToJSON converts a Go data type to a JSON data type.
+//
+// Parameters:
+//
+//	goType: The Go data type to convert.
+//
+// Returns:
+//
+//	string: The JSON data type.
 func GoToJSON(goType string) string {
 	if strings.HasPrefix(goType, "[]") && goType != "[]byte" {
 		elementType := goType[2:]
@@ -47,13 +66,9 @@ func GoToJSON(goType string) string {
 		return "integer"
 	case "bool":
 		return "boolean"
-	case "map[string]interface{}":
-		return "object"
-	case "interface{}":
-		return "null"
 	case "[]byte":
 		return "string(binary)"
 	default:
-		return "string"
+		return "object"
 	}
 }
