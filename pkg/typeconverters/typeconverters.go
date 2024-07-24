@@ -27,7 +27,7 @@ func JSONToGo(jsonType string) string {
 	case jsonType == "null":
 		return "interface{}"
 	default:
-		return "interface{}" // Default type if unknown
+		return "interface{}"
 	}
 }
 
@@ -54,6 +54,6 @@ func GoToJSON(goType string) string {
 	case "[]byte":
 		return "string(binary)"
 	default:
-		return "string" // Default type if unknown
+		return "string"
 	}
 }
