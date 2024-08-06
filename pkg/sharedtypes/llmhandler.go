@@ -4,7 +4,9 @@ package sharedtypes
 type HandlerRequest struct {
 	Adapter             string            `json:"adapter"` // "chat", "embeddings"
 	InstructionGuid     string            `json:"instructionGuid"`
+	ModelIds            []string          `json:"modelIds"` // optional model ids to define a set of specific models to be used for this request
 	Data                string            `json:"data"`
+	Images              []string          `json:"images"`                 // List of images in base64 format
 	ChatRequestType     string            `json:"chatRequestType"`        // "summary", "code", "keywords", "general"; only relevant if "adapter" is "chat"
 	DataStream          bool              `json:"dataStream"`             // only relevant if "adapter" is "chat"
 	MaxNumberOfKeywords uint32            `json:"maxNumberOfKeywords"`    // only relevant if "chatRequestType" is "keywords"
@@ -14,7 +16,6 @@ type HandlerRequest struct {
 	MsgContext          string            `json:"msgContext"`             // any added context you might need
 	SystemPrompt        string            `json:"systemPrompt"`           // only relevant if "chatRequestType" is "general"
 	ModelOptions        ModelOptions      `json:"modelOptions,omitempty"` // only relevant if "adapter" is "chat"
-	ClientGuid          string
 }
 
 // HandlerResponse represents the LLM Handler response for a specific request.
@@ -22,14 +23,18 @@ type HandlerResponse struct {
 	// Common properties
 	InstructionGuid string `json:"instructionGuid"`
 	Type            string `json:"type"` // "info", "error", "chat", "embeddings"
+
 	// Chat properties
 	IsLast   *bool   `json:"isLast,omitempty"`
 	Position *uint32 `json:"position,omitempty"`
 	ChatData *string `json:"chatData,omitempty"`
+
 	// Embeddings properties
 	EmbeddedData []float32 `json:"embeddedData,omitempty"`
+
 	// Error properties
 	Error *ErrorResponse `json:"error,omitempty"`
+
 	// Info properties
 	InfoMessage *string `json:"infoMessage,omitempty"`
 }
