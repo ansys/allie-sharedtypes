@@ -53,8 +53,9 @@ type TransferDetails struct {
 
 // HistoricMessage represents a past chat messages.
 type HistoricMessage struct {
-	Role    string `json:"role"` // "user", "assistant", "system"
-	Content string `json:"content"`
+	Role    string   `json:"role"`
+	Content string   `json:"content"`
+	Images  []string `json:"images"` // image in base64 format
 }
 
 // OpenAIOption represents an option for an OpenAI API call.
