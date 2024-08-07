@@ -260,6 +260,22 @@ func createFlags(val reflect.Value, prefix string) {
 }
 
 ///////////////////////
+// Helper Functions
+///////////////////////
+
+// GetGlobalConfigAsJSON returns the global configuration as a JSON string.
+//
+// Returns:
+//   - string: The global configuration as a JSON string.
+func GetGlobalConfigAsJSON() string {
+	jsonData, err := json.Marshal(GlobalConfig)
+	if err != nil {
+		return ""
+	}
+	return string(jsonData)
+}
+
+///////////////////////
 // Error file creator
 ///////////////////////
 
