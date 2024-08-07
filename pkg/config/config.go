@@ -32,7 +32,7 @@ func InitGlobalConfigFromFile(fileName string, requiredProperties []string, opti
 	GlobalConfig = &configResult
 
 	// Set optional properties if missing
-	defineOptionalProperties(configResult, optionalDefaultValues)
+	defineOptionalProperties(GlobalConfig, optionalDefaultValues)
 }
 
 // readYaml reads the yaml specified in `fileName` parameter and saves it to `config_struct`
@@ -116,27 +116,48 @@ func validateConfig(config Config, requiredProperties []string) {
 // Parameters:
 //   - config: The configuration object to validate.
 //   - optionalDefaultValues: The map of optional properties and their default values.
-func defineOptionalProperties(config Config, optionalDefaultValues map[string]interface{}) {
+func defineOptionalProperties(config *Config, optionalDefaultValues map[string]interface{}) {
 	defer func() {
 		r := recover()
 		if r != nil {
 			// Write message to error file
-			pan := writeInterfaceToFile(r)
+			message := fmt.Sprintf("Error in defineOptionalProperties: %v", r)
+			pan := writeStringToFile(message)
 			if pan != nil {
 				panic(pan)
 			}
 		}
 	}()
 
-	// Iterate over the optional properties and set the default values if missing
-	for key, value := range optionalDefaultValues {
-		// Check if the property is missing
-		field := reflect.ValueOf(config).FieldByName(key)
-		if !field.IsValid() || field.IsZero() {
-			// Set the default value
-			field.Set(reflect.ValueOf(value))
+	// Iterate over the optional default values
+	for key, defaultValue := range optionalDefaultValues {
+		// Use reflection to check if the field exists and is set to its zero value
+		fieldValue := reflect.ValueOf(config).Elem().FieldByName(key)
+		if fieldValue.IsValid() && isZeroValue(fieldValue) {
+			// Set the default value using reflection
+			if reflect.TypeOf(defaultValue) == fieldValue.Type() {
+				fieldValue.Set(reflect.ValueOf(defaultValue))
+			} else {
+				// Handle type mismatch
+				message := fmt.Sprintf("Type mismatch for key '%s': expected %v, got %v", key, fieldValue.Type(), reflect.TypeOf(defaultValue))
+				pan := writeStringToFile(message)
+				if pan != nil {
+					panic(pan)
+				}
+			}
 		}
 	}
+}
+
+// isZeroValue checks if a reflect.Value is zero for its type.
+//
+// Parameters:
+//   - v: The reflect.Value to check.
+//
+// Returns:
+//   - bool: True if the value is zero, false otherwise.
+func isZeroValue(v reflect.Value) bool {
+	return reflect.DeepEqual(v.Interface(), reflect.Zero(v.Type()).Interface())
 }
 
 /////////////////////////////////////////
