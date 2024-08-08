@@ -1,11 +1,21 @@
 import os
 import shutil
 import re
+import sys
+
+# Ensure the correct number of arguments are provided
+if len(sys.argv) != 3:
+    print("Usage: python script.py <repo_owner> <repo_name>")
+    sys.exit(1)
+
+# Parse CLI arguments
+repo_owner = sys.argv[1]
+repo_name = sys.argv[2]
 
 # Set environment variables for file paths
 DOC_BUILD_HTML = "documentation-html"
 SOURCE_FILE = os.path.join(DOC_BUILD_HTML, "api_reference", "test", "index.html")
-SOURCE_DIRECTORY = "dist/pkg/github.com/ansys/allie-flowkit/pkg/"
+SOURCE_DIRECTORY = f"dist/pkg/github.com/{repo_owner}/{repo_name}/pkg/"
 REPLACEMENT_DIRECTORY = os.path.join(DOC_BUILD_HTML, "api_reference", "pkg")
 ACTUAL_DIR = os.path.join(DOC_BUILD_HTML, "api_reference/")
 
@@ -45,11 +55,15 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
             match = re.search(r'<body>([\s\S]*?)<\/body>', content)
             if match:
                 replacementBodyContent = match.group(1)
-                replacementBodyContent = re.sub(
-                    r'<div class="top-heading" id="heading-wide"><a href="\/pkg\/github.com\/ansys\/allie-flowkit\/">GoPages \| Auto-generated docs<\/a><\/div>[\s\S]*?<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;<\/span><\/a>',
-                    '',
-                    replacementBodyContent
+                search_pattern = (
+                    '<div class="top-heading" id="heading-wide"><a href="/pkg/github.com/'
+                    + re.escape(repo_owner)
+                    + '/'
+                    + re.escape(repo_name)
+                    + '/">GoPages \| Auto-generated docs</a></div>'
+                    + '[\\s\\S]*?<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>'
                 )
+                replacementBodyContent = re.sub(search_pattern, '', replacementBodyContent)
 
                 # Read source file and replace content
                 with open(SOURCE_FILE, 'r') as f:

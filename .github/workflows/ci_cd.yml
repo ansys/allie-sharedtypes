@@ -152,6 +152,11 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
       - name: Build GoPages
         run: |
           go install github.com/johnstarich/go/gopages@latest
@@ -164,7 +169,7 @@ jobs:
           path: documentation-html
 
       - name: Run Python script
-        run: python pkg/scripts/doc_api_reference.py
+        run: python pkg/scripts/doc_api_reference.py ansys allie-sharedtypes
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
