@@ -163,44 +163,8 @@ jobs:
           name: documentation-html
           path: documentation-html
 
-      - name: Run Bash script
-        run: |
-          # Set environment variables for file paths
-          DOC_BUILD_HTML="documentation-html"
-          SOURCE_FILE="$DOC_BUILD_HTML/api_reference/test/index.html"
-          SOURCE_DIRECTORY="dist/pkg/github.com/ansys/allie-sharedtypes/pkg/"
-          REPLACEMENT_DIRECTORY="$DOC_BUILD_HTML/api_reference/pkg"
-          ACTUAL_DIR="$DOC_BUILD_HTML/api_reference/"
-          # Check if REPLACEMENT_DIRECTORY exists, if not, create it
-          if [ ! -d "$REPLACEMENT_DIRECTORY" ]; then
-            mkdir -p "$REPLACEMENT_DIRECTORY"
-          fi
-          # Remove existing content in the replacement directory
-          rm -rf "$REPLACEMENT_DIRECTORY"/*
-          # Move the source_directory content to the replacement_directory
-          mv "$SOURCE_DIRECTORY"* "$REPLACEMENT_DIRECTORY"
-          # Remove the index.html file in the replacement_directory
-          rm "$REPLACEMENT_DIRECTORY/index.html"
-          # Process each HTML file in the replacement directory
-          find "$REPLACEMENT_DIRECTORY" -type f -name "*.html" | while IFS= read -r replacement_file; do
-            replacementBodyContent=$(sed -n '/<body>/,/<\/body>/p' "$replacement_file" | \
-            sed '/<div class="top-heading" id="heading-wide"><a href="\/pkg\/github.com\/ansys\/allie-sharedtypes\/">GoPages | Auto-generated docs<\/a><\/div>/,/<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;<\/span><\/a>/d' | \
-            sed 's/\//\\\//g')
-            # Use awk to replace content between specific HTML tags
-            awk -v repl="$replacementBodyContent" '
-              /<article class="bd-article" role="main">/,/<\/article>/ {
-                if ($0 ~ /<article class="bd-article" role="main">/) {
-                  print $0
-                  print repl
-                  while ($0 !~ /<\/article>/) getline
-                  next
-                }
-              }
-              { print $0 }
-            ' "$SOURCE_FILE" > "$replacement_file"
-          done
-          # Move the modified files back to the actual directory
-          mv "$REPLACEMENT_DIRECTORY"/* "$ACTUAL_DIR"
+      - name: Run Python script
+        run: python pkg/scripts/doc_api_reference.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
