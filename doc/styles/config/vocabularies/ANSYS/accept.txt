@@ -5,5 +5,3 @@ API
 knowledgedb
 llmhandler
 config
-sharedtypes
-typeconverters

@@ -1,19 +1,23 @@
 API reference
 =============
 
+.. vale off
+
 +---------------------------------------------------+
 | Module                                            |
 +===================================================+
-| `allieflowkitgrpc <pkg/allieflowkitgrpc/?m=all>`_ |
+| `allieflowkitgrpc <allieflowkitgrpc/index.html>`_ |
 +---------------------------------------------------+
-| `config <pkg/config/?m=all>`_                     |
+| `config <config/index.html>`_                     |
 +---------------------------------------------------+
-| `logging <pkg/logging/?m=all>`_                   |
+| `logging <logging/index.html>`_                   |
 +---------------------------------------------------+
-| `sharedtypes <pkg/sharedtypes/?m=all>`_           |
+| `sharedtypes <sharedtypes/index.html>`_           |
 +---------------------------------------------------+
-| `typeconverters <pkg/typeconverters/?m=all>`_     |
+| `typeconverters <typeconverters/index.html>`_     |
 +---------------------------------------------------+
+
+.. vale on
 
 .. toctree::
     :maxdepth: 2
