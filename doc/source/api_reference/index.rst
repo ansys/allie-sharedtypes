@@ -1,17 +1,23 @@
 API reference
 =============
 
+.. vale off
+
 +---------------------------------------------------+
 | Module                                            |
 +===================================================+
-| `llmhandler <llmhandler/index.html>`_             |
+| `allieflowkitgrpc <allieflowkitgrpc/index.html>`_ |
 +---------------------------------------------------+
-| `knowledgedb <knowledgedb/index.html>`_           |
+| `config <config/index.html>`_                     |
 +---------------------------------------------------+
-| `agent <agent/index.html>`_                       |
+| `logging <logging/index.html>`_                   |
 +---------------------------------------------------+
-| `executor <executor/index.html>`_                 |
+| `sharedtypes <sharedtypes/index.html>`_           |
 +---------------------------------------------------+
+| `typeconverters <typeconverters/index.html>`_     |
++---------------------------------------------------+
+
+.. vale on
 
 .. toctree::
     :maxdepth: 2

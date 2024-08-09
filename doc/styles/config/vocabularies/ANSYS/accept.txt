@@ -4,3 +4,4 @@ Allie Shared types
 API
 knowledgedb
 llmhandler
+config
