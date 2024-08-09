@@ -4,13 +4,15 @@ API reference
 +---------------------------------------------------+
 | Module                                            |
 +===================================================+
-| `llmhandler <llmhandler/index.html>`_             |
+| `allieflowkitgrpc <pkg/allieflowkitgrpc/?m=all>`_ |
 +---------------------------------------------------+
-| `knowledgedb <knowledgedb/index.html>`_           |
+| `config <pkg/config/?m=all>`_                     |
 +---------------------------------------------------+
-| `agent <agent/index.html>`_                       |
+| `logging <pkg/logging/?m=all>`_                   |
 +---------------------------------------------------+
-| `executor <executor/index.html>`_                 |
+| `sharedtypes <pkg/sharedtypes/?m=all>`_           |
++---------------------------------------------------+
+| `typeconverters <pkg/typeconverters/?m=all>`_     |
 +---------------------------------------------------+
 
 .. toctree::
