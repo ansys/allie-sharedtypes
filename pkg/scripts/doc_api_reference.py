@@ -70,7 +70,7 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
                     source_content = f.read()
 
                 new_content = re.sub(
-                    r'(<article class="bd-article" role="main">)[\s\S]*?(<\/article>)',
+                    r'(<article class="bd-article">)[\s\S]*?(<\/article>)',
                     r'\1' + replacementBodyContent + r'\2',
                     source_content
                 )
