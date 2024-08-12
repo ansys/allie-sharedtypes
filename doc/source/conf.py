@@ -19,7 +19,7 @@ switcher_version = get_version_match(version_file)
 cname = os.getenv("DOCUMENTATION_CNAME", "noname.com")
 """The canonical name of the webpage hosting the documentation."""
 
-# Select desired logo, theme, and declare the html title
+# Select desired theme, and declare the html title
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = project
 html_favicon = ansys_favicon
