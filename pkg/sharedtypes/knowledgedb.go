@@ -93,11 +93,11 @@ type GeneralNeo4jQueryInput struct {
 // GeneralNeo4jQueryOutput represents the output of executing a Neo4j query.
 type GeneralNeo4jQueryOutput struct {
 	Success  bool          `json:"success" description:"Returns true if the query was executed successfully. Returns false or an error if not."`
-	Response neo4jResponse `json:"response" description:"Summary and records of the query execution."`
+	Response Neo4jResponse `json:"response" description:"Summary and records of the query execution."`
 }
 
 // neo4jResponse represents the response from the Neo4j query.
-type neo4jResponse struct {
+type Neo4jResponse struct {
 	Record          neo4jRecord     `json:"record"`
 	SummaryCounters summaryCounters `json:"summaryCounters"`
 }
