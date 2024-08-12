@@ -3,7 +3,7 @@
 from datetime import datetime
 import os
 
-from ansys_sphinx_theme import ansys_logo_black, ansys_favicon, get_version_match
+from ansys_sphinx_theme import ansys_favicon, get_version_match
 
 # Project information
 project = "allie-sharedtypes"
@@ -19,10 +19,9 @@ switcher_version = get_version_match(version_file)
 cname = os.getenv("DOCUMENTATION_CNAME", "noname.com")
 """The canonical name of the webpage hosting the documentation."""
 
-# Select desired logo, theme, and declare the html title
+# Select desired theme, and declare the html title
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = project
-html_logo = ansys_logo_black
 html_favicon = ansys_favicon
 html_context = {
     "github_user": "ansys",
@@ -31,6 +30,7 @@ html_context = {
     "doc_path": "doc/source",
 }
 html_theme_options = {
+    "logo": "ansys",
     "github_url": "https://github.com/ansys/allie-sharedtypes",
     "additional_breadcrumbs": [
         ("Allie", "https://allie.docs.pyansys.com/"),
