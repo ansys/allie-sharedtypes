@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ansys/allie-sharedtypes/pkg/sharedtypes"
+	"github.com/ansys/allie-flowkit/pkg/externalfunctions"
 )
 
 func TestJSONToGo(t *testing.T) {
@@ -92,7 +92,7 @@ func TestConvertStringToGivenType(t *testing.T) {
 		{"{\"key\":\"value\"}", "map[string]string", map[string]string{"key": "value"}, nil},
 		{"", "map[string]float64", map[string]float64{}, nil},
 		{"{}", "map[string]bool", map[string]bool{}, nil},
-		{"[]", "[]DbJsonFilter", []sharedtypes.DbJsonFilter{}, nil},
+		{"[]", "[]DbJsonFilter", []externalfunctions.DbJsonFilter{}, nil},
 		{"", "*chan string", (*chan string)(nil), nil},
 		// Add more test cases as needed for each supported type
 	}

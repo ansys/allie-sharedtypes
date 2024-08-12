@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ansys/allie-sharedtypes/pkg/sharedtypes"
+	"github.com/ansys/allie-flowkit/pkg/externalfunctions"
 )
 
 // JSONToGo converts a JSON data type to a Go data type.
@@ -230,7 +230,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if value == "" {
 			value = "{}"
 		}
-		output := sharedtypes.DbArrayFilter{}
+		output := externalfunctions.DbArrayFilter{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -240,7 +240,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if value == "" {
 			value = "{}"
 		}
-		output := sharedtypes.DbFilters{}
+		output := externalfunctions.DbFilters{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -250,7 +250,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if value == "" {
 			value = "[]"
 		}
-		output := []sharedtypes.DbJsonFilter{}
+		output := []externalfunctions.DbJsonFilter{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -260,7 +260,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if value == "" {
 			value = "[]"
 		}
-		output := []sharedtypes.DbResponse{}
+		output := []externalfunctions.DbResponse{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -270,7 +270,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if value == "" {
 			value = "[]"
 		}
-		output := []sharedtypes.HistoricMessage{}
+		output := []externalfunctions.HistoricMessage{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -285,7 +285,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if value == "" {
 			value = "[]"
 		}
-		output := []sharedtypes.AnsysGPTDefaultFields{}
+		output := []externalfunctions.AnsysGPTDefaultFields{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -296,7 +296,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if value == "" {
 			value = "[]"
 		}
-		output := []sharedtypes.ACSSearchResponse{}
+		output := []externalfunctions.ACSSearchResponse{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -307,7 +307,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if value == "" {
 			value = "[]"
 		}
-		output := []sharedtypes.AnsysGPTCitation{}
+		output := []externalfunctions.AnsysGPTCitation{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -318,7 +318,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if value == "" {
 			value = "[]"
 		}
-		output := []sharedtypes.DataExtractionDocumentData{}
+		output := []externalfunctions.DataExtractionDocumentData{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -420,31 +420,31 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 		}
 		return string(output), nil
 	case "DbArrayFilter":
-		output, err := json.Marshal(value.(sharedtypes.DbArrayFilter))
+		output, err := json.Marshal(value.(externalfunctions.DbArrayFilter))
 		if err != nil {
 			return "", err
 		}
 		return string(output), nil
 	case "DbFilters":
-		output, err := json.Marshal(value.(sharedtypes.DbFilters))
+		output, err := json.Marshal(value.(externalfunctions.DbFilters))
 		if err != nil {
 			return "", err
 		}
 		return string(output), nil
 	case "[]DbJsonFilter":
-		output, err := json.Marshal(value.([]sharedtypes.DbJsonFilter))
+		output, err := json.Marshal(value.([]externalfunctions.DbJsonFilter))
 		if err != nil {
 			return "", err
 		}
 		return string(output), nil
 	case "[]DbResponse":
-		output, err := json.Marshal(value.([]sharedtypes.DbResponse))
+		output, err := json.Marshal(value.([]externalfunctions.DbResponse))
 		if err != nil {
 			return "", err
 		}
 		return string(output), nil
 	case "[]HistoricMessage":
-		output, err := json.Marshal(value.([]sharedtypes.HistoricMessage))
+		output, err := json.Marshal(value.([]externalfunctions.HistoricMessage))
 		if err != nil {
 			return "", err
 		}
@@ -452,25 +452,25 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 	case "*chan string":
 		return "", nil
 	case "[]AnsysGPTDefaultFields":
-		output, err := json.Marshal(value.([]sharedtypes.AnsysGPTDefaultFields))
+		output, err := json.Marshal(value.([]externalfunctions.AnsysGPTDefaultFields))
 		if err != nil {
 			return "", err
 		}
 		return string(output), nil
 	case "[]ACSSearchResponse":
-		output, err := json.Marshal(value.([]sharedtypes.ACSSearchResponse))
+		output, err := json.Marshal(value.([]externalfunctions.ACSSearchResponse))
 		if err != nil {
 			return "", err
 		}
 		return string(output), nil
 	case "[]AnsysGPTCitation":
-		output, err := json.Marshal(value.([]sharedtypes.AnsysGPTCitation))
+		output, err := json.Marshal(value.([]externalfunctions.AnsysGPTCitation))
 		if err != nil {
 			return "", err
 		}
 		return string(output), nil
 	case "[]DataExtractionDocumentData":
-		output, err := json.Marshal(value.([]sharedtypes.DataExtractionDocumentData))
+		output, err := json.Marshal(value.([]externalfunctions.DataExtractionDocumentData))
 		if err != nil {
 			return "", err
 		}
