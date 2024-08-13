@@ -4,8 +4,8 @@ package sharedtypes
 type HandlerRequest struct {
 	Adapter             string            `json:"adapter"` // "chat", "embeddings"
 	InstructionGuid     string            `json:"instructionGuid"`
-	ModelIds            []string          `json:"modelIds"` // optional model ids to define a set of specific models to be used for this request
-	Data                string            `json:"data"`
+	ModelIds            []string          `json:"modelIds"`               // optional model ids to define a set of specific models to be used for this request
+	Data                interface{}       `json:"data"`                   // for embeddings, this can be a string or []string; for chat, only string is allowed
 	Images              []string          `json:"images"`                 // List of images in base64 format
 	ChatRequestType     string            `json:"chatRequestType"`        // "summary", "code", "keywords", "general"; only relevant if "adapter" is "chat"
 	DataStream          bool              `json:"dataStream"`             // only relevant if "adapter" is "chat"
@@ -30,7 +30,7 @@ type HandlerResponse struct {
 	ChatData *string `json:"chatData,omitempty"`
 
 	// Embeddings properties
-	EmbeddedData []float32 `json:"embeddedData,omitempty"`
+	EmbeddedData interface{} `json:"embeddedData,omitempty"` // []float32 or [][]float32
 
 	// Error properties
 	Error *ErrorResponse `json:"error,omitempty"`
