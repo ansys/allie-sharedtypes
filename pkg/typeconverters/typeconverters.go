@@ -185,6 +185,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if err != nil {
 			return nil, err
 		}
+		return output, nil
 	case "map[string]string":
 		if value == "" {
 			value = "{}"
