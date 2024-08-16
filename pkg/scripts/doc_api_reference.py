@@ -113,7 +113,7 @@ for filename in os.listdir(REPLACEMENT_DIRECTORY):
     shutil.move(os.path.join(REPLACEMENT_DIRECTORY, filename), ACTUAL_DIR)
 
 # FInd the subfolders in the actual directory and fix the static paths
-def fix_subfolder_static_path():
+def find_subfolders():
     """Find the subfolders in the actual directory and return the list of subfolders.
 
     Returns
@@ -166,10 +166,10 @@ def fix_static_path_in_file(file_path, static_relative_path):
     with open(file_path, 'w') as f:
         f.write(modified_content)
 
-def fix_static_path_in_files():
+def fix_static_path_in_subfolder_files():
     """Fix the static path in the files."""
     # find the sub sub foders
-    sub_dirs = fix_subfolder_static_path()
+    sub_dirs = find_subfolders()
     if not sub_dirs:
         print("No subfolders found")
         return
@@ -179,5 +179,4 @@ def fix_static_path_in_files():
         for file in sub_dir_files:
             fix_static_path_in_file(file, get_relative_path_to_static_files(sub_dir).replace("\\", "/"))
 
-
-fix_static_path_in_files()
+fix_static_path_in_subfolder_files()
