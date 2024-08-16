@@ -176,6 +176,16 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			return nil, err
 		}
 		return output, nil
+	case "[][]float32":
+		if value == "" {
+			value = "[]"
+		}
+		output := [][]float32{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
 	case "map[string]string":
 		if value == "" {
 			value = "{}"
@@ -385,6 +395,12 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 		return string(output), nil
 	case "[]bool":
 		output, err := json.Marshal(value.([]bool))
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
+	case "[][]float32":
+		output, err := json.Marshal(value.([][]float32))
 		if err != nil {
 			return "", err
 		}
