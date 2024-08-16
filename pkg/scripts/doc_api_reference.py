@@ -2,6 +2,7 @@ import os
 import shutil
 import re
 import sys
+import pathlib
 
 # Ensure the correct number of arguments are provided
 if len(sys.argv) != 3:
@@ -18,6 +19,13 @@ SOURCE_FILE = os.path.join(DOC_BUILD_HTML, "api_reference", "test", "index.html"
 SOURCE_DIRECTORY = f"dist/pkg/github.com/{repo_owner}/{repo_name}/pkg/"
 REPLACEMENT_DIRECTORY = os.path.join(DOC_BUILD_HTML, "api_reference", "pkg")
 ACTUAL_DIR = os.path.join(DOC_BUILD_HTML, "api_reference/")
+STATIC_DIR = os.path.join(DOC_BUILD_HTML, "_static")
+
+
+def get_relative_path_to_static_files(file_path):
+    # Get the relative path to the static files
+    relative_path = os.path.relpath(STATIC_DIR, start=file_path)
+    return relative_path
 
 # Check if REPLACEMENT_DIRECTORY exists, if not, create it
 if not os.path.exists(REPLACEMENT_DIRECTORY):
@@ -42,6 +50,25 @@ for filename in os.listdir(SOURCE_DIRECTORY):
 index_file_path = os.path.join(REPLACEMENT_DIRECTORY, "index.html")
 if os.path.exists(index_file_path):
     os.remove(index_file_path)
+
+def get_subfolder_path(file_path, source_directory):
+    """Get the relative path of the file to the source directory.
+
+    Parameters
+    ----------
+    file_path : str
+        The path of the file.
+    source_directory : str
+        The path of the source directory.
+
+    Returns
+    -------
+    str
+        The relative path of the file to the source directory.
+    """
+    relative_path = os.path.relpath(file_path, start=source_directory)
+    return relative_path
+
 
 # Process each HTML file in the replacement directory
 for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
@@ -84,3 +111,72 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
 # Move the modified files back to the actual directory
 for filename in os.listdir(REPLACEMENT_DIRECTORY):
     shutil.move(os.path.join(REPLACEMENT_DIRECTORY, filename), ACTUAL_DIR)
+
+# FInd the subfolders in the actual directory and fix the static paths
+def find_subfolders():
+    """Find the subfolders in the actual directory and return the list of subfolders.
+
+    Returns
+    -------
+    list
+        The list of subfolders in the actual directory.
+    """
+    for root, dirs, files in os.walk(ACTUAL_DIR):
+        if dirs and root != ACTUAL_DIR:
+            return [os.path.join(root, dir) for dir in dirs]
+
+def fix_static_path(static_relative_path, content):
+    """Fix the static path in the content.
+
+    Parameters
+    ----------
+    static_relative_path : str
+        The relative path to the static files.
+    content : str
+        The content to fix the static path in.
+
+    Returns
+    -------
+    str
+        The content with the fixed static path.
+    """
+    # Replace the static file paths in content href and src attributes having */_static/*
+    modified_content = re.sub(
+        r'(href|src)="([^:"]*?)/_static/([^"]*?)"',
+        r'\1="' + static_relative_path + r'/\3"',
+        content
+    )
+    return modified_content
+
+def fix_static_path_in_file(file_path, static_relative_path):
+    """Fix the static path in the file.
+
+    Parameters
+    ----------
+    file_path : str
+        The path of the file.
+    static_relative_path : str
+        The relative path to the static files.
+    """
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    modified_content = fix_static_path(static_relative_path, content)
+
+    with open(file_path, 'w') as f:
+        f.write(modified_content)
+
+def fix_static_path_in_subfolder_files():
+    """Fix the static path in the files."""
+    # find the sub sub foders
+    sub_dirs = find_subfolders()
+    if not sub_dirs:
+        print("No subfolders found")
+        return
+
+    for sub_dir in sub_dirs:
+        sub_dir_files = pathlib.Path(sub_dir).rglob('*.html')
+        for file in sub_dir_files:
+            fix_static_path_in_file(file, get_relative_path_to_static_files(sub_dir).replace("\\", "/"))
+
+fix_static_path_in_subfolder_files()
