@@ -95,6 +95,8 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 	}()
 
 	switch goType {
+	case "interface{}":
+		return value, nil
 	case "string":
 		return value, nil
 	case "float32":
@@ -357,6 +359,8 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 	}()
 
 	switch goType {
+	case "interface{}":
+		return fmt.Sprintf("%v", value), nil
 	case "string":
 		return value.(string), nil
 	case "float32":
