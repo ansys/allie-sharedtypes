@@ -95,8 +95,6 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 	}()
 
 	switch goType {
-	case "interface{}":
-		return value, nil
 	case "string":
 		return value, nil
 	case "float32":
@@ -128,6 +126,13 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			value = "false"
 		}
 		return strconv.ParseBool(value)
+	case "interface{}":
+		var output interface{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
 	case "[]string":
 		if value == "" {
 			value = "[]"
@@ -187,6 +192,14 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		if err != nil {
 			return nil, err
 		}
+		return output, nil
+	case "*chan string":
+		var output *chan string
+		output = nil
+		return output, nil
+	case "chan interface{}":
+		var output chan interface{}
+		output = nil
 		return output, nil
 	case "map[string]string":
 		if value == "" {
@@ -288,10 +301,6 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			return nil, err
 		}
 		return output, nil
-	case "*chan string":
-		var output *chan string
-		output = nil
-		return output, nil
 
 	case "[]AnsysGPTDefaultFields":
 		if value == "" {
@@ -359,8 +368,6 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 	}()
 
 	switch goType {
-	case "interface{}":
-		return fmt.Sprintf("%v", value), nil
 	case "string":
 		return value.(string), nil
 	case "float32":
@@ -373,6 +380,12 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 		return strconv.FormatUint(uint64(value.(uint32)), 10), nil
 	case "bool":
 		return strconv.FormatBool(value.(bool)), nil
+	case "interface{}":
+		output, err := json.Marshal(value)
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
 	case "[]string":
 		output, err := json.Marshal(value.([]string))
 		if err != nil {
@@ -409,6 +422,10 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 			return "", err
 		}
 		return string(output), nil
+	case "*chan string":
+		return "", nil
+	case "chan interface{}":
+		return "", nil
 	case "map[string]string":
 		output, err := json.Marshal(value.(map[string]string))
 		if err != nil {
@@ -469,8 +486,6 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 			return "", err
 		}
 		return string(output), nil
-	case "*chan string":
-		return "", nil
 	case "[]AnsysGPTDefaultFields":
 		output, err := json.Marshal(value.([]sharedtypes.AnsysGPTDefaultFields))
 		if err != nil {
