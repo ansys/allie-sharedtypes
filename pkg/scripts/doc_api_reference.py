@@ -112,7 +112,7 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
 for filename in os.listdir(REPLACEMENT_DIRECTORY):
     shutil.move(os.path.join(REPLACEMENT_DIRECTORY, filename), ACTUAL_DIR)
 
-# FInd the subfolders in the actual directory and fix the static paths
+# Find the subfolders in the actual directory and fix the static paths
 def find_subfolders():
     """Find the subfolders in the actual directory and return the list of subfolders.
 
@@ -168,12 +168,14 @@ def fix_static_path_in_file(file_path, static_relative_path):
 
 def fix_static_path_in_subfolder_files():
     """Fix the static path in the files."""
-    # find the sub sub foders
+
+    # find the sub folders
     sub_dirs = find_subfolders()
     if not sub_dirs:
         print("No subfolders found")
         return
 
+    # find the sub sub folders
     for sub_dir in sub_dirs:
         sub_dir_files = pathlib.Path(sub_dir).rglob('*.html')
         for file in sub_dir_files:
