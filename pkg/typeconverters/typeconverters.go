@@ -197,8 +197,8 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		var output *chan string
 		output = nil
 		return output, nil
-	case "chan interface{}":
-		var output chan interface{}
+	case "*chan interface{}":
+		var output *chan interface{}
 		output = nil
 		return output, nil
 	case "map[string]string":
@@ -381,11 +381,16 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 	case "bool":
 		return strconv.FormatBool(value.(bool)), nil
 	case "interface{}":
-		output, err := json.Marshal(value)
-		if err != nil {
-			return "", err
+		switch v := value.(type) {
+		case string:
+			return v, nil
+		default:
+			output, err := json.Marshal(value)
+			if err != nil {
+				return "", err
+			}
+			return string(output), nil
 		}
-		return string(output), nil
 	case "[]string":
 		output, err := json.Marshal(value.([]string))
 		if err != nil {
@@ -424,7 +429,7 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 		return string(output), nil
 	case "*chan string":
 		return "", nil
-	case "chan interface{}":
+	case "*chan interface{}":
 		return "", nil
 	case "map[string]string":
 		output, err := json.Marshal(value.(map[string]string))
