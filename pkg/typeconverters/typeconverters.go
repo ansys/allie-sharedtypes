@@ -128,9 +128,13 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		return strconv.ParseBool(value)
 	case "interface{}":
 		var output interface{}
-		err := json.Unmarshal([]byte(value), &output)
-		if err != nil {
-			return nil, err
+		if value == "" {
+			output = nil
+		} else {
+			err := json.Unmarshal([]byte(value), &output)
+			if err != nil {
+				return nil, err
+			}
 		}
 		return output, nil
 	case "[]string":
