@@ -27,12 +27,11 @@ type Config struct {
 	DATADOG_METRICS bool   `yaml:"DATADOG_METRICS"`
 	METRICS_URL     string `yaml:"METRICS_URL"`
 
-	// Allie General
+	// SSL Settings
 	/////////////////
 	USE_SSL                   bool   `yaml:"USE_SSL"`
 	SSL_CERT_PUBLIC_KEY_FILE  string `yaml:"SSL_CERT_PUBLIC_KEY_FILE"`
 	SSL_CERT_PRIVATE_KEY_FILE string `yaml:"SSL_CERT_PRIVATE_KEY_FILE"`
-	LLM_HANDLER_ENDPOINT      string `yaml:"LLM_HANDLER_ENDPOINT,omitempty"`
 
 	// Allie Agent
 	///////////////
@@ -48,10 +47,15 @@ type Config struct {
 	// Allie Flowkit
 	/////////////////
 	EXTERNALFUNCTIONS_GRPC_PORT string `yaml:"EXTERNALFUNCTIONS_GRPC_PORT,omitempty"`
-	KNOWLEDGE_DB_ENDPOINT       string `yaml:"KNOWLEDGE_DB_ENDPOINT,omitempty"`
-	ACS_ENDPOINT                string `yaml:"ACS_ENDPOINT,omitempty"`
-	ACS_API_KEY                 string `yaml:"ACS_API_KEY,omitempty"`
-	ACS_API_VERSION             string `yaml:"ACS_API_VERSION,omitempty"`
+	FLOWKIT_API_KEY             string `yaml:"FLOWKIT_API_KEY,omitempty"`
+	// Allie Modules
+	LLM_HANDLER_ENDPOINT  string `yaml:"LLM_HANDLER_ENDPOINT,omitempty"`
+	KNOWLEDGE_DB_ENDPOINT string `yaml:"KNOWLEDGE_DB_ENDPOINT,omitempty"`
+	EXEC_ENDPOINT         string `yaml:"EXEC_ENDPOINT,omitempty"`
+	// Azure Cognitive Services
+	ACS_ENDPOINT    string `yaml:"ACS_ENDPOINT,omitempty"`
+	ACS_API_KEY     string `yaml:"ACS_API_KEY,omitempty"`
+	ACS_API_VERSION string `yaml:"ACS_API_VERSION,omitempty"`
 
 	// Allie LLM
 	/////////////
