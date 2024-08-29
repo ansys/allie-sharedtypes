@@ -139,8 +139,8 @@ type summaryCounters struct {
 
 // DbAddDataInput represents the input for adding data to the database.
 type DbAddDataInput struct {
-	CollectionName string    `json:"collection_name" description:"Name of the collection to which the data objects will be added. Required for adding data." required:"true"`
-	Data           []*DbData `json:"data" description:"Data objects to be added to the DB." required:"true"`
+	CollectionName string   `json:"collection_name" description:"Name of the collection to which the data objects will be added. Required for adding data." required:"true"`
+	Data           []DbData `json:"data" description:"Data objects to be added to the DB." required:"true"`
 }
 
 // DbAddDataOutput represents the output of adding data to the database.
@@ -159,11 +159,4 @@ type DbCreateCollectionInput struct {
 type DbCreateCollectionOutput struct {
 	Success bool   `json:"success" description:"Returns true if the collection was created successfully. Returns false or an error if not."`
 	Error   string `json:"error" description:"Error message if the collection could not be created."`
-}
-
-// DbListCollectionsOutput represents the output of listing collections in the database.
-type DbListCollectionsOutput struct {
-	Success     bool     `json:"success" description:"Returns true if the collections were listed successfully. Returns false or an error if not."`
-	Collections []string `json:"collections" description:"A list of collection names."`
-	Error       string   `json:"error" description:"Error message if the collection could not be created."`
 }

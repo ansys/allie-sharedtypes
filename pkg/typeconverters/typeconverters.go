@@ -339,11 +339,11 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 		}
 		return output, nil
 
-	case "[]DataExtractionDocumentData":
+	case "[]DbData":
 		if value == "" {
 			value = "[]"
 		}
-		output := []sharedtypes.DataExtractionDocumentData{}
+		output := []sharedtypes.DbData{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -513,8 +513,8 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 			return "", err
 		}
 		return string(output), nil
-	case "[]DataExtractionDocumentData":
-		output, err := json.Marshal(value.([]sharedtypes.DataExtractionDocumentData))
+	case "[]DbData":
+		output, err := json.Marshal(value.([]sharedtypes.DbData))
 		if err != nil {
 			return "", err
 		}
