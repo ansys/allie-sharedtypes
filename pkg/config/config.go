@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"reflect"
 	"strconv"
@@ -173,27 +174,6 @@ func readYaml(fileName string, configStruct Config) (extractedConfigStruct Confi
 	return configStruct, nil
 }
 
-// validateConfig checks for mandatory entries in the configuration and validates chosen models.
-//
-// Parameters:
-//   - config: The configuration object to validate.
-//   - requiredProperties: The list of required properties.
-func ValidateConfig(config Config, requiredProperties []string) (err error) {
-	// Check if all mandatory properties are present
-	configValue := reflect.ValueOf(config)
-
-	for _, property := range requiredProperties {
-		field := configValue.FieldByName(property)
-
-		if !field.IsValid() || field.IsZero() {
-			message := fmt.Sprintf("config.yaml is missing mandatory property '%v': ", property)
-			return fmt.Errorf(message)
-		}
-	}
-
-	return nil
-}
-
 // defineOptionalProperties sets optional properties for the configuration.
 //
 // Parameters:
@@ -250,7 +230,7 @@ func isZeroValue(v reflect.Value) bool {
 func CreateUpdateConfigFileFromCLI(fileName string) (err error) {
 	// Checking for any command-line arguments
 	if len(os.Args) == 1 {
-		fmt.Println("No command line options given; full config will be retrieved from existing config.yaml file")
+		log.Println("No command line options given; full config will be retrieved from existing config.yaml file and/or Azure Key Vault.")
 		return
 	}
 
@@ -268,13 +248,13 @@ func CreateUpdateConfigFileFromCLI(fileName string) (err error) {
 
 	if os.IsNotExist(err) {
 		// If it doesn't exist, create a new one
-		fmt.Println("config.yaml file does not exist. Creating a new one...")
+		log.Println("config.yaml file does not exist. Creating a new one with provided CLI values...")
 
 		file, _ := yaml.Marshal(cliConfig)
 		_ = os.WriteFile(fileName, file, 0644)
 	} else {
 		// If it does exist, open and append to it
-		fmt.Println("config.yaml file exists. Appending command line options...")
+		log.Println("config.yaml file exists. Appending command line options with provided CLI values...")
 
 		file, _ := os.ReadFile(fileName)
 		config := Config{}
@@ -343,6 +323,9 @@ func createFlags(val reflect.Value, prefix string) {
 // Returns:
 //   - error: An error if there was an issue extracting the configuration.
 func InitGlobalConfigFromAzureKeyVault() (err error) {
+	// log
+	log.Println("Extracting configuration from Azure Key Vault...")
+
 	// get environment variables
 	azureManagedIdentity := os.Getenv(GlobalConfig.AZURE_MANAGED_IDENTITY_ID)
 	azureKeyVaultName := os.Getenv(GlobalConfig.AZURE_KEY_VAULT_NAME)
@@ -384,7 +367,6 @@ func InitGlobalConfigFromAzureKeyVault() (err error) {
 	if err != nil {
 		return err
 	}
-	fmt.Println("Azure Key Vault client created")
 
 	// list all secrets
 	pagerSecerts := clientSecrets.NewListSecretPropertiesPager(nil)
@@ -454,6 +436,27 @@ func InitGlobalConfigFromAzureKeyVault() (err error) {
 ///////////////////////
 // Helper Functions
 ///////////////////////
+
+// ValidateConfig checks for mandatory entries in the configuration and validates chosen models.
+//
+// Parameters:
+//   - config: The configuration object to validate.
+//   - requiredProperties: The list of required properties.
+func ValidateConfig(config Config, requiredProperties []string) (err error) {
+	// Check if all mandatory properties are present
+	configValue := reflect.ValueOf(config)
+
+	for _, property := range requiredProperties {
+		field := configValue.FieldByName(property)
+
+		if !field.IsValid() || field.IsZero() {
+			message := fmt.Sprintf("config.yaml is missing mandatory property '%v': ", property)
+			return fmt.Errorf(message)
+		}
+	}
+
+	return nil
+}
 
 // GetGlobalConfigAsJSON returns the global configuration as a JSON string.
 //
