@@ -19,7 +19,7 @@ import (
 )
 
 ////////////////////////////////////////////
-// Stanard Config init for Allie Go Modules
+// Standard Config init for Allie Go Modules
 ////////////////////////////////////////////
 
 // InitConfig initializes the configuration for the Allie service.
