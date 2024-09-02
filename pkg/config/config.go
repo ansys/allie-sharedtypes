@@ -120,6 +120,9 @@ func InitConfig(requiredProperties []string, optionalDefaultValues map[string]in
 //   - fileName: The name of the configuration file.
 //   - requiredProperties: The list of required properties.
 //   - optionalDefaultValues: The map of optional properties and their default values.
+//
+// Returns:
+//   - err: An error if there was an issue initializing the configuration.
 func InitGlobalConfigFromFile(fileName string, requiredProperties []string, optionalDefaultValues map[string]interface{}) (err error) {
 	var config Config
 	configResult, err := readYaml(fileName, config)
@@ -144,6 +147,10 @@ func InitGlobalConfigFromFile(fileName string, requiredProperties []string, opti
 // Parameters:
 //   - fileName: The name of the configuration file.
 //   - configStruct: Struct with the parameters of the YAML to read.
+//
+// Returns:
+//   - extractedConfigStruct: The extracted configuration struct.
+//   - err: An error if there was an issue reading the YAML file.
 func readYaml(fileName string, configStruct Config) (extractedConfigStruct Config, err error) {
 	// Read the YAML file into a byte slice
 	data, err := os.ReadFile(fileName)
@@ -179,6 +186,9 @@ func readYaml(fileName string, configStruct Config) (extractedConfigStruct Confi
 // Parameters:
 //   - config: The configuration object to validate.
 //   - optionalDefaultValues: The map of optional properties and their default values.
+//
+// Returns:
+//   - err: An error if there was an issue setting the optional properties.
 func defineOptionalProperties(config *Config, optionalDefaultValues map[string]interface{}) (err error) {
 	defer func() {
 		r := recover()
@@ -227,6 +237,9 @@ func isZeroValue(v reflect.Value) bool {
 //
 // Parameters:
 //   - fileName: The name of the configuration file.
+//
+// Returns:
+//   - err: An error if there was an issue creating or updating the configuration file.
 func CreateUpdateConfigFileFromCLI(fileName string) (err error) {
 	// Checking for any command-line arguments
 	if len(os.Args) == 1 {
@@ -321,7 +334,7 @@ func createFlags(val reflect.Value, prefix string) {
 // it sets the field to the value of the secret.
 //
 // Returns:
-//   - error: An error if there was an issue extracting the configuration.
+//   - err: An error if there was an issue extracting the configuration.
 func InitGlobalConfigFromAzureKeyVault() (err error) {
 	// log
 	log.Println("Extracting configuration from Azure Key Vault...")
@@ -442,6 +455,9 @@ func InitGlobalConfigFromAzureKeyVault() (err error) {
 // Parameters:
 //   - config: The configuration object to validate.
 //   - requiredProperties: The list of required properties.
+//
+// Returns:
+//   - err: An error if there was an issue validating the configuration.
 func ValidateConfig(config Config, requiredProperties []string) (err error) {
 	// Check if all mandatory properties are present
 	configValue := reflect.ValueOf(config)
