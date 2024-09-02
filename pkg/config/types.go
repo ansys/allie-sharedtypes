@@ -10,86 +10,92 @@ type Config struct {
 
 	// Logging
 	///////////
-	LOG_LEVEL string `yaml:"LOG_LEVEL"`
+	LOG_LEVEL string `yaml:"LOG_LEVEL" json:"LOGLEVEL"`
 	// Local Logs
-	LOCAL_LOGS          bool   `yaml:"LOCAL_LOGS"`
-	LOCAL_LOGS_LOCATION string `yaml:"LOCAL_LOGS_LOCATION"`
+	LOCAL_LOGS          bool   `yaml:"LOCAL_LOGS" json:"LOCALLOGS"`
+	LOCAL_LOGS_LOCATION string `yaml:"LOCAL_LOGS_LOCATION" json:"LOCALLOGSLOCATION"`
 	// Datadog Logs
-	DATADOG_LOGS        bool   `yaml:"DATADOG_LOGS"`
-	STAGE               string `yaml:"STAGE"`
-	VERSION             string `yaml:"VERSION"`
-	SERVICE_NAME        string `yaml:"SERVICE_NAME"`
-	ERROR_FILE_LOCATION string `yaml:"ERROR_FILE_LOCATION"`
-	LOGGING_URL         string `yaml:"LOGGING_URL"`
-	LOGGING_API_KEY     string `yaml:"LOGGING_API_KEY"`
-	DATADOG_SOURCE      string `yaml:"DATADOG_SOURCE"`
+	DATADOG_LOGS        bool   `yaml:"DATADOG_LOGS" json:"DATADOGLOGS"`
+	STAGE               string `yaml:"STAGE" json:"STAGE"`
+	VERSION             string `yaml:"VERSION" json:"VERSION"`
+	SERVICE_NAME        string `yaml:"SERVICE_NAME" json:"SERVICENAME"`
+	ERROR_FILE_LOCATION string `yaml:"ERROR_FILE_LOCATION" json:"ERRORFILELOCATION"`
+	LOGGING_URL         string `yaml:"LOGGING_URL" json:"LOGGINGURL"`
+	LOGGING_API_KEY     string `yaml:"LOGGING_API_KEY" json:"LOGGINGAPIKEY"`
+	DATADOG_SOURCE      string `yaml:"DATADOG_SOURCE" json:"DATADOGSOURCE"`
 	// Datadog Metrics
-	DATADOG_METRICS bool   `yaml:"DATADOG_METRICS"`
-	METRICS_URL     string `yaml:"METRICS_URL"`
+	DATADOG_METRICS bool   `yaml:"DATADOG_METRICS" json:"DATADOGMETRICS"`
+	METRICS_URL     string `yaml:"METRICS_URL" json:"METRICSURL"`
 
 	// SSL Settings
 	/////////////////
-	USE_SSL                   bool   `yaml:"USE_SSL"`
-	SSL_CERT_PUBLIC_KEY_FILE  string `yaml:"SSL_CERT_PUBLIC_KEY_FILE"`
-	SSL_CERT_PRIVATE_KEY_FILE string `yaml:"SSL_CERT_PRIVATE_KEY_FILE"`
+	USE_SSL                   bool   `yaml:"USE_SSL" json:"USESSL"`
+	SSL_CERT_PUBLIC_KEY_FILE  string `yaml:"SSL_CERT_PUBLIC_KEY_FILE" json:"SSLCERTPUBLICKEYFILE"`
+	SSL_CERT_PRIVATE_KEY_FILE string `yaml:"SSL_CERT_PRIVATE_KEY_FILE" json:"SSLCERTPRIVATEKEYFILE"`
+
+	// Azure Key Vault Settings
+	////////////////////////////
+	EXTRACT_CONFIG_FROM_AZURE_KEY_VAULT bool   `yaml:"EXTRACT_CONFIG_FROM_AZURE_KEY_VAULT" json:"EXTRACTCONFIGFROMAZUREKEYVAULT"`
+	AZURE_KEY_VAULT_NAME                string `yaml:"AZURE_KEY_VAULT_NAME" json:"AZUREKEYVAULTNAME"`
+	AZURE_MANAGED_IDENTITY_ID           string `yaml:"AZURE_MANAGED_IDENTITY_ID" json:"AZUREMANAGEDIDENTITYID"`
 
 	// Allie Agent
 	///////////////
-	AGENT_PORT                 string `yaml:"AGENT_PORT,omitempty"`
-	WORKFLOW_API_KEY           string `yaml:"WORKFLOW_API_KEY,omitempty"`
-	WORKFLOW_STORE_PATH        string `yaml:"WORKFLOW_STORE_PATH,omitempty"`
-	NUMBER_OF_WORKFLOW_WORKERS int    `yaml:"NUMBER_OF_WORKFLOW_WORKERS,omitempty"`
-	BINARY_STORE_PATH          string `yaml:"BINARY_STORE_PATH,omitempty"`
-	EXTERNALFUNCTIONS_ENDPOINT string `yaml:"EXTERNALFUNCTIONS_ENDPOINT"`
-	FLOWKIT_PYTHON_ENDPOINT    string `yaml:"FLOWKIT_PYTHON_ENDPOINT"`
-	FLOWKIT_PYTHON_API_KEY     string `yaml:"FLOWKIT_PYTHON_API_KEY"`
+	AGENT_PORT                 string `yaml:"AGENT_PORT" json:"AGENTPORT"`
+	WORKFLOW_API_KEY           string `yaml:"WORKFLOW_API_KEY" json:"WORKFLOWAPIKEY"`
+	WORKFLOW_STORE_PATH        string `yaml:"WORKFLOW_STORE_PATH" json:"WORKFLOWSTOREPATH"`
+	NUMBER_OF_WORKFLOW_WORKERS int    `yaml:"NUMBER_OF_WORKFLOW_WORKERS" json:"NUMBEROFWORKFLOWWORKERS"`
+	BINARY_STORE_PATH          string `yaml:"BINARY_STORE_PATH" json:"BINARYSTOREPATH"`
+	EXTERNALFUNCTIONS_ENDPOINT string `yaml:"EXTERNALFUNCTIONS_ENDPOINT" json:"EXTERNALFUNCTIONSENDPOINT"`
+	FLOWKIT_PYTHON_ENDPOINT    string `yaml:"FLOWKIT_PYTHON_ENDPOINT" json:"FLOWKITPYTHONENDPOINT"`
+	FLOWKIT_PYTHON_API_KEY     string `yaml:"FLOWKIT_PYTHON_API_KEY" json:"FLOWKITPYTHONAPIKEY"`
 
 	// Allie Flowkit
 	/////////////////
-	EXTERNALFUNCTIONS_GRPC_PORT string `yaml:"EXTERNALFUNCTIONS_GRPC_PORT,omitempty"`
-	FLOWKIT_API_KEY             string `yaml:"FLOWKIT_API_KEY,omitempty"`
+	EXTERNALFUNCTIONS_GRPC_PORT string `yaml:"EXTERNALFUNCTIONS_GRPC_PORT" json:"EXTERNALFUNCTIONSGRPCPORT"`
+	FLOWKIT_API_KEY             string `yaml:"FLOWKIT_API_KEY" json:"FLOWKITAPIKEY"`
 	// Allie Modules
-	LLM_HANDLER_ENDPOINT  string `yaml:"LLM_HANDLER_ENDPOINT,omitempty"`
-	KNOWLEDGE_DB_ENDPOINT string `yaml:"KNOWLEDGE_DB_ENDPOINT,omitempty"`
-	EXEC_ENDPOINT         string `yaml:"EXEC_ENDPOINT,omitempty"`
+	LLM_HANDLER_ENDPOINT  string `yaml:"LLM_HANDLER_ENDPOINT" json:"LLMHANDLERENDPOINT"`
+	KNOWLEDGE_DB_ENDPOINT string `yaml:"KNOWLEDGE_DB_ENDPOINT" json:"KNOWLEDGEDBENDPOINT"`
+	EXEC_ENDPOINT         string `yaml:"EXEC_ENDPOINT" json:"EXECENDPOINT"`
 	// Azure Cognitive Services
-	ACS_ENDPOINT    string `yaml:"ACS_ENDPOINT,omitempty"`
-	ACS_API_KEY     string `yaml:"ACS_API_KEY,omitempty"`
-	ACS_API_VERSION string `yaml:"ACS_API_VERSION,omitempty"`
+	ACS_ENDPOINT    string `yaml:"ACS_ENDPOINT" json:"ACSENDPOINT"`
+	ACS_API_KEY     string `yaml:"ACS_API_KEY" json:"ACSAPIKEY"`
+	ACS_API_VERSION string `yaml:"ACS_API_VERSION" json:"ACSAPIVERSION"`
 
 	// Allie LLM
 	/////////////
-	WEBSERVER_PORT         string `yaml:"WEBSERVER_PORT"`
-	MODELS_CONFIG_LOCATION string `yaml:"MODELS_CONFIG_LOCATION"`
+	WEBSERVER_PORT         string `yaml:"WEBSERVER_PORT" json:"WEBSERVERPORT"`
+	MODELS_CONFIG_LOCATION string `yaml:"MODELS_CONFIG_LOCATION" json:"MODELSCONFIGLOCATION"`
 
 	// Allie DB
 	///////////
-	WEBSERVER_PORT_DB                  string   `yaml:"WEBSERVER_PORT_DB"`
-	EMBEDDINGS_DIMENSIONS              int      `yaml:"EMBEDDINGS_DIMENSIONS"`
-	MILVUS_INDEX_TYPE                  string   `yaml:"MILVUS_INDEX_TYPE"`
-	MILVUS_METRIC_TYPE                 string   `yaml:"MILVUS_METRIC_TYPE"` // cosine, l2 or ip
-	MILVUS_HOST                        string   `yaml:"MILVUS_HOST"`
-	MILVUS_PORT                        string   `yaml:"MILVUS_PORT"`
-	NEO4J_DB                           bool     `yaml:"NEO4J_DB"`
-	NEO4J_URI                          string   `yaml:"NEO4J_URI"`
-	NEO4J_USERNAME                     string   `yaml:"NEO4J_USERNAME"`
-	NEO4J_PASSWORD                     string   `yaml:"NEO4J_PASSWORD"`
-	TEMP_COLLECTION_NAME               string   `yaml:"TEMP_COLLECTION_NAME"`
-	ELASTICSEARCH_HOST                 string   `yaml:"ELASTICSEARCH_HOST"`
-	ELASTICSEARCH_PORT                 string   `yaml:"ELASTICSEARCH_PORT"`
-	ELASTICSEARCH_USERNAME             string   `yaml:"ELASTICSEARCH_USERNAME"`
-	ELASTICSEARCH_PASSWORD             string   `yaml:"ELASTICSEARCH_PASSWORD"`
-	ELASTICSEARCH_INDEX_TYPE           string   `yaml:"ELASTICSEARCH_INDEX_TYPE"`           // cosineSimilarity or dotProduct
-	ELASTICSEARCH_TRUSTED_CERTIFICATES []string `yaml:"ELASTICSEARCH_TRUSTED_CERTIFICATES"` // list of paths to trusted certificates
-	ELASTICSEARCH_INSECURE_CONNECTION  bool     `yaml:"ELASTICSEARCH_INSECURE_CONNECTION"`
-	DATABASE_TYPE                      string   `yaml:"DATABASE_TYPE"` // milvus or elasticsearch
+	WEBSERVER_PORT_DB                  string   `yaml:"WEBSERVER_PORT_DB" json:"WEBSERVERPORTDB"`
+	EMBEDDINGS_DIMENSIONS              int      `yaml:"EMBEDDINGS_DIMENSIONS" json:"EMBEDDINGSDIMENSIONS"`
+	MILVUS_INDEX_TYPE                  string   `yaml:"MILVUS_INDEX_TYPE" json:"MILVUSINDEXTYPE"`
+	MILVUS_METRIC_TYPE                 string   `yaml:"MILVUS_METRIC_TYPE" json:"MILVUSMETRICTYPE"` // cosine, l2 or ip
+	MILVUS_HOST                        string   `yaml:"MILVUS_HOST" json:"MILVUSHOST"`
+	MILVUS_PORT                        string   `yaml:"MILVUS_PORT" json:"MILVUSPORT"`
+	NEO4J_DB                           bool     `yaml:"NEO4J_DB" json:"NEO4JDB"`
+	NEO4J_URI                          string   `yaml:"NEO4J_URI" json:"NEO4JURI"`
+	NEO4J_USERNAME                     string   `yaml:"NEO4J_USERNAME" json:"NEO4JUSERNAME"`
+	NEO4J_PASSWORD                     string   `yaml:"NEO4J_PASSWORD" json:"NEO4JPASSWORD"`
+	TEMP_COLLECTION_NAME               string   `yaml:"TEMP_COLLECTION_NAME" json:"TEMPCOLLECTIONNAME"`
+	ELASTICSEARCH_HOST                 string   `yaml:"ELASTICSEARCH_HOST" json:"ELASTICSEARCHHOST"`
+	ELASTICSEARCH_PORT                 string   `yaml:"ELASTICSEARCH_PORT" json:"ELASTICSEARCHPORT"`
+	ELASTICSEARCH_USERNAME             string   `yaml:"ELASTICSEARCH_USERNAME" json:"ELASTICSEARCHUSERNAME"`
+	ELASTICSEARCH_PASSWORD             string   `yaml:"ELASTICSEARCH_PASSWORD" json:"ELASTICSEARCHPASSWORD"`
+	ELASTICSEARCH_INDEX_TYPE           string   `yaml:"ELASTICSEARCH_INDEX_TYPE" json:"ELASTICSEARCHINDEXTYPE"`                     // cosineSimilarity or dotProduct
+	ELASTICSEARCH_TRUSTED_CERTIFICATES []string `yaml:"ELASTICSEARCH_TRUSTED_CERTIFICATES" json:"ELASTICSEARCHTRUSTEDCERTIFICATES"` // list of paths to trusted certificates
+	ELASTICSEARCH_INSECURE_CONNECTION  bool     `yaml:"ELASTICSEARCH_INSECURE_CONNECTION" json:"ELASTICSEARCHINSECURECONNECTION"`
+	DATABASE_TYPE                      string   `yaml:"DATABASE_TYPE" json:"DATABASETYPE"` // milvus or elasticsearch
 
 	// Allie Exec
 	//////////////
-	WEBSERVER_PORT_EXEC            string `yaml:"WEBSERVER_PORT_EXEC"`
-	EXECUTABLE                     string `yaml:"EXECUTABLE"`
-	WATCH_FOLDER_PATH              string `yaml:"WATCH_FOLDER_PATH"`
-	MILLISECONDS_SINCE_LAST_CHANGE int    `yaml:"MILLISECONDS_SINCE_LAST_CHANGE"`
+	WEBSERVER_PORT_EXEC            string `yaml:"WEBSERVER_PORT_EXEC" json:"WEBSERVERPORTEXEC"`
+	EXECUTABLE                     string `yaml:"EXECUTABLE" json:"EXECUTABLE"`
+	WATCH_FOLDER_PATH              string `yaml:"WATCH_FOLDER_PATH" json:"WATCHFOLDERPATH"`
+	MILLISECONDS_SINCE_LAST_CHANGE int    `yaml:"MILLISECONDS_SINCE_LAST_CHANGE" json:"MILLISECONDSSINCELASTCHANGE"`
 }
 
 // Initialize conifg dict

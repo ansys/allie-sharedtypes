@@ -1,16 +1,114 @@
 package config
 
 import (
+	"context"
 	"encoding/json"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
 
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
+	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets"
 	"gopkg.in/yaml.v2"
 )
+
+////////////////////////////////////////////
+// Standard Config init for Allie Go Modules
+////////////////////////////////////////////
+
+// InitConfig initializes the configuration for the Allie service.
+//
+// Parameters:
+//   - requiredProperties: The list of required properties.
+//   - optionalDefaultValues: The map of optional properties and their default values.
+func InitConfig(requiredProperties []string, optionalDefaultValues map[string]interface{}) {
+	// Get config file location
+	// 1st option: read from environment variable
+	configFile := os.Getenv("ALLIE_CONFIG_PATH")
+	if configFile == "" {
+		// 2nd option: read from default location... root directory
+		configFile = "config.yaml"
+	}
+
+	// Get config properties from CLI
+	err := CreateUpdateConfigFileFromCLI(configFile)
+	if err != nil {
+		pan := writeStringToFile("error in creating and/or updating configuration file from command line:")
+		if pan != nil {
+			panic(pan)
+		}
+		pan = writeInterfaceToFile(err)
+		if pan != nil {
+			panic(pan)
+		}
+		panic(err)
+	}
+
+	// Initialize config From File
+	err = InitGlobalConfigFromFile(configFile, requiredProperties, optionalDefaultValues)
+	if err != nil {
+		pan := writeStringToFile("error in reading configuration values from configuration file:")
+		if pan != nil {
+			panic(pan)
+		}
+		pan = writeInterfaceToFile(err)
+		if pan != nil {
+			panic(pan)
+		}
+		panic(err)
+	}
+
+	// Optionally retrieve secrets from Azure Key Vault with Managed Identity (only works inside Azure Services)
+	if GlobalConfig.EXTRACT_CONFIG_FROM_AZURE_KEY_VAULT {
+		// Validate the required properties for Azure Key Vault are set
+		err = ValidateConfig(*GlobalConfig, []string{"AZURE_KEY_VAULT_NAME", "AZURE_MANAGED_IDENTITY_ID"})
+		if err != nil {
+			pan := writeStringToFile("error in validating the mandatory configuration values for extracting configuration from Azure Key Vault:")
+			if pan != nil {
+				panic(pan)
+			}
+			pan = writeInterfaceToFile(err)
+			if pan != nil {
+				panic(pan)
+			}
+			panic(err)
+		}
+
+		// Initialize the config from Azure Key Vault
+		err = InitGlobalConfigFromAzureKeyVault()
+		if err != nil {
+			pan := writeStringToFile("error in retrieving configuration values from Azure Key Vault:")
+			if pan != nil {
+				panic(pan)
+			}
+			pan = writeInterfaceToFile(err)
+			if pan != nil {
+				panic(pan)
+			}
+			panic(err)
+		}
+	}
+
+	// Validate mandatory config properties
+	err = ValidateConfig(*GlobalConfig, requiredProperties)
+	if err != nil {
+		pan := writeStringToFile("error in validating configuration variables:")
+		if pan != nil {
+			panic(pan)
+		}
+		pan = writeInterfaceToFile(err)
+		if pan != nil {
+			panic(pan)
+		}
+		panic(err)
+	}
+}
 
 //////////////////////////////////////////
 // Read Config variables from Config file
@@ -22,17 +120,26 @@ import (
 //   - fileName: The name of the configuration file.
 //   - requiredProperties: The list of required properties.
 //   - optionalDefaultValues: The map of optional properties and their default values.
-func InitGlobalConfigFromFile(fileName string, requiredProperties []string, optionalDefaultValues map[string]interface{}) {
+//
+// Returns:
+//   - err: An error if there was an issue initializing the configuration.
+func InitGlobalConfigFromFile(fileName string, requiredProperties []string, optionalDefaultValues map[string]interface{}) (err error) {
 	var config Config
-	configResult := readYaml(fileName, config)
-	// Validate mandatory config properties
-	validateConfig(configResult, requiredProperties)
+	configResult, err := readYaml(fileName, config)
+	if err != nil {
+		return err
+	}
 
 	// Assign to global config
 	GlobalConfig = &configResult
 
 	// Set optional properties if missing
-	defineOptionalProperties(GlobalConfig, optionalDefaultValues)
+	err = defineOptionalProperties(GlobalConfig, optionalDefaultValues)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // readYaml reads the yaml specified in `fileName` parameter and saves it to `config_struct`
@@ -40,20 +147,16 @@ func InitGlobalConfigFromFile(fileName string, requiredProperties []string, opti
 // Parameters:
 //   - fileName: The name of the configuration file.
 //   - configStruct: Struct with the parameters of the YAML to read.
-func readYaml(fileName string, configStruct Config) Config {
+//
+// Returns:
+//   - extractedConfigStruct: The extracted configuration struct.
+//   - err: An error if there was an issue reading the YAML file.
+func readYaml(fileName string, configStruct Config) (extractedConfigStruct Config, err error) {
 	// Read the YAML file into a byte slice
 	data, err := os.ReadFile(fileName)
 	if err != nil {
 		message := "config.yaml file is missing from directory or not accessible"
-		pan := writeStringToFile(message)
-		if pan != nil {
-			panic(pan)
-		}
-		pan2 := writeInterfaceToFile(err)
-		if pan2 != nil {
-			panic(pan2)
-		}
-		panic(err)
+		return Config{}, fmt.Errorf(message)
 	}
 
 	// Unmarshal the YAML data into the config object
@@ -73,42 +176,9 @@ func readYaml(fileName string, configStruct Config) Config {
 		message = message + "}"
 
 		// Write message and error to error file
-		pan := writeStringToFile(message)
-		if pan != nil {
-			panic(pan)
-		}
-		pan2 := writeInterfaceToFile(err)
-		if pan2 != nil {
-			panic(pan2)
-		}
-		panic(err)
+		return Config{}, fmt.Errorf(message)
 	}
-	return configStruct
-}
-
-// validateConfig checks for mandatory entries in the configuration and validates chosen models.
-//
-// Parameters:
-//   - config: The configuration object to validate.
-//   - requiredProperties: The list of required properties.
-func validateConfig(config Config, requiredProperties []string) {
-	// Check if all mandatory properties are present
-	configValue := reflect.ValueOf(config)
-
-	for _, property := range requiredProperties {
-		field := configValue.FieldByName(property)
-
-		if !field.IsValid() || field.IsZero() {
-			message := fmt.Sprintf("config.yaml is missing mandatory property '%v': ", property)
-
-			// Write message to error file
-			pan := writeInterfaceToFile(message)
-			if pan != nil {
-				panic(pan)
-			}
-			panic(message)
-		}
-	}
+	return configStruct, nil
 }
 
 // defineOptionalProperties sets optional properties for the configuration.
@@ -116,16 +186,16 @@ func validateConfig(config Config, requiredProperties []string) {
 // Parameters:
 //   - config: The configuration object to validate.
 //   - optionalDefaultValues: The map of optional properties and their default values.
-func defineOptionalProperties(config *Config, optionalDefaultValues map[string]interface{}) {
+//
+// Returns:
+//   - err: An error if there was an issue setting the optional properties.
+func defineOptionalProperties(config *Config, optionalDefaultValues map[string]interface{}) (err error) {
 	defer func() {
 		r := recover()
 		if r != nil {
 			// Write message to error file
 			message := fmt.Sprintf("Error in defineOptionalProperties: %v", r)
-			pan := writeStringToFile(message)
-			if pan != nil {
-				panic(pan)
-			}
+			err = fmt.Errorf(message)
 		}
 	}()
 
@@ -140,13 +210,12 @@ func defineOptionalProperties(config *Config, optionalDefaultValues map[string]i
 			} else {
 				// Handle type mismatch
 				message := fmt.Sprintf("Type mismatch for key '%s': expected %v, got %v", key, fieldValue.Type(), reflect.TypeOf(defaultValue))
-				pan := writeStringToFile(message)
-				if pan != nil {
-					panic(pan)
-				}
+				return fmt.Errorf(message)
 			}
 		}
 	}
+
+	return nil
 }
 
 // isZeroValue checks if a reflect.Value is zero for its type.
@@ -168,10 +237,13 @@ func isZeroValue(v reflect.Value) bool {
 //
 // Parameters:
 //   - fileName: The name of the configuration file.
-func CreateUpdateConfigFileFromCLI(fileName string) {
+//
+// Returns:
+//   - err: An error if there was an issue creating or updating the configuration file.
+func CreateUpdateConfigFileFromCLI(fileName string) (err error) {
 	// Checking for any command-line arguments
 	if len(os.Args) == 1 {
-		fmt.Println("No command line options given; full config will be retrieved from existing config.yaml file")
+		log.Println("No command line options given; full config will be retrieved from existing config.yaml file and/or Azure Key Vault.")
 		return
 	}
 
@@ -185,32 +257,24 @@ func CreateUpdateConfigFileFromCLI(fileName string) {
 	flag.Parse()
 
 	// Checking if config.yaml file already exists
-	_, err := os.Stat(fileName)
+	_, err = os.Stat(fileName)
 
 	if os.IsNotExist(err) {
 		// If it doesn't exist, create a new one
-		fmt.Println("config.yaml file does not exist. Creating a new one...")
+		log.Println("config.yaml file does not exist. Creating a new one with provided CLI values...")
 
 		file, _ := yaml.Marshal(cliConfig)
 		_ = os.WriteFile(fileName, file, 0644)
 	} else {
 		// If it does exist, open and append to it
-		fmt.Println("config.yaml file exists. Appending command line options...")
+		log.Println("config.yaml file exists. Appending command line options with provided CLI values...")
 
 		file, _ := os.ReadFile(fileName)
 		config := Config{}
 		err := yaml.Unmarshal(file, &config)
 		if err != nil {
-			message := "error in yaml.Unmarshal:"
-			pan := writeStringToFile(message)
-			if pan != nil {
-				panic(pan)
-			}
-			pan2 := writeInterfaceToFile(err)
-			if pan2 != nil {
-				panic(pan2)
-			}
-			panic(err)
+			message := fmt.Sprintf("Error in yaml.Unmarshal: %v", err)
+			return fmt.Errorf(message)
 		}
 
 		// Use reflection to update fields that were set in the command line
@@ -230,6 +294,8 @@ func CreateUpdateConfigFileFromCLI(fileName string) {
 		file, _ = yaml.Marshal(config)
 		_ = os.WriteFile(fileName, file, 0644)
 	}
+
+	return nil
 }
 
 // CreateFlags initializes command-line flags for configuration.
@@ -259,9 +325,154 @@ func createFlags(val reflect.Value, prefix string) {
 	}
 }
 
+/////////////////////////////////////////////////
+// Extract Config variables from Azure Key Vault
+/////////////////////////////////////////////////
+
+// InitGlobalConfigFromAzureKeyVault extracts the configuration from Azure Key Vault.
+// It iterates over all secrets in the key vault and if the secret name matches a field in the Config struct,
+// it sets the field to the value of the secret.
+//
+// Returns:
+//   - err: An error if there was an issue extracting the configuration.
+func InitGlobalConfigFromAzureKeyVault() (err error) {
+	// log
+	log.Println("Extracting configuration from Azure Key Vault...")
+
+	// get environment variables
+	azureManagedIdentity := os.Getenv(GlobalConfig.AZURE_MANAGED_IDENTITY_ID)
+	azureKeyVaultName := os.Getenv(GlobalConfig.AZURE_KEY_VAULT_NAME)
+
+	// check if all required environment variables are set
+	if azureManagedIdentity == "" {
+		return fmt.Errorf("environment variable for %v is not set", azureManagedIdentity)
+	}
+	if azureKeyVaultName == "" {
+		return fmt.Errorf("environment variable for %v is not set", azureKeyVaultName)
+	}
+
+	// create key vault URL
+	keyVaultUrl := fmt.Sprintf("https://%s.vault.azure.net/", azureKeyVaultName)
+
+	// create Managed Identity credential
+	cred, err := azidentity.NewManagedIdentityCredential(&azidentity.ManagedIdentityCredentialOptions{
+		ID: azidentity.ClientID(azureManagedIdentity),
+	})
+	if err != nil {
+		return fmt.Errorf("failed to get Managed Identity credential: %w", err)
+	}
+
+	// Test the managed id by getting a token
+	scope := "https://vault.azure.net/.default" // Scope for Azure Key Vault
+	_, err = cred.GetToken(context.TODO(), policy.TokenRequestOptions{
+		Scopes: []string{scope},
+	})
+	if err != nil {
+		return fmt.Errorf("failed to get token from managed ID: %w", err)
+	}
+
+	// Reflect on the struct
+	GlobalConfigValue := reflect.ValueOf(GlobalConfig).Elem()
+	GlobalConfigType := GlobalConfigValue.Type()
+
+	// create azsecrets client
+	clientSecrets, err := azsecrets.NewClient(keyVaultUrl, cred, nil)
+	if err != nil {
+		return err
+	}
+
+	// list all secrets
+	pagerSecerts := clientSecrets.NewListSecretPropertiesPager(nil)
+	// iterate over all secrets
+	for pagerSecerts.More() {
+		page, err := pagerSecerts.NextPage(context.TODO())
+		if err != nil {
+			return err
+		}
+		for _, secret := range page.Value {
+			// iterate over all fields in the struct
+			for i := 0; i < GlobalConfigValue.NumField(); i++ {
+				// Get the field
+				field := GlobalConfigValue.Field(i)
+
+				// Get the YAML tag
+				fieldType := GlobalConfigType.Field(i)
+				yamlTag := fieldType.Tag.Get("json")
+
+				// Check if the field name matches the target field name
+				if yamlTag == secret.ID.Name() {
+					// Get the key value
+					resp, err := clientSecrets.GetSecret(context.TODO(), secret.ID.Name(), "", nil)
+					if err != nil {
+						return err
+					}
+					// Check if the field is settable
+					if field.CanSet() {
+						// Set the field to the new value
+						switch field.Kind() {
+						case reflect.String:
+							field.SetString(*resp.Value)
+						case reflect.Bool:
+							// Convert string to bool
+							value, err := strconv.ParseBool(*resp.Value)
+							if err != nil {
+								return err
+							}
+							field.SetBool(value)
+						case reflect.Int:
+							// Convert string to int
+							value, err := strconv.Atoi(*resp.Value)
+							if err != nil {
+								return err
+							}
+							field.SetInt(int64(value))
+						case reflect.Slice:
+							// Convert string to string slice
+							var value []string
+							err := json.Unmarshal([]byte(*resp.Value), &value)
+							if err != nil {
+								return err
+							}
+							field.Set(reflect.ValueOf(value))
+						default:
+							return fmt.Errorf("unsupported field type: %v", field.Kind())
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return nil
+}
+
 ///////////////////////
 // Helper Functions
 ///////////////////////
+
+// ValidateConfig checks for mandatory entries in the configuration and validates chosen models.
+//
+// Parameters:
+//   - config: The configuration object to validate.
+//   - requiredProperties: The list of required properties.
+//
+// Returns:
+//   - err: An error if there was an issue validating the configuration.
+func ValidateConfig(config Config, requiredProperties []string) (err error) {
+	// Check if all mandatory properties are present
+	configValue := reflect.ValueOf(config)
+
+	for _, property := range requiredProperties {
+		field := configValue.FieldByName(property)
+
+		if !field.IsValid() || field.IsZero() {
+			message := fmt.Sprintf("config.yaml is missing mandatory property '%v': ", property)
+			return fmt.Errorf(message)
+		}
+	}
+
+	return nil
+}
 
 // GetGlobalConfigAsJSON returns the global configuration as a JSON string.
 //
