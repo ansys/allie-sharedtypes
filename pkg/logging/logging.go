@@ -17,7 +17,11 @@ import (
 // Create Context
 ///////////////////////////////////
 
-// Define Error file location
+// Set possible context keys
+const (
+	Rest_Call_Id ContextKey = "restCallId"
+	Rest_Call    ContextKey = "restCall"
+)
 
 // Set function sets ContextKeys equal to any value
 func (ctx *ContextMap) Set(key ContextKey, value interface{}) {
