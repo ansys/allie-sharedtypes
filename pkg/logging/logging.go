@@ -17,8 +17,6 @@ import (
 // Create Context
 ///////////////////////////////////
 
-// Define Error file location
-
 // Set function sets ContextKeys equal to any value
 func (ctx *ContextMap) Set(key ContextKey, value interface{}) {
 	ctx.data.Store(key, value)
