@@ -12,6 +12,11 @@ type ContextKey string
 const (
 	InstructionGuid ContextKey = "instructionGuid"
 	AdapterType     ContextKey = "adapterType"
+	WatchFolderPath ContextKey = "watchFolderPath"
+	WatchFilePath   ContextKey = "watchFilePath"
+	ReaderGuid      ContextKey = "readerGuid"
+	ClientGuid      ContextKey = "clientGuid"
+	Action          ContextKey = "action"
 )
 
 // Initialize the global logger variable.
