@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/ansys/allie-sharedtypes/pkg/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
@@ -55,22 +56,44 @@ func (ctx *ContextMap) Copy() *ContextMap {
 // InitLogger initializes the global logger.
 //
 // The function creates a new zap logger with the specified configuration and sets the global logger variable to the new logger.
-func InitLogger() {
+//
+// Parameters:
+//   - GlobalConfig: The global configuration from the config package.
+func InitLogger(GlobalConfig *config.Config) {
+
+	// Create a new zap logger with the specified configuration
 	config := zap.NewProductionConfig()
 	config.Level.SetLevel(zap.DebugLevel)
 	option := zap.AddCallerSkip(1)
 	config.EncoderConfig.FunctionKey = "func"
 	temp, _ := config.Build(option)
 	Log = loggerWrapper{lw: temp}
+
+	// Set the global configuration variables for the logging package
+	initLoggerConfig(Config{
+		ErrorFileLocation: GlobalConfig.ERROR_FILE_LOCATION,
+		LogLevel:          GlobalConfig.LOG_LEVEL,
+		LocalLogs:         GlobalConfig.LOCAL_LOGS,
+		LocalLogsLocation: GlobalConfig.LOCAL_LOGS_LOCATION,
+		DatadogLogs:       GlobalConfig.DATADOG_LOGS,
+		DatadogSource:     GlobalConfig.DATADOG_SOURCE,
+		DatadogStage:      GlobalConfig.STAGE,
+		DatadogVersion:    GlobalConfig.VERSION,
+		DatadogService:    GlobalConfig.SERVICE_NAME,
+		DatadogAPIKey:     GlobalConfig.LOGGING_API_KEY,
+		DatadogLogsURL:    GlobalConfig.LOGGING_URL,
+		DatadogMetrics:    GlobalConfig.DATADOG_METRICS,
+		DatadogMetricsURL: GlobalConfig.METRICS_URL,
+	})
 }
 
-// InitConfig initializes the global configuration variables for the logging package.
+// initLoggerConfig initializes the global configuration variables for the logging package.
 //
 // The function sets the global configuration variables to the values specified in the provided Config struct.
 //
 // Parameters:
 //   - config: The Config struct containing the configuration values to set.
-func InitConfig(config Config) {
+func initLoggerConfig(config Config) {
 	ERROR_FILE_LOCATION = config.ErrorFileLocation
 	LOG_LEVEL = config.LogLevel
 	LOCAL_LOGS = config.LocalLogs
