@@ -41,11 +41,14 @@ message FunctionDefinition {
     // Category of the function.
     string category = 3;
 
+    // Display name of the function;
+    string displayName = 4;
+
     // List of input definitions for the function.
-    repeated FunctionInputDefinition input = 4;
+    repeated FunctionInputDefinition input = 5;
 
     // List of output definitions for the function.
-    repeated FunctionOutputDefinition output = 5;
+    repeated FunctionOutputDefinition output = 6;
 }
 
 // FunctionInputDefinition is the definition of an input for a function.
