@@ -19,6 +19,7 @@ const (
 	Action          ContextKey = "action"
 	Rest_Call_Id    ContextKey = "restCallId"
 	Rest_Call       ContextKey = "restCall"
+	UserMail        ContextKey = "userMail"
 )
 
 // Initialize the global logger variable.
