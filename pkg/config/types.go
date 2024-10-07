@@ -53,6 +53,8 @@ type Config struct {
 	// Azure AD Authentication
 	AZURE_AD_AUTHENTICATION     bool   `yaml:"AZURE_AD_AUTHENTICATION" json:"AZUREADAUTHENTICATION"`
 	AZURE_AD_AUTHENTICATION_URL string `yaml:"AZURE_AD_AUTHENTICATION_URL" json:"AZUREADAUTHENTICATIONURL"`
+	// Exec Endpoints
+	EXEC_ENDPOINT string `yaml:"EXEC_ENDPOINT" json:"EXECENDPOINT"`
 
 	// Allie Flowkit
 	/////////////////
@@ -61,7 +63,6 @@ type Config struct {
 	// Allie Modules
 	LLM_HANDLER_ENDPOINT  string `yaml:"LLM_HANDLER_ENDPOINT" json:"LLMHANDLERENDPOINT"`
 	KNOWLEDGE_DB_ENDPOINT string `yaml:"KNOWLEDGE_DB_ENDPOINT" json:"KNOWLEDGEDBENDPOINT"`
-	EXEC_ENDPOINT         string `yaml:"EXEC_ENDPOINT" json:"EXECENDPOINT"`
 	// Azure Cognitive Services
 	ACS_ENDPOINT    string `yaml:"ACS_ENDPOINT" json:"ACSENDPOINT"`
 	ACS_API_KEY     string `yaml:"ACS_API_KEY" json:"ACSAPIKEY"`
@@ -96,10 +97,15 @@ type Config struct {
 
 	// Allie Exec
 	//////////////
-	WEBSERVER_PORT_EXEC            string `yaml:"WEBSERVER_PORT_EXEC" json:"WEBSERVERPORTEXEC"`
-	EXECUTABLE                     string `yaml:"EXECUTABLE" json:"EXECUTABLE"`
+	WEBSERVER_PORT_EXEC string `yaml:"WEBSERVER_PORT_EXEC" json:"WEBSERVERPORTEXEC"`
+	EXEC_API_KEY        string `yaml:"EXEC_API_KEY" json:"EXECAPIKEY"`
+	// Python executable name
+	EXECUTABLE string `yaml:"EXECUTABLE" json:"EXECUTABLE"`
+	// File transfer
 	WATCH_FOLDER_PATH              string `yaml:"WATCH_FOLDER_PATH" json:"WATCHFOLDERPATH"`
 	MILLISECONDS_SINCE_LAST_CHANGE int    `yaml:"MILLISECONDS_SINCE_LAST_CHANGE" json:"MILLISECONDSSINCELASTCHANGE"`
+	// Agent connection
+	AGENT_ENDPOINT string `yaml:"AGENT_ENDPOINT" json:"AGENTENDPOINT"`
 }
 
 // Initialize conifg dict
