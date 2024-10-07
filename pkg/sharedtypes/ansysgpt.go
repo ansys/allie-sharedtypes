@@ -22,7 +22,7 @@ type ACSSearchResponse struct {
 	Version             string  `json:"version"`
 	SearchScore         float64 `json:"@search.score"`
 	SearchRerankerScore float64 `json:"@search.rerankerScore"`
-	IndexName           string  // only internal use
+	IndexName           string  `json:"indexName"`
 }
 
 // AnsysGPTCitation represents the citation from the AnsysGPT.
