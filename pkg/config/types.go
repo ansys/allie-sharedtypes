@@ -55,6 +55,11 @@ type Config struct {
 	AZURE_AD_AUTHENTICATION_URL string `yaml:"AZURE_AD_AUTHENTICATION_URL" json:"AZUREADAUTHENTICATIONURL"`
 	// Exec Endpoints
 	EXEC_ENDPOINT string `yaml:"EXEC_ENDPOINT" json:"EXECENDPOINT"`
+	// Private Workflows
+	LOAD_PRIVATE_WORKFLOWS   bool   `yaml:"LOAD_PRIVATE_WORKFLOWS" json:"LOADPRIVATEWORKFLOWS"`
+	GITHUB_USER              string `yaml:"GITHUB_USER" json:"GITHUBUSER"`
+	GITHUB_TOKEN             string `yaml:"GITHUB_TOKEN" json:"GITHUBTOKEN"`
+	PRIVATE_WORKFLOWS_FOLDER string `yaml:"PRIVATE_WORKFLOWS_FOLDER" json:"PRIVATEWORKFLOWSFOLDER"`
 
 	// Allie Flowkit
 	/////////////////
