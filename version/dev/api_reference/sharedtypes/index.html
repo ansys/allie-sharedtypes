@@ -1,0 +1,1683 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API reference &#8212; allie-sharedtypes</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/ansys_sphinx_theme.css?v=e7c4c341" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  
+    <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../_static/documentation_options.js?v=7838c05f"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/test/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://ansys.github.io/allie-sharedtypes/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://ansys.github.io/allie-sharedtypes/version/stable/api_reference/sharedtypes/index.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://www.ansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ansys_logo_transparent_black.png" class="logo__image only-light" alt="allie-sharedtypes - Home"/>
+    <script>document.write(`<img src="../../_static/ansys_logo_transparent_white.png" class="logo__image only-dark" alt="allie-sharedtypes - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<div class="search-bar" id="search-bar">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+         aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+         autocapitalize="off" spellcheck="false"/>
+  <span class="search-button__kbd-shortcut">
+    <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+  </span>
+</form>
+<!-- Search results container -->
+<div id="results" class="results" style="display: none;" tabindex="0">
+</div>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/allie-sharedtypes" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<div class="search-bar" id="search-bar">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+         aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+         autocapitalize="off" spellcheck="false"/>
+  <span class="search-button__kbd-shortcut">
+    <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+  </span>
+</form>
+<!-- Search results container -->
+<div id="results" class="results" style="display: none;" tabindex="0">
+</div>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/allie-sharedtypes" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://allie.docs.pyansys.com/" class="nav-link">Allie</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">API reference</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package sharedtypes
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/ansys/allie-sharedtypes/pkg/sharedtypes"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+			
+				
+				<dd><a href="#ACSSearchResponse">type ACSSearchResponse</a></dd>
+				
+				
+			
+				
+				<dd><a href="#AnsysGPTCitation">type AnsysGPTCitation</a></dd>
+				
+				
+			
+				
+				<dd><a href="#AnsysGPTDefaultFields">type AnsysGPTDefaultFields</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DBListCollectionsOutput">type DBListCollectionsOutput</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DataExtractionDocumentData">type DataExtractionDocumentData</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DbAddDataInput">type DbAddDataInput</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DbAddDataOutput">type DbAddDataOutput</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DbArrayFilter">type DbArrayFilter</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DbCreateCollectionInput">type DbCreateCollectionInput</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DbCreateCollectionOutput">type DbCreateCollectionOutput</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DbData">type DbData</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DbFilters">type DbFilters</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DbJsonFilter">type DbJsonFilter</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DbResponse">type DbResponse</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ErrorResponse">type ErrorResponse</a></dd>
+				
+				
+			
+				
+				<dd><a href="#GeneralNeo4jQueryInput">type GeneralNeo4jQueryInput</a></dd>
+				
+				
+			
+				
+				<dd><a href="#GeneralNeo4jQueryOutput">type GeneralNeo4jQueryOutput</a></dd>
+				
+				
+			
+				
+				<dd><a href="#HandlerRequest">type HandlerRequest</a></dd>
+				
+				
+			
+				
+				<dd><a href="#HandlerResponse">type HandlerResponse</a></dd>
+				
+				
+			
+				
+				<dd><a href="#HistoricMessage">type HistoricMessage</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ModelOptions">type ModelOptions</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Neo4jResponse">type Neo4jResponse</a></dd>
+				
+				
+			
+				
+				<dd><a href="#TransferDetails">type TransferDetails</a></dd>
+				
+				
+			
+				
+				<dd><a href="#neo4jRecord">type neo4jRecord</a></dd>
+				
+				
+			
+				
+				<dd><a href="#props">type props</a></dd>
+				
+				
+			
+				
+				<dd><a href="#summaryCounters">type summaryCounters</a></dd>
+				
+				
+			
+				
+				<dd><a href="#value">type value</a></dd>
+				
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/agent.go">agent.go</a>
+			
+				<a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/ansysgpt.go">ansysgpt.go</a>
+			
+				<a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/dataextraction.go">dataextraction.go</a>
+			
+				<a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/executor.go">executor.go</a>
+			
+				<a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go">knowledgedb.go</a>
+			
+				<a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/llmhandler.go">llmhandler.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+		
+		
+			
+			
+			<h2 id="ACSSearchResponse">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/ansysgpt.go#L11">ACSSearchResponse</a>
+				<a class="permalink" href="#ACSSearchResponse">&#xb6;</a>
+				
+				
+			</h2>
+			<p>ACSSearchResponse represents the response from the ACS search.
+
+			<pre>type ACSSearchResponse struct {
+<span id="ACSSearchResponse.Physics"></span>    Physics             <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;physics&#34;`
+<span id="ACSSearchResponse.SourceTitleLvl3"></span>    SourceTitleLvl3     <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;sourceTitle_lvl3&#34;`
+<span id="ACSSearchResponse.SourceURLLvl3"></span>    SourceURLLvl3       <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;sourceURL_lvl3&#34;`
+<span id="ACSSearchResponse.TokenSize"></span>    TokenSize           <a href="https://pkg.go.dev/builtin/#int">int</a>     `json:&#34;tokenSize&#34;`
+<span id="ACSSearchResponse.SourceTitleLvl2"></span>    SourceTitleLvl2     <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;sourceTitle_lvl2&#34;`
+<span id="ACSSearchResponse.Weight"></span>    Weight              <a href="https://pkg.go.dev/builtin/#float64">float64</a> `json:&#34;weight&#34;`
+<span id="ACSSearchResponse.SourceURLLvl2"></span>    SourceURLLvl2       <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;sourceURL_lvl2&#34;`
+<span id="ACSSearchResponse.Product"></span>    Product             <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;product&#34;`
+<span id="ACSSearchResponse.Content"></span>    Content             <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;content&#34;`
+<span id="ACSSearchResponse.TypeOFasset"></span>    TypeOFasset         <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;typeOFasset&#34;`
+<span id="ACSSearchResponse.Version"></span>    Version             <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;version&#34;`
+<span id="ACSSearchResponse.SearchScore"></span>    SearchScore         <a href="https://pkg.go.dev/builtin/#float64">float64</a> `json:&#34;@search.score&#34;`
+<span id="ACSSearchResponse.SearchRerankerScore"></span>    SearchRerankerScore <a href="https://pkg.go.dev/builtin/#float64">float64</a> `json:&#34;@search.rerankerScore&#34;`
+<span id="ACSSearchResponse.IndexName"></span>    IndexName           <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;indexName&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="AnsysGPTCitation">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/ansysgpt.go#L29">AnsysGPTCitation</a>
+				<a class="permalink" href="#AnsysGPTCitation">&#xb6;</a>
+				
+				
+			</h2>
+			<p>AnsysGPTCitation represents the citation from the AnsysGPT.
+
+			<pre>type AnsysGPTCitation struct {
+<span id="AnsysGPTCitation.Title"></span>    Title     <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;Title&#34;`
+<span id="AnsysGPTCitation.URL"></span>    URL       <a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;URL&#34;`
+<span id="AnsysGPTCitation.Relevance"></span>    Relevance <a href="https://pkg.go.dev/builtin/#float64">float64</a> `json:&#34;Relevance&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="AnsysGPTDefaultFields">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/ansysgpt.go#L4">AnsysGPTDefaultFields</a>
+				<a class="permalink" href="#AnsysGPTDefaultFields">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DefaultFields represents the default fields for the user query.
+
+			<pre>type AnsysGPTDefaultFields struct {
+<span id="AnsysGPTDefaultFields.QueryWord"></span>    QueryWord         <a href="https://pkg.go.dev/builtin/#string">string</a>
+<span id="AnsysGPTDefaultFields.FieldName"></span>    FieldName         <a href="https://pkg.go.dev/builtin/#string">string</a>
+<span id="AnsysGPTDefaultFields.FieldDefaultValue"></span>    FieldDefaultValue <a href="https://pkg.go.dev/builtin/#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DBListCollectionsOutput">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L83">DBListCollectionsOutput</a>
+				<a class="permalink" href="#DBListCollectionsOutput">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DBListCollectionsOutput represents the output of listing collections in the database.
+
+			<pre>type DBListCollectionsOutput struct {
+<span id="DBListCollectionsOutput.Success"></span>    Success     <a href="https://pkg.go.dev/builtin/#bool">bool</a>     `json:&#34;success&#34; description:&#34;Returns true if the collections were listed successfully. Returns false or an error if not.&#34;`
+<span id="DBListCollectionsOutput.Collections"></span>    Collections []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;collections&#34; description:&#34;A list of collection names.&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DataExtractionDocumentData">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/dataextraction.go#L4">DataExtractionDocumentData</a>
+				<a class="permalink" href="#DataExtractionDocumentData">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DataExtractionDocumentData represents the data extracted from a document.
+
+			<pre>type DataExtractionDocumentData struct {
+<span id="DataExtractionDocumentData.DocumentName"></span>    DocumentName      <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;documentName&#34;`
+<span id="DataExtractionDocumentData.DocumentId"></span>    DocumentId        <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;documentId&#34;`
+<span id="DataExtractionDocumentData.Guid"></span>    Guid              <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;guid&#34;`
+<span id="DataExtractionDocumentData.Level"></span>    Level             <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;level&#34;`
+<span id="DataExtractionDocumentData.ChildIds"></span>    ChildIds          []<a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;childIds&#34;`
+<span id="DataExtractionDocumentData.ParentId"></span>    ParentId          <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;parentId&#34;`
+<span id="DataExtractionDocumentData.PreviousSiblingId"></span>    PreviousSiblingId <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;previousSiblingId&#34;`
+<span id="DataExtractionDocumentData.NextSiblingId"></span>    NextSiblingId     <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;nextSiblingId&#34;`
+<span id="DataExtractionDocumentData.LastChildId"></span>    LastChildId       <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;lastChildId&#34;`
+<span id="DataExtractionDocumentData.FirstChildId"></span>    FirstChildId      <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;firstChildId&#34;`
+<span id="DataExtractionDocumentData.Text"></span>    Text              <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;text&#34;`
+<span id="DataExtractionDocumentData.Keywords"></span>    Keywords          []<a href="https://pkg.go.dev/builtin/#string">string</a>  `json:&#34;keywords&#34;`
+<span id="DataExtractionDocumentData.Summary"></span>    Summary           <a href="https://pkg.go.dev/builtin/#string">string</a>    `json:&#34;summary&#34;`
+<span id="DataExtractionDocumentData.Embedding"></span>    Embedding         []<a href="https://pkg.go.dev/builtin/#float32">float32</a> `json:&#34;embedding&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DbAddDataInput">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L141">DbAddDataInput</a>
+				<a class="permalink" href="#DbAddDataInput">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DbAddDataInput represents the input for adding data to the database.
+
+			<pre>type DbAddDataInput struct {
+<span id="DbAddDataInput.CollectionName"></span>    CollectionName <a href="https://pkg.go.dev/builtin/#string">string</a>   `json:&#34;collection_name&#34; description:&#34;Name of the collection to which the data objects will be added. Required for adding data.&#34; required:&#34;true&#34;`
+<span id="DbAddDataInput.Data"></span>    Data           []<a href="#DbData">DbData</a> `json:&#34;data&#34; description:&#34;Data objects to be added to the DB.&#34; required:&#34;true&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DbAddDataOutput">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L147">DbAddDataOutput</a>
+				<a class="permalink" href="#DbAddDataOutput">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DbAddDataOutput represents the output of adding data to the database.
+
+			<pre>type DbAddDataOutput struct {
+<span id="DbAddDataOutput.Success"></span>    Success             <a href="https://pkg.go.dev/builtin/#bool">bool</a>   `json:&#34;success&#34; description:&#34;Returns true if the data was added successfully. Returns false or an error if not.&#34;`
+<span id="DbAddDataOutput.IgnoredObjectsCount"></span>    IgnoredObjectsCount <a href="https://pkg.go.dev/builtin/#int">int</a>    `json:&#34;ignored_objects_count&#34; description:&#34;Number of ignored documents.&#34;`
+<span id="DbAddDataOutput.Error"></span>    Error               <a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;error&#34; description:&#34;Error message if the collection could not be created.&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DbArrayFilter">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L20">DbArrayFilter</a>
+				<a class="permalink" href="#DbArrayFilter">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DbArrayFilter represents the filter for an array field in the database.
+
+			<pre>type DbArrayFilter struct {
+<span id="DbArrayFilter.NeedAll"></span>    NeedAll    <a href="https://pkg.go.dev/builtin/#bool">bool</a>     `json:&#34;needAll&#34;`
+<span id="DbArrayFilter.FilterData"></span>    FilterData []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;filterData&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DbCreateCollectionInput">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L154">DbCreateCollectionInput</a>
+				<a class="permalink" href="#DbCreateCollectionInput">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DbCreateCollectionInput represents the input for creating a collection in the database.
+
+			<pre>type DbCreateCollectionInput struct {
+<span id="DbCreateCollectionInput.CollectionName"></span>    CollectionName <a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;collection_name&#34; description:&#34;Name of the collection to which the data objects will be added. Required for adding data.&#34; required:&#34;true&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DbCreateCollectionOutput">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L159">DbCreateCollectionOutput</a>
+				<a class="permalink" href="#DbCreateCollectionOutput">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DbCreateCollectionOutput represents the output of creating a collection in the database.
+
+			<pre>type DbCreateCollectionOutput struct {
+<span id="DbCreateCollectionOutput.Success"></span>    Success <a href="https://pkg.go.dev/builtin/#bool">bool</a>   `json:&#34;success&#34; description:&#34;Returns true if the collection was created successfully. Returns false or an error if not.&#34;`
+<span id="DbCreateCollectionOutput.Error"></span>    Error   <a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;error&#34; description:&#34;Error message if the collection could not be created.&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DbData">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L34">DbData</a>
+				<a class="permalink" href="#DbData">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DbData represents the data stored in the database.
+
+			<pre>type DbData struct {
+<span id="DbData.Guid"></span>    Guid              <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;guid&#34;`
+<span id="DbData.DocumentId"></span>    DocumentId        <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;document_id&#34;`
+<span id="DbData.DocumentName"></span>    DocumentName      <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;document_name&#34;`
+<span id="DbData.Text"></span>    Text              <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;text&#34;`
+<span id="DbData.Keywords"></span>    Keywords          []<a href="https://pkg.go.dev/builtin/#string">string</a>               `json:&#34;keywords&#34;`
+<span id="DbData.Summary"></span>    Summary           <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;summary&#34;`
+<span id="DbData.Embedding"></span>    Embedding         []<a href="https://pkg.go.dev/builtin/#float32">float32</a>              `json:&#34;embeddings&#34;`
+<span id="DbData.Tags"></span>    Tags              []<a href="https://pkg.go.dev/builtin/#string">string</a>               `json:&#34;tags&#34;`
+<span id="DbData.Metadata"></span>    Metadata          map[<a href="https://pkg.go.dev/builtin/#string">string</a>]interface{} `json:&#34;metadata&#34;`
+<span id="DbData.ParentId"></span>    ParentId          <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;parent_id&#34;`
+<span id="DbData.ChildIds"></span>    ChildIds          []<a href="https://pkg.go.dev/builtin/#string">string</a>               `json:&#34;child_ids&#34;`
+<span id="DbData.PreviousSiblingId"></span>    PreviousSiblingId <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;previous_sibling_id&#34;`
+<span id="DbData.NextSiblingId"></span>    NextSiblingId     <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;next_sibling_id&#34;`
+<span id="DbData.LastChildId"></span>    LastChildId       <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;last_child_id&#34;`
+<span id="DbData.FirstChildId"></span>    FirstChildId      <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;first_child_id&#34;`
+<span id="DbData.Level"></span>    Level             <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;level&#34;`
+<span id="DbData.HasNeo4jEntry"></span>    HasNeo4jEntry     <a href="https://pkg.go.dev/builtin/#bool">bool</a>                   `json:&#34;has_neo4j_entry&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DbFilters">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L4">DbFilters</a>
+				<a class="permalink" href="#DbFilters">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DbFilters represents the filters for the database.
+
+			<pre>type DbFilters struct {
+    <span class="comment">// Filters for string fields</span>
+<span id="DbFilters.GuidFilter"></span>    GuidFilter         []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;guid,omitempty&#34;`
+<span id="DbFilters.DocumentIdFilter"></span>    DocumentIdFilter   []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;document_id,omitempty&#34;`
+<span id="DbFilters.DocumentNameFilter"></span>    DocumentNameFilter []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;document_name,omitempty&#34;`
+<span id="DbFilters.LevelFilter"></span>    LevelFilter        []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;level,omitempty&#34;`
+
+    <span class="comment">// Filters for array fields</span>
+<span id="DbFilters.TagsFilter"></span>    TagsFilter     <a href="#DbArrayFilter">DbArrayFilter</a> `json:&#34;tags,omitempty&#34;`
+<span id="DbFilters.KeywordsFilter"></span>    KeywordsFilter <a href="#DbArrayFilter">DbArrayFilter</a> `json:&#34;keywords,omitempty&#34;`
+
+    <span class="comment">// Filters for JSON fields</span>
+<span id="DbFilters.MetadataFilter"></span>    MetadataFilter []<a href="#DbJsonFilter">DbJsonFilter</a> `json:&#34;metadata,omitempty&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DbJsonFilter">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L26">DbJsonFilter</a>
+				<a class="permalink" href="#DbJsonFilter">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DbJsonFilter represents the filter for a JSON field in the database.
+
+			<pre>type DbJsonFilter struct {
+<span id="DbJsonFilter.FieldName"></span>    FieldName  <a href="https://pkg.go.dev/builtin/#string">string</a>   `json:&#34;fieldName&#34;`
+<span id="DbJsonFilter.FieldType"></span>    FieldType  <a href="https://pkg.go.dev/builtin/#string">string</a>   `json:&#34;fieldType&#34; description:&#34;Can be either string or array.&#34;` <span class="comment">// &#34;string&#34; or &#34;array&#34;</span>
+<span id="DbJsonFilter.FilterData"></span>    FilterData []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;filterData&#34;`
+<span id="DbJsonFilter.NeedAll"></span>    NeedAll    <a href="https://pkg.go.dev/builtin/#bool">bool</a>     `json:&#34;needAll&#34; description:&#34;Only needed if the FieldType is array.&#34;` <span class="comment">// only needed for array fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DbResponse">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L55">DbResponse</a>
+				<a class="permalink" href="#DbResponse">&#xb6;</a>
+				
+				
+			</h2>
+			<p>DbResponse represents the response from the database.
+
+			<pre>type DbResponse struct {
+<span id="DbResponse.Guid"></span>    Guid              <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;guid&#34;`
+<span id="DbResponse.DocumentId"></span>    DocumentId        <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;document_id&#34;`
+<span id="DbResponse.DocumentName"></span>    DocumentName      <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;document_name&#34;`
+<span id="DbResponse.Text"></span>    Text              <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;text&#34;`
+<span id="DbResponse.Keywords"></span>    Keywords          []<a href="https://pkg.go.dev/builtin/#string">string</a>               `json:&#34;keywords&#34;`
+<span id="DbResponse.Summary"></span>    Summary           <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;summary&#34;`
+<span id="DbResponse.Embedding"></span>    Embedding         []<a href="https://pkg.go.dev/builtin/#float32">float32</a>              `json:&#34;embeddings&#34;`
+<span id="DbResponse.Tags"></span>    Tags              []<a href="https://pkg.go.dev/builtin/#string">string</a>               `json:&#34;tags&#34;`
+<span id="DbResponse.Metadata"></span>    Metadata          map[<a href="https://pkg.go.dev/builtin/#string">string</a>]interface{} `json:&#34;metadata&#34;`
+<span id="DbResponse.ParentId"></span>    ParentId          <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;parent_id&#34;`
+<span id="DbResponse.ChildIds"></span>    ChildIds          []<a href="https://pkg.go.dev/builtin/#string">string</a>               `json:&#34;child_ids&#34;`
+<span id="DbResponse.PreviousSiblingId"></span>    PreviousSiblingId <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;previous_sibling_id&#34;`
+<span id="DbResponse.NextSiblingId"></span>    NextSiblingId     <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;next_sibling_id&#34;`
+<span id="DbResponse.LastChildId"></span>    LastChildId       <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;last_child_id&#34;`
+<span id="DbResponse.FirstChildId"></span>    FirstChildId      <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;first_child_id&#34;`
+<span id="DbResponse.Distance"></span>    Distance          <a href="https://pkg.go.dev/builtin/#float64">float64</a>                `json:&#34;distance&#34;`
+<span id="DbResponse.Level"></span>    Level             <a href="https://pkg.go.dev/builtin/#string">string</a>                 `json:&#34;level&#34;`
+<span id="DbResponse.HasNeo4jEntry"></span>    HasNeo4jEntry     <a href="https://pkg.go.dev/builtin/#bool">bool</a>                   `json:&#34;has_neo4j_entry&#34;`
+
+<span id="DbResponse.Siblings"></span>    <span class="comment">// Siblings</span>
+<span id="DbResponse.Parent"></span>    Parent    *<a href="#DbData">DbData</a>  `json:&#34;parent,omitempty&#34;`
+<span id="DbResponse.Children"></span>    Children  []<a href="#DbData">DbData</a> `json:&#34;children,omitempty&#34;`
+<span id="DbResponse.LeafNodes"></span>    LeafNodes []<a href="#DbData">DbData</a> `json:&#34;leaf_nodes,omitempty&#34;`
+    Siblings  []<a href="#DbData">DbData</a> `json:&#34;siblings,omitempty&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ErrorResponse">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/llmhandler.go#L45">ErrorResponse</a>
+				<a class="permalink" href="#ErrorResponse">&#xb6;</a>
+				
+				
+			</h2>
+			<p>ErrorResponse represents the error response sent to the client when something fails during the processing of the request.
+
+			<pre>type ErrorResponse struct {
+<span id="ErrorResponse.Code"></span>    Code    <a href="https://pkg.go.dev/builtin/#int">int</a>    `json:&#34;code&#34;`
+<span id="ErrorResponse.Message"></span>    Message <a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;message&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="GeneralNeo4jQueryInput">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L89">GeneralNeo4jQueryInput</a>
+				<a class="permalink" href="#GeneralNeo4jQueryInput">&#xb6;</a>
+				
+				
+			</h2>
+			<p>GeneralNeo4jQueryInput represents the input for executing a Neo4j query.
+
+			<pre>type GeneralNeo4jQueryInput struct {
+<span id="GeneralNeo4jQueryInput.Query"></span>    Query <a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;query&#34; description:&#34;Neo4j query to be executed. Required for executing a query.&#34; required:&#34;true&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="GeneralNeo4jQueryOutput">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L94">GeneralNeo4jQueryOutput</a>
+				<a class="permalink" href="#GeneralNeo4jQueryOutput">&#xb6;</a>
+				
+				
+			</h2>
+			<p>GeneralNeo4jQueryOutput represents the output of executing a Neo4j query.
+
+			<pre>type GeneralNeo4jQueryOutput struct {
+<span id="GeneralNeo4jQueryOutput.Success"></span>    Success  <a href="https://pkg.go.dev/builtin/#bool">bool</a>          `json:&#34;success&#34; description:&#34;Returns true if the query was executed successfully. Returns false or an error if not.&#34;`
+<span id="GeneralNeo4jQueryOutput.Response"></span>    Response <a href="#Neo4jResponse">Neo4jResponse</a> `json:&#34;response&#34; description:&#34;Summary and records of the query execution.&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HandlerRequest">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/llmhandler.go#L4">HandlerRequest</a>
+				<a class="permalink" href="#HandlerRequest">&#xb6;</a>
+				
+				
+			</h2>
+			<p>HandlerRequest represents the client request for a specific chat or embeddings operation.
+
+			<pre>type HandlerRequest struct {
+<span id="HandlerRequest.Adapter"></span>    Adapter             <a href="https://pkg.go.dev/builtin/#string">string</a>            `json:&#34;adapter&#34;` <span class="comment">// &#34;chat&#34;, &#34;embeddings&#34;</span>
+<span id="HandlerRequest.InstructionGuid"></span>    InstructionGuid     <a href="https://pkg.go.dev/builtin/#string">string</a>            `json:&#34;instructionGuid&#34;`
+<span id="HandlerRequest.ModelIds"></span>    ModelIds            []<a href="https://pkg.go.dev/builtin/#string">string</a>          `json:&#34;modelIds&#34;`               <span class="comment">// optional model ids to define a set of specific models to be used for this request</span>
+<span id="HandlerRequest.Data"></span>    Data                interface{}       `json:&#34;data&#34;`                   <span class="comment">// for embeddings, this can be a string or []string; for chat, only string is allowed</span>
+<span id="HandlerRequest.Images"></span>    Images              []<a href="https://pkg.go.dev/builtin/#string">string</a>          `json:&#34;images&#34;`                 <span class="comment">// List of images in base64 format</span>
+<span id="HandlerRequest.ChatRequestType"></span>    ChatRequestType     <a href="https://pkg.go.dev/builtin/#string">string</a>            `json:&#34;chatRequestType&#34;`        <span class="comment">// &#34;summary&#34;, &#34;code&#34;, &#34;keywords&#34;, &#34;general&#34;; only relevant if &#34;adapter&#34; is &#34;chat&#34;</span>
+<span id="HandlerRequest.DataStream"></span>    DataStream          <a href="https://pkg.go.dev/builtin/#bool">bool</a>              `json:&#34;dataStream&#34;`             <span class="comment">// only relevant if &#34;adapter&#34; is &#34;chat&#34;</span>
+<span id="HandlerRequest.MaxNumberOfKeywords"></span>    MaxNumberOfKeywords <a href="https://pkg.go.dev/builtin/#uint32">uint32</a>            `json:&#34;maxNumberOfKeywords&#34;`    <span class="comment">// only relevant if &#34;chatRequestType&#34; is &#34;keywords&#34;</span>
+<span id="HandlerRequest.IsConversation"></span>    IsConversation      <a href="https://pkg.go.dev/builtin/#bool">bool</a>              `json:&#34;isConversation&#34;`         <span class="comment">// only relevant if &#34;chatRequestType&#34; is &#34;code&#34;</span>
+<span id="HandlerRequest.ConversationHistory"></span>    ConversationHistory []<a href="#HistoricMessage">HistoricMessage</a> `json:&#34;conversationHistory&#34;`    <span class="comment">// only relevant if &#34;isConversation&#34; is true</span>
+<span id="HandlerRequest.GeneralContext"></span>    GeneralContext      <a href="https://pkg.go.dev/builtin/#string">string</a>            `json:&#34;generalContext&#34;`         <span class="comment">// any added context you might need</span>
+<span id="HandlerRequest.MsgContext"></span>    MsgContext          <a href="https://pkg.go.dev/builtin/#string">string</a>            `json:&#34;msgContext&#34;`             <span class="comment">// any added context you might need</span>
+<span id="HandlerRequest.SystemPrompt"></span>    SystemPrompt        <a href="https://pkg.go.dev/builtin/#string">string</a>            `json:&#34;systemPrompt&#34;`           <span class="comment">// only relevant if &#34;chatRequestType&#34; is &#34;general&#34;</span>
+<span id="HandlerRequest.ModelOptions"></span>    ModelOptions        <a href="#ModelOptions">ModelOptions</a>      `json:&#34;modelOptions,omitempty&#34;` <span class="comment">// only relevant if &#34;adapter&#34; is &#34;chat&#34;</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HandlerResponse">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/llmhandler.go#L22">HandlerResponse</a>
+				<a class="permalink" href="#HandlerResponse">&#xb6;</a>
+				
+				
+			</h2>
+			<p>HandlerResponse represents the LLM Handler response for a specific request.
+
+			<pre>type HandlerResponse struct {
+    <span class="comment">// Common properties</span>
+<span id="HandlerResponse.InstructionGuid"></span>    InstructionGuid <a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;instructionGuid&#34;`
+<span id="HandlerResponse.Type"></span>    Type            <a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;type&#34;` <span class="comment">// &#34;info&#34;, &#34;error&#34;, &#34;chat&#34;, &#34;embeddings&#34;</span>
+
+    <span class="comment">// Chat properties</span>
+<span id="HandlerResponse.IsLast"></span>    IsLast           *<a href="https://pkg.go.dev/builtin/#bool">bool</a>   `json:&#34;isLast,omitempty&#34;`
+<span id="HandlerResponse.Position"></span>    Position         *<a href="https://pkg.go.dev/builtin/#uint32">uint32</a> `json:&#34;position,omitempty&#34;`
+<span id="HandlerResponse.InputTokenCount"></span>    InputTokenCount  *<a href="https://pkg.go.dev/builtin/#int">int</a>    `json:&#34;inputTokenCount,omitempty&#34;`
+<span id="HandlerResponse.OutputTokenCount"></span>    OutputTokenCount *<a href="https://pkg.go.dev/builtin/#int">int</a>    `json:&#34;outputTokenCount,omitempty&#34;`
+<span id="HandlerResponse.ChatData"></span>    ChatData         *<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;chatData,omitempty&#34;`
+
+    <span class="comment">// Embeddings properties</span>
+<span id="HandlerResponse.EmbeddedData"></span>    EmbeddedData interface{} `json:&#34;embeddedData,omitempty&#34;` <span class="comment">// []float32 or [][]float32</span>
+
+<span id="HandlerResponse.Error"></span>    <span class="comment">// Error properties</span>
+    Error *<a href="#ErrorResponse">ErrorResponse</a> `json:&#34;error,omitempty&#34;`
+
+    <span class="comment">// Info properties</span>
+<span id="HandlerResponse.InfoMessage"></span>    InfoMessage *<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;infoMessage,omitempty&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HistoricMessage">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/llmhandler.go#L57">HistoricMessage</a>
+				<a class="permalink" href="#HistoricMessage">&#xb6;</a>
+				
+				
+			</h2>
+			<p>HistoricMessage represents a past chat messages.
+
+			<pre>type HistoricMessage struct {
+<span id="HistoricMessage.Role"></span>    Role    <a href="https://pkg.go.dev/builtin/#string">string</a>   `json:&#34;role&#34;`
+<span id="HistoricMessage.Content"></span>    Content <a href="https://pkg.go.dev/builtin/#string">string</a>   `json:&#34;content&#34;`
+<span id="HistoricMessage.Images"></span>    Images  []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;images&#34;` <span class="comment">// image in base64 format</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ModelOptions">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/llmhandler.go#L64">ModelOptions</a>
+				<a class="permalink" href="#ModelOptions">&#xb6;</a>
+				
+				
+			</h2>
+			<p>OpenAIOption represents an option for an OpenAI API call.
+
+			<pre>type ModelOptions struct {
+<span id="ModelOptions.FrequencyPenalty"></span>    FrequencyPenalty *<a href="https://pkg.go.dev/builtin/#float32">float32</a> `json:&#34;frequencyPenalty,omitempty&#34;`
+<span id="ModelOptions.MaxTokens"></span>    MaxTokens        *<a href="https://pkg.go.dev/builtin/#int32">int32</a>   `json:&#34;maxTokens,omitempty&#34;`
+<span id="ModelOptions.PresencePenalty"></span>    PresencePenalty  *<a href="https://pkg.go.dev/builtin/#float32">float32</a> `json:&#34;presencePenalty,omitempty&#34;`
+<span id="ModelOptions.Stop"></span>    Stop             []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;stop,omitempty&#34;`
+<span id="ModelOptions.Temperature"></span>    Temperature      *<a href="https://pkg.go.dev/builtin/#float32">float32</a> `json:&#34;temperature,omitempty&#34;`
+<span id="ModelOptions.TopP"></span>    TopP             *<a href="https://pkg.go.dev/builtin/#float32">float32</a> `json:&#34;topP,omitempty&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Neo4jResponse">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L100">Neo4jResponse</a>
+				<a class="permalink" href="#Neo4jResponse">&#xb6;</a>
+				
+				
+			</h2>
+			<p>neo4jResponse represents the response from the Neo4j query.
+
+			<pre>type Neo4jResponse struct {
+<span id="Neo4jResponse.Record"></span>    Record          neo4jRecord     `json:&#34;record&#34;`
+<span id="Neo4jResponse.SummaryCounters"></span>    SummaryCounters summaryCounters `json:&#34;summaryCounters&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TransferDetails">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/llmhandler.go#L51">TransferDetails</a>
+				<a class="permalink" href="#TransferDetails">&#xb6;</a>
+				
+				
+			</h2>
+			<p>TransferDetails holds communication channels for the websocket listener and writer.
+
+			<pre>type TransferDetails struct {
+<span id="TransferDetails.ResponseChannel"></span>    ResponseChannel chan <a href="#HandlerResponse">HandlerResponse</a>
+<span id="TransferDetails.RequestChannel"></span>    RequestChannel  chan <a href="#HandlerRequest">HandlerRequest</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="neo4jRecord">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L106">neo4jRecord</a>
+				<a class="permalink" href="#neo4jRecord">&#xb6;</a>
+				
+				
+			</h2>
+			<p>neo4jRecord represents the record from the Neo4j query.
+
+			<pre>type neo4jRecord []struct {
+    Values []value `json:&#34;Values&#34;`
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="props">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L118">props</a>
+				<a class="permalink" href="#props">&#xb6;</a>
+				
+				
+			</h2>
+			<p>props represents the properties from the Neo4j query.
+
+			<pre>type props struct {
+<span id="props.CollectionName"></span>    CollectionName <a href="https://pkg.go.dev/builtin/#string">string</a>   `json:&#34;collectionName&#34;`
+<span id="props.DocumentId"></span>    DocumentId     <a href="https://pkg.go.dev/builtin/#string">string</a>   `json:&#34;documentId&#34;`
+<span id="props.DocumentTypes"></span>    DocumentTypes  []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;documentTypes,omitempty&#34;`
+<span id="props.Guid"></span>    Guid           <a href="https://pkg.go.dev/builtin/#string">string</a>   `json:&#34;guid,omitempty&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="summaryCounters">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L126">summaryCounters</a>
+				<a class="permalink" href="#summaryCounters">&#xb6;</a>
+				
+				
+			</h2>
+			<p>summaryCounters represents the summary counters from the Neo4j query.
+
+			<pre>type summaryCounters struct {
+<span id="summaryCounters.NodesCreated"></span>    NodesCreated         <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;nodes_created&#34;`
+<span id="summaryCounters.NodesDeleted"></span>    NodesDeleted         <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;nodes_deleted&#34;`
+<span id="summaryCounters.RelationshipsCreated"></span>    RelationshipsCreated <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;relationships_created&#34;`
+<span id="summaryCounters.RelationshipsDeleted"></span>    RelationshipsDeleted <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;relationships_deleted&#34;`
+<span id="summaryCounters.PropertiesSet"></span>    PropertiesSet        <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;properties_set&#34;`
+<span id="summaryCounters.LabelsAdded"></span>    LabelsAdded          <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;labels_added&#34;`
+<span id="summaryCounters.LabelsRemoved"></span>    LabelsRemoved        <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;labels_removed&#34;`
+<span id="summaryCounters.IndexesAdded"></span>    IndexesAdded         <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;indexes_added&#34;`
+<span id="summaryCounters.IndexesRemoved"></span>    IndexesRemoved       <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;indexes_removed&#34;`
+<span id="summaryCounters.ConstraintsAdded"></span>    ConstraintsAdded     <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;constraints_added&#34;`
+<span id="summaryCounters.ConstraintsRemoved"></span>    ConstraintsRemoved   <a href="https://pkg.go.dev/builtin/#int">int</a> `json:&#34;constraints_removed&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="value">type <a href="https://github.com/ansys/allie-sharedtypes/blob/main/pkg/sharedtypes/knowledgedb.go#L111">value</a>
+				<a class="permalink" href="#value">&#xb6;</a>
+				
+				
+			</h2>
+			<p>value represents the value from the Neo4j query.
+
+			<pre>type value struct {
+<span id="value.Id"></span>    Id        <a href="https://pkg.go.dev/builtin/#int">int</a>      `json:&#34;Id&#34;`
+<span id="value.NodeTypes"></span>    NodeTypes []<a href="https://pkg.go.dev/builtin/#string">string</a> `json:&#34;Labels&#34;`
+<span id="value.Props"></span>    Props     props    `json:&#34;Props&#34;`
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.21.13.<br>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="None">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/api_reference/test/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+<link rel="stylesheet" href="../../_static/css/fuse-search.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+
+
+
+
+
+
+
+<script>
+var theme_static_search = JSON.parse('{"ignoreLocation": "False", "keys": ["title", "text"], "shouldSort": "True", "threshold": 0.5, "useExtendedSearch": "True"}');
+var theme_limit = "10";
+var min_chars_for_search = "1";
+var searchPath = "../../_static/search.json";
+
+</script>
+
+<script src="../../_static/js/fuse_search.js"></script>
+<script src="../../_static/js/fuse_extension.js"></script>
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.1.2. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
