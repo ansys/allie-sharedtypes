@@ -25,9 +25,11 @@ type HandlerResponse struct {
 	Type            string `json:"type"` // "info", "error", "chat", "embeddings"
 
 	// Chat properties
-	IsLast   *bool   `json:"isLast,omitempty"`
-	Position *uint32 `json:"position,omitempty"`
-	ChatData *string `json:"chatData,omitempty"`
+	IsLast           *bool   `json:"isLast,omitempty"`
+	Position         *uint32 `json:"position,omitempty"`
+	InputTokenCount  *int    `json:"inputTokenCount,omitempty"`
+	OutputTokenCount *int    `json:"outputTokenCount,omitempty"`
+	ChatData         *string `json:"chatData,omitempty"`
 
 	// Embeddings properties
 	EmbeddedData interface{} `json:"embeddedData,omitempty"` // []float32 or [][]float32
