@@ -11,6 +11,7 @@ type SessionContext struct {
 	SessionType string            `json:"session_type"`          // Type of session: "workflow", "exec"
 	ApiKey      string            `json:"api_key"`               // API key for authentication, only relevant if "session_type" is "exec"
 	JwtToken    string            `json:"jwt_token"`             // JWT token for authentication (optional)
+	ExecId      string            `json:"exec_id,omitempty"`     // Unique identifier of connecting Exec, only relevant if "session_type" is "exec"
 	WorkflowId  string            `json:"workflow_id,omitempty"` // Workflow ID, only relevant if "workflow_endpoint" is "custom"
 	Variables   map[string]string `json:"variables,omitempty"`   // Variables to be passed to the workflow
 }
