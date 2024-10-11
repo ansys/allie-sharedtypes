@@ -105,6 +105,7 @@ type Config struct {
 
 	// Allie Exec
 	//////////////
+	EXEC_ID             string `yaml:"EXEC_ID" json:"EXECID"`
 	WEBSERVER_PORT_EXEC string `yaml:"WEBSERVER_PORT_EXEC" json:"WEBSERVERPORTEXEC"`
 	EXEC_API_KEY        string `yaml:"EXEC_API_KEY" json:"EXECAPIKEY"`
 	// Python executable name
