@@ -11,8 +11,9 @@ type ExecRequest struct {
 
 // ExecutionInstruction contain an array of strings that represent the code to be executed in allie-exec
 type ExecutionInstruction struct {
-	CodeType string   `json:"codeType"` // "python", "bash"
-	Code     []string `json:"Code"`
+	CodeType       string   `json:"codeType"` // "python", "bash"
+	Code           []string `json:"code"`
+	VenvExecutable string   `json:"venvExecutable"`
 }
 
 // ExecResponse represents the response that allie-exec sends back
