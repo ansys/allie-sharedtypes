@@ -119,6 +119,9 @@ type Config struct {
 	MILLISECONDS_SINCE_LAST_CHANGE int    `yaml:"MILLISECONDS_SINCE_LAST_CHANGE" json:"MILLISECONDSSINCELASTCHANGE"`
 	// Agent connection
 	AGENT_ENDPOINT string `yaml:"AGENT_ENDPOINT" json:"AGENTENDPOINT"`
+
+	// Workflow Store
+	WORKFLOW_CONFIG_VARIABLES map[string]string `yaml:"WORKFLOW_CONFIG_VARIABLES" json:"WORKFLOWCONFIGVARIABLES"`
 }
 
 // Initialize conifg dict
