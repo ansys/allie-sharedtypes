@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -156,7 +157,7 @@ func readYaml(fileName string, configStruct Config) (extractedConfigStruct Confi
 	data, err := os.ReadFile(fileName)
 	if err != nil {
 		message := "config.yaml file is missing from directory or not accessible"
-		return Config{}, fmt.Errorf(message)
+		return Config{}, errors.New(message)
 	}
 
 	// Unmarshal the YAML data into the config object
@@ -176,7 +177,7 @@ func readYaml(fileName string, configStruct Config) (extractedConfigStruct Confi
 		message = message + "}"
 
 		// Write message and error to error file
-		return Config{}, fmt.Errorf(message)
+		return Config{}, errors.New(message)
 	}
 	return configStruct, nil
 }
@@ -195,7 +196,7 @@ func defineOptionalProperties(config *Config, optionalDefaultValues map[string]i
 		if r != nil {
 			// Write message to error file
 			message := fmt.Sprintf("Error in defineOptionalProperties: %v", r)
-			err = fmt.Errorf(message)
+			err = errors.New(message)
 		}
 	}()
 
@@ -210,7 +211,7 @@ func defineOptionalProperties(config *Config, optionalDefaultValues map[string]i
 			} else {
 				// Handle type mismatch
 				message := fmt.Sprintf("Type mismatch for key '%s': expected %v, got %v", key, fieldValue.Type(), reflect.TypeOf(defaultValue))
-				return fmt.Errorf(message)
+				return errors.New(message)
 			}
 		}
 	}
@@ -429,6 +430,14 @@ func InitGlobalConfigFromAzureKeyVault() (err error) {
 						case reflect.Slice:
 							// Convert string to string slice
 							var value []string
+							err := json.Unmarshal([]byte(*resp.Value), &value)
+							if err != nil {
+								return err
+							}
+							field.Set(reflect.ValueOf(value))
+						case reflect.Map:
+							// Convert string to map[string]string
+							var value map[string]string
 							err := json.Unmarshal([]byte(*resp.Value), &value)
 							if err != nil {
 								return err
