@@ -74,10 +74,6 @@ type Config struct {
 	// Allie Modules
 	LLM_HANDLER_ENDPOINT  string `yaml:"LLM_HANDLER_ENDPOINT" json:"LLMHANDLERENDPOINT"`
 	KNOWLEDGE_DB_ENDPOINT string `yaml:"KNOWLEDGE_DB_ENDPOINT" json:"KNOWLEDGEDBENDPOINT"`
-	// Azure Cognitive Services
-	ACS_ENDPOINT    string `yaml:"ACS_ENDPOINT" json:"ACSENDPOINT"`
-	ACS_API_KEY     string `yaml:"ACS_API_KEY" json:"ACSAPIKEY"`
-	ACS_API_VERSION string `yaml:"ACS_API_VERSION" json:"ACSAPIVERSION"`
 
 	// Allie LLM
 	/////////////
