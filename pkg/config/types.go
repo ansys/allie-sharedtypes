@@ -41,6 +41,7 @@ type Config struct {
 
 	// Allie Agent
 	///////////////
+	PRODUCTION_MODE            bool   `yaml:"PRODUCTION_MODE" json:"PRODUCTIONMODE"` // If true, the agent error messages will be generic
 	AGENT_PORT                 string `yaml:"AGENT_PORT" json:"AGENTPORT"`
 	WORKFLOW_API_KEY           string `yaml:"WORKFLOW_API_KEY" json:"WORKFLOWAPIKEY"`
 	WORKFLOW_STORE_PATH        string `yaml:"WORKFLOW_STORE_PATH" json:"WORKFLOWSTOREPATH"`
