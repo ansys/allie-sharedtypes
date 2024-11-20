@@ -9,7 +9,7 @@ import (
 
 	"github.com/ansys/allie-sharedtypes/pkg/clients/flowkitclient"
 	"github.com/ansys/allie-sharedtypes/pkg/config"
-	"github.com/ansys/allie-sharedtypes/pkg/structs"
+	"github.com/ansys/allie-sharedtypes/pkg/sharedtypes"
 	"github.com/ansys/allie-sharedtypes/pkg/typeconverters"
 )
 
@@ -61,7 +61,7 @@ func ListFunctionsAndSaveToInteralStates() (err error) {
 	}
 
 	// Unmarshal the JSON response into the struct
-	var listResp []structs.FlowKitPythonFunction
+	var listResp []sharedtypes.FlowKitPythonFunction
 	err = json.Unmarshal(body, &listResp)
 	if err != nil {
 		errorMessage := fmt.Errorf("error unmarshalling JSON response: %v", err)
@@ -71,7 +71,7 @@ func ListFunctionsAndSaveToInteralStates() (err error) {
 	// Save the functions to internal states
 	for _, function := range listResp {
 		// convert inputs and outputs
-		inputs := []structs.FunctionInput{}
+		inputs := []sharedtypes.FunctionInput{}
 		for _, inputParam := range function.Inputs {
 			// check if options is nil
 			if inputParam.Options == nil {
@@ -85,14 +85,14 @@ func ListFunctionsAndSaveToInteralStates() (err error) {
 			}
 
 			// append the input to the list
-			inputs = append(inputs, structs.FunctionInput{
+			inputs = append(inputs, sharedtypes.FunctionInput{
 				Name:    inputParam.Name,
 				Type:    inputParam.Type,
 				GoType:  inputParam.GoType,
 				Options: inputParam.Options,
 			})
 		}
-		outputs := []structs.FunctionOutput{}
+		outputs := []sharedtypes.FunctionOutput{}
 		for _, outputParam := range function.Outputs {
 			// convert type to go type
 			outputParam.GoType, err = typeconverters.JSONToGo(outputParam.Type)
@@ -101,7 +101,7 @@ func ListFunctionsAndSaveToInteralStates() (err error) {
 			}
 
 			// append the output to the list
-			outputs = append(outputs, structs.FunctionOutput{
+			outputs = append(outputs, sharedtypes.FunctionOutput{
 				Name:   outputParam.Name,
 				Type:   outputParam.Type,
 				GoType: outputParam.GoType,
@@ -109,7 +109,7 @@ func ListFunctionsAndSaveToInteralStates() (err error) {
 		}
 
 		// Save the function to internal states
-		flowkitclient.AvailableFunctions[function.Name] = &structs.FunctionDefinition{
+		flowkitclient.AvailableFunctions[function.Name] = &sharedtypes.FunctionDefinition{
 			Name:        function.Name,
 			Description: function.Description,
 			DisplayName: function.DisplayName,
@@ -133,9 +133,9 @@ func ListFunctionsAndSaveToInteralStates() (err error) {
 //   - outputDefinition: the definition of the outputs
 //
 // Returns:
-//   - map[string]structs.FilledInputOutput: the outputs of the function
+//   - map[string]sharedtypes.FilledInputOutput: the outputs of the function
 //   - error: an error message if the API call fails
-func RunFunction(functionName string, inputs map[string]structs.FilledInputOutput) (outputs map[string]structs.FilledInputOutput, err error) {
+func RunFunction(functionName string, inputs map[string]sharedtypes.FilledInputOutput) (outputs map[string]sharedtypes.FilledInputOutput, err error) {
 	defer func() {
 		r := recover()
 		if r != nil {
@@ -213,9 +213,9 @@ func RunFunction(functionName string, inputs map[string]structs.FilledInputOutpu
 	}
 
 	// Create the outputs map
-	outputs = map[string]structs.FilledInputOutput{}
+	outputs = map[string]sharedtypes.FilledInputOutput{}
 	for key, value := range outputDict {
-		outputs[key] = structs.FilledInputOutput{
+		outputs[key] = sharedtypes.FilledInputOutput{
 			Name:   key,
 			Value:  value,
 			GoType: outputGoTypes[key],

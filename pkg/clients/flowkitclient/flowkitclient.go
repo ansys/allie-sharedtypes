@@ -8,7 +8,7 @@ import (
 
 	"github.com/ansys/allie-sharedtypes/pkg/allieflowkitgrpc"
 	"github.com/ansys/allie-sharedtypes/pkg/logging"
-	"github.com/ansys/allie-sharedtypes/pkg/structs"
+	"github.com/ansys/allie-sharedtypes/pkg/sharedtypes"
 	"github.com/ansys/allie-sharedtypes/pkg/typeconverters"
 
 	"github.com/ansys/allie-sharedtypes/pkg/config"
@@ -19,7 +19,7 @@ import (
 )
 
 // Global variable to store the available functions
-var AvailableFunctions map[string]*structs.FunctionDefinition
+var AvailableFunctions map[string]*sharedtypes.FunctionDefinition
 
 // ListFunctionsAndSaveToInteralStates calls the ListFunctions gRPC and saves the functions to internal states
 // This function is used to get the list of available functions from the external function server
@@ -58,22 +58,22 @@ func ListFunctionsAndSaveToInteralStates(ctx *logging.ContextMap) error {
 	// Save the functions to internal states
 	for _, function := range listResp.Functions {
 		// convert inputs and outputs
-		inputs := []structs.FunctionInput{}
+		inputs := []sharedtypes.FunctionInput{}
 		for _, inputParam := range function.Input {
 			// check if options is nil
 			if inputParam.Options == nil {
 				inputParam.Options = []string{}
 			}
-			inputs = append(inputs, structs.FunctionInput{
+			inputs = append(inputs, sharedtypes.FunctionInput{
 				Name:    inputParam.Name,
 				Type:    inputParam.Type,
 				GoType:  inputParam.GoType,
 				Options: inputParam.Options,
 			})
 		}
-		outputs := []structs.FunctionOutput{}
+		outputs := []sharedtypes.FunctionOutput{}
 		for _, outputParam := range function.Output {
-			outputs = append(outputs, structs.FunctionOutput{
+			outputs = append(outputs, sharedtypes.FunctionOutput{
 				Name:   outputParam.Name,
 				Type:   outputParam.Type,
 				GoType: outputParam.GoType,
@@ -81,7 +81,7 @@ func ListFunctionsAndSaveToInteralStates(ctx *logging.ContextMap) error {
 		}
 
 		// Save the function to internal states
-		AvailableFunctions[function.Name] = &structs.FunctionDefinition{
+		AvailableFunctions[function.Name] = &sharedtypes.FunctionDefinition{
 			Name:        function.Name,
 			DisplayName: function.DisplayName,
 			Description: function.Description,
@@ -103,9 +103,9 @@ func ListFunctionsAndSaveToInteralStates(ctx *logging.ContextMap) error {
 //   - inputs: the inputs to the function
 //
 // Returns:
-//   - map[string]structs.FilledInputOutput: the outputs of the function
+//   - map[string]sharedtypes.FilledInputOutput: the outputs of the function
 //   - error: an error message if the gRPC call fails
-func RunFunction(ctx *logging.ContextMap, functionName string, inputs map[string]structs.FilledInputOutput) (map[string]structs.FilledInputOutput, error) {
+func RunFunction(ctx *logging.ContextMap, functionName string, inputs map[string]sharedtypes.FilledInputOutput) (map[string]sharedtypes.FilledInputOutput, error) {
 	defer func() {
 		r := recover()
 		if r != nil {
@@ -162,8 +162,8 @@ func RunFunction(ctx *logging.ContextMap, functionName string, inputs map[string
 		return nil, fmt.Errorf("error in external function gRPC RunFunction: %v", err)
 	}
 
-	// convert outputs to map[string]structs.FilledInputOutput
-	outputs := map[string]structs.FilledInputOutput{}
+	// convert outputs to map[string]sharedtypes.FilledInputOutput
+	outputs := map[string]sharedtypes.FilledInputOutput{}
 	for _, output := range runResp.Outputs {
 		// convert value to Go type
 		value, err := typeconverters.ConvertStringToGivenType(output.Value, output.GoType)
@@ -172,7 +172,7 @@ func RunFunction(ctx *logging.ContextMap, functionName string, inputs map[string
 		}
 
 		// Save the output to the map
-		outputs[output.Name] = structs.FilledInputOutput{
+		outputs[output.Name] = sharedtypes.FilledInputOutput{
 			Name:   output.Name,
 			GoType: output.GoType,
 			Value:  value,
@@ -192,7 +192,7 @@ func RunFunction(ctx *logging.ContextMap, functionName string, inputs map[string
 // Returns:
 //   - *chan string: a channel to stream the output
 //   - error: an error message if the gRPC call fails
-func StreamFunction(ctx *logging.ContextMap, functionName string, inputs map[string]structs.FilledInputOutput) (*chan string, error) {
+func StreamFunction(ctx *logging.ContextMap, functionName string, inputs map[string]sharedtypes.FilledInputOutput) (*chan string, error) {
 	defer func() {
 		r := recover()
 		if r != nil {
