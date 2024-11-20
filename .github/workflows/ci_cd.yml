@@ -24,7 +24,9 @@ jobs:
     steps:
     - name: Install required tools
       run : |
-        sudo apt install golang-golang-x-tools
+        sudo apt-get update
+        sudo apt-get install -y golang-go
+        sudo apt-get install -y golang-golang-x-tools
         sudo snap install golangci-lint --classic
 
     - name: Checkout repository
