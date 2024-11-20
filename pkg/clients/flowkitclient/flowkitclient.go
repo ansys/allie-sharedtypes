@@ -35,6 +35,9 @@ func ListFunctionsAndSaveToInteralStates(ctx *logging.ContextMap) error {
 		}
 	}()
 
+	// Initialize the available functions map
+	AvailableFunctions = make(map[string]*structs.FunctionDefinition)
+
 	// Set up a connection to the server.
 	c, conn, err := createClient()
 	if err != nil {
