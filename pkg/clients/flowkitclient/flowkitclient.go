@@ -303,6 +303,11 @@ func receiveStreamFromServer(ctx *logging.ContextMap, stream allieflowkitgrpc.Ex
 //   - connection: the connection to the external functions gRPC
 //   - err: an error message if the client creation fails
 func createClient() (client allieflowkitgrpc.ExternalFunctionsClient, connection *grpc.ClientConn, err error) {
+	// check if EXTERNALFUNCTIONS_ENDPOINT is set
+	if config.GlobalConfig.EXTERNALFUNCTIONS_ENDPOINT == "" {
+		return nil, nil, fmt.Errorf("config variable 'EXTERNALFUNCTIONS_ENDPOINT' is not set")
+	}
+
 	// Extract the scheme (http or https) from the EXTERNALFUNCTIONS_ENDPOINT
 	var scheme string
 	var address string

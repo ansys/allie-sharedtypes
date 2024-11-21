@@ -7,7 +7,7 @@ import (
 // ExecRequest represents the requests that can be sent to allie-exec
 type ExecRequest struct {
 	Type                 string                       `json:"type"`   // "code", "flowkit"
-	Action               string                       `json:"action"` // onyl for type "code", possible values: "execute", "append", "cancel", "status"
+	Action               string                       `json:"action"` // type "code":"execute", "append", "cancel", "status"; for type "flowkit": "<functionName>"
 	InstructionGuid      string                       `json:"instructionGuid"`
 	ExecutionInstruction *ExecutionInstruction        `json:"executionInstruction"` // only for type "code"
 	Inputs               map[string]FilledInputOutput `json:"inputs"`               // only for type "flowkit"
@@ -27,7 +27,7 @@ type ExecResponse struct {
 	Error            *ErrorResponse               `json:"error,omitempty"`
 	ExecutionDetails *ExecutionDetails            `json:"executionDetails,omitempty"`
 	FileDetails      *FileDetails                 `json:"fileDetails,omitempty"`
-	Outputs          map[string]FilledInputOutput `json:"inputs"` // only for type "flowkit"
+	Outputs          map[string]FilledInputOutput `json:"outputs"` // only for type "flowkit"
 }
 
 // ExecutionDetails represents the details of the execution
