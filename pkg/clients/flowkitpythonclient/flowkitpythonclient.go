@@ -143,6 +143,11 @@ func RunFunction(functionName string, inputs map[string]sharedtypes.FilledInputO
 		}
 	}()
 
+	// check if endpoint is set
+	if config.GlobalConfig.FLOWKIT_PYTHON_ENDPOINT == "" {
+		return nil, fmt.Errorf("config variable 'FLOWKIT_PYTHON_ENDPOINT' is not set")
+	}
+
 	// Get function definition
 	functionDefinition := flowkitclient.AvailableFunctions[functionName]
 
