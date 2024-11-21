@@ -1,4 +1,4 @@
-package structs
+package sharedtypes
 
 // FunctionDefinition is a struct that contains the id, name, description, package, inputs and outputs of a function
 type FunctionDefinition struct {

@@ -1,12 +1,16 @@
 package sharedtypes
 
-import "time"
+import (
+	"time"
+)
 
 // ExecRequest represents the requests that can be sent to allie-exec
 type ExecRequest struct {
-	Action               string                `json:"action"` // "execute", "append", "cancel", "status"
-	InstructionGuid      string                `json:"instructionGuid"`
-	ExecutionInstruction *ExecutionInstruction `json:"executionInstruction"`
+	Type                 string                       `json:"type"`   // "code", "flowkit"
+	Action               string                       `json:"action"` // onyl for type "code", possible values: "execute", "append", "cancel", "status"
+	InstructionGuid      string                       `json:"instructionGuid"`
+	ExecutionInstruction *ExecutionInstruction        `json:"executionInstruction"` // only for type "code"
+	Inputs               map[string]FilledInputOutput `json:"inputs"`               // only for type "flowkit"
 }
 
 // ExecutionInstruction contain an array of strings that represent the code to be executed in allie-exec
@@ -18,11 +22,12 @@ type ExecutionInstruction struct {
 
 // ExecResponse represents the response that allie-exec sends back
 type ExecResponse struct {
-	Type             string            `json:"type"` // "status", "file", "error"
-	InstructionGuid  string            `json:"instructionGuid"`
-	Error            *ErrorResponse    `json:"error,omitempty"`
-	ExecutionDetails *ExecutionDetails `json:"executionDetails,omitempty"`
-	FileDetails      *FileDetails      `json:"fileDetails,omitempty"`
+	Type             string                       `json:"type"` // "status", "flowkit", "file", "error"
+	InstructionGuid  string                       `json:"instructionGuid"`
+	Error            *ErrorResponse               `json:"error,omitempty"`
+	ExecutionDetails *ExecutionDetails            `json:"executionDetails,omitempty"`
+	FileDetails      *FileDetails                 `json:"fileDetails,omitempty"`
+	Outputs          map[string]FilledInputOutput `json:"inputs"` // only for type "flowkit"
 }
 
 // ExecutionDetails represents the details of the execution
