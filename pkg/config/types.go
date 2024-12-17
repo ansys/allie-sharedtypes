@@ -80,6 +80,7 @@ type Config struct {
 	/////////////
 	WEBSERVER_PORT         string `yaml:"WEBSERVER_PORT" json:"WEBSERVERPORT"`
 	MODELS_CONFIG_LOCATION string `yaml:"MODELS_CONFIG_LOCATION" json:"MODELSCONFIGLOCATION"`
+	LLM_API_KEY            string `yaml:"LLM_API_KEY" json:"LLMAPIKEY"`
 
 	// Allie DB
 	///////////
