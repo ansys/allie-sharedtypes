@@ -24,6 +24,9 @@ func TestJSONToGo(t *testing.T) {
 		{"array<integer>", "[]int", false},
 		{"array<boolean>", "[]bool", false},
 		{"array<object>", "", true},
+		{"dict[string][string]", "map[string]string", false},
+		{"dict[string][integer]", "map[string]int", false},
+		{"dict[string][number]", "map[string]float64", false},
 		{"unsupportedType", "", true},
 	}
 
@@ -61,7 +64,10 @@ func TestGoToJSON(t *testing.T) {
 		{"uint32", "integer"},
 		{"uint64", "integer"},
 		{"bool", "boolean"},
-		{"map[string]interface{}", "object"},
+		{"map[string]string", "dict[string][string]"},
+		{"map[string]int", "dict[string][integer]"},
+		{"map[string]float64", "dict[string][number]"},
+		{"map[string]interface{}", "dict[string][object]"},
 		{"interface{}", "object"},
 		{"[]string", "array<string>"},
 		{"[]float64", "array<number>"},
