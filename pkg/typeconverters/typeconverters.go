@@ -20,6 +20,7 @@ import (
 //	string: The Go data type.
 //	error: An error if the JSON data type is not supported.
 func JSONToGo(jsonType string) (string, error) {
+	// Handle array types
 	if strings.HasPrefix(jsonType, "array<") && strings.HasSuffix(jsonType, ">") {
 		elementType := jsonType[6 : len(jsonType)-1]
 		arrayType, err := JSONToGo(elementType)
@@ -28,6 +29,32 @@ func JSONToGo(jsonType string) (string, error) {
 		}
 
 		return "[]" + arrayType, nil
+	}
+
+	// Handle dictionary types
+	if strings.HasPrefix(jsonType, "dict[") && strings.HasSuffix(jsonType, "]") {
+		// Extract the inner types of the dictionary
+		inner := jsonType[5 : len(jsonType)-1]
+		parts := strings.Split(inner, "][")
+		if len(parts) != 2 {
+			return "", fmt.Errorf("invalid dictionary type: %s", jsonType)
+		}
+
+		keyType := parts[0]
+		valueType := parts[1]
+
+		// Convert the value type using JSONToGo
+		goValueType, err := JSONToGo(valueType)
+		if err != nil {
+			return "", err
+		}
+
+		// Go maps always have string keys
+		if keyType != "string" {
+			return "", fmt.Errorf("unsupported key type for Go maps: %s (only string keys are allowed)", keyType)
+		}
+
+		return fmt.Sprintf("map[string]%s", goValueType), nil
 	}
 
 	switch {
@@ -59,6 +86,13 @@ func GoToJSON(goType string) string {
 	if strings.HasPrefix(goType, "[]") && goType != "[]byte" {
 		elementType := goType[2:]
 		return "array<" + GoToJSON(elementType) + ">"
+	}
+
+	// Handle maps (map[string]T)
+	if strings.HasPrefix(goType, "map[string]") {
+		// Extract the value type (after "map[string]")
+		valueType := goType[len("map[string]"):]
+		return "dict[string][" + GoToJSON(valueType) + "]"
 	}
 
 	switch goType {
