@@ -299,6 +299,16 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			return nil, err
 		}
 		return output, nil
+	case "map[string]map[string]string":
+		if value == "" {
+			value = "{}"
+		}
+		output := map[string]map[string]string{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
 	case "DbArrayFilter":
 		if value == "" {
 			value = "{}"
@@ -388,6 +398,36 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			value = "[]"
 		}
 		output := []sharedtypes.DbData{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
+	case "[]CodeGenerationElement":
+		if value == "" {
+			value = "[]"
+		}
+		output := []sharedtypes.CodeGenerationElement{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
+	case "[]CodeGenerationExample":
+		if value == "" {
+			value = "[]"
+		}
+		output := []sharedtypes.CodeGenerationExample{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
+	case "[]CodeGenerationSection":
+		if value == "" {
+			value = "[]"
+		}
+		output := []sharedtypes.CodeGenerationUserGuideSection{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -515,6 +555,12 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 			return "", err
 		}
 		return string(output), nil
+	case "map[string]map[string]string":
+		output, err := json.Marshal(value.(map[string]map[string]string))
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
 	case "DbArrayFilter":
 		output, err := json.Marshal(value.(sharedtypes.DbArrayFilter))
 		if err != nil {
@@ -565,6 +611,24 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 		return string(output), nil
 	case "[]DbData":
 		output, err := json.Marshal(value.([]sharedtypes.DbData))
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
+	case "[]CodeGenerationElement":
+		output, err := json.Marshal(value.([]sharedtypes.CodeGenerationElement))
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
+	case "[]CodeGenerationExample":
+		output, err := json.Marshal(value.([]sharedtypes.CodeGenerationExample))
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
+	case "[]CodeGenerationSection":
+		output, err := json.Marshal(value.([]sharedtypes.CodeGenerationUserGuideSection))
 		if err != nil {
 			return "", err
 		}
