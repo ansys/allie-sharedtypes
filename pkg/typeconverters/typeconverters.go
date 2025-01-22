@@ -423,7 +423,7 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			return nil, err
 		}
 		return output, nil
-	case "[]CodeGenerationSection":
+	case "[]CodeGenerationUserGuideSection":
 		if value == "" {
 			value = "[]"
 		}
@@ -627,7 +627,7 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 			return "", err
 		}
 		return string(output), nil
-	case "[]CodeGenerationSection":
+	case "[]CodeGenerationUserGuideSection":
 		output, err := json.Marshal(value.([]sharedtypes.CodeGenerationUserGuideSection))
 		if err != nil {
 			return "", err
