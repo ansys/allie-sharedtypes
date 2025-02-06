@@ -354,15 +354,17 @@ func (logger *loggerWrapper) Debugf(ctx *ContextMap, format string, args ...inte
 	logger.lw.Debug(fmt.Sprintf(format, args...), fields...)
 
 	entry := logger.lw.Check(zapcore.DebugLevel, format)
-	go sendLogs(
-		ctx,
-		entry.Level,
-		entry.Time,
-		fmt.Sprintf(format, args...),
-		entry.Caller,
-		entry.Stack,
-		entry.Caller.Function,
-		args...)
+	if entry != nil {
+		go sendLogs(
+			ctx,
+			entry.Level,
+			entry.Time,
+			fmt.Sprintf(format, args...),
+			entry.Caller,
+			entry.Stack,
+			entry.Caller.Function,
+			args...)
+	}
 }
 
 // Metrics sends a metric event with the specified name and count to Datadog if Datadog metrics are enabled.
