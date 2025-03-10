@@ -1,7 +1,8 @@
 module github.com/ansys/allie-sharedtypes
 
-go 1.22
-toolchain go1.22.5
+go 1.22.0
+
+toolchain go1.22.12
 
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.17.0
