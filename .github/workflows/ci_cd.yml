@@ -99,6 +99,7 @@ jobs:
       - name: Compile protofiles
         run: |
           protoc --go_out=pkg --go-grpc_out=pkg ./pkg/allieflowkitgrpc/allie-flowkit.proto
+          protoc --go_out=pkg --go-grpc_out=pkg ./pkg/allieagentgrpc/allie-agent.proto
           go mod tidy
           go mod verify
 
@@ -204,7 +205,9 @@ jobs:
         uses: ansys/actions/doc-deploy-dev@v8
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
           doc-artifact-name: documentation-html-with-api
 
   upload_docs_release:
@@ -217,5 +220,7 @@ jobs:
         uses: ansys/actions/doc-deploy-stable@v8
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
           doc-artifact-name: documentation-html-with-api
