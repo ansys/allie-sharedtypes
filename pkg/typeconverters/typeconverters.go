@@ -171,6 +171,16 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			}
 		}
 		return output, nil
+	case "[]interface{}":
+		if value == "" {
+			value = "[]"
+		}
+		output := []interface{}{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
 	case "[]string":
 		if value == "" {
 			value = "[]"
@@ -314,6 +324,26 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			value = "[]"
 		}
 		output := []map[string]string{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
+	case "[]map[uint]float32":
+		if value == "" {
+			value = "[]"
+		}
+		output := []map[uint]float32{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
+	case "[]map[string]interface{}":
+		if value == "" {
+			value = "[]"
+		}
+		output := []map[string]interface{}{}
 		err := json.Unmarshal([]byte(value), &output)
 		if err != nil {
 			return nil, err
@@ -495,6 +525,12 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 			return "", err
 		}
 		return string(output), nil
+	case "[]interface{}":
+		output, err := json.Marshal(value.([]interface{}))
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
 	case "[]float32":
 		output, err := json.Marshal(value.([]float32))
 		if err != nil {
@@ -573,6 +609,18 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 		return string(output), nil
 	case "[]map[string]string":
 		output, err := json.Marshal(value.([]map[string]string))
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
+	case "[]map[string]interface{}":
+		output, err := json.Marshal(value.([]map[string]interface{}))
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
+	case "[]map[uint]float32":
+		output, err := json.Marshal(value.([]map[uint]float32))
 		if err != nil {
 			return "", err
 		}
