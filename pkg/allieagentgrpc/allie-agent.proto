@@ -38,13 +38,13 @@ message ServerMessage {
 // SessionContext is the message to initiate a session with the server.
 message SessionContext {
     // JWT token for authentication
-    string jwt_token = 1; 
-    
+    string jwt_token = 1;
+
     // Workflow ID for the workflow to be run
-    string workflow_id = 2; 
+    string workflow_id = 2;
 
     // Variables to be passed to the workflow
-    map<string, string> variables = 3; 
+    map<string, string> variables = 3;
 }
 
 // ClientRequest is the message to send a request to the server.
@@ -53,7 +53,7 @@ message ClientRequest {
     string instruction_id = 1;
 
     // Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive"
-    string type = 2; 
+    string type = 2;
 
     // String input for chat interface interaction
     string input = 3;
@@ -83,8 +83,8 @@ message ClientResponse {
     string instruction_id = 1;
 
     // Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values"
-    string type = 2; 
-  
+    string type = 2;
+
     // Chat Interface properties
     bool is_last = 3;
     uint32 position = 4;
@@ -93,17 +93,17 @@ message ClientResponse {
     int32 input_token_count = 7;
     int32 output_token_count = 8;
     string context = 9;
-  
+
     // Variable values properties
     map<string, string> variable_values = 10;
-  
+
     // Error properties
     ErrorResponse error = 11;
-  
+
     // Info properties
     optional string info_message = 12;
 }
-  
+
 // ErrorResponse is the message to send an error response to the client.
 message ErrorResponse {
     // Error code
@@ -112,4 +112,3 @@ message ErrorResponse {
     // Error message
     string message = 2;
 }
-  
