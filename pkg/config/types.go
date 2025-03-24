@@ -121,6 +121,13 @@ type Config struct {
 
 	// Workflow Store
 	WORKFLOW_CONFIG_VARIABLES map[string]string `yaml:"WORKFLOW_CONFIG_VARIABLES" json:"WORKFLOWCONFIGVARIABLES"`
+
+	// Allie Database
+	/////////////////
+	// graph db
+	DB_GRAPH_PORT    uint   `yaml:"DB_GRAPH_PORT" json:"DBGRAPHPORT"`
+	DB_GRAPH_PATH    string `yaml:"DB_GRAPH_PATH" json:"DBGRAPHPATH"`
+	DB_GRAPH_WORKERS uint   `yaml:"DB_GRAPH_WORKERS" json:"DBGRAPHWORKERS"`
 }
 
 // Initialize conifg dict
