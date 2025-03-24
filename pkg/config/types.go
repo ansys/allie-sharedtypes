@@ -121,6 +121,18 @@ type Config struct {
 
 	// Workflow Store
 	WORKFLOW_CONFIG_VARIABLES map[string]string `yaml:"WORKFLOW_CONFIG_VARIABLES" json:"WORKFLOWCONFIGVARIABLES"`
+
+	// Allie Database
+	/////////////////
+	// graph db
+	DB_GRAPH_PORT    uint   `yaml:"DB_GRAPH_PORT" json:"DBGRAPHPORT"`
+	DB_GRAPH_PATH    string `yaml:"DB_GRAPH_PATH" json:"DBGRAPHPATH"`
+	DB_GRAPH_WORKERS uint   `yaml:"DB_GRAPH_WORKERS" json:"DBGRAPHWORKERS"`
+	// vector db
+	DB_VECTOR_PORT       uint   `yaml:"DB_VECTOR_PORT" json:"DBVECTORPORT"`
+	DB_VECTOR_PATH       string `yaml:"DB_VECTOR_PATH" json:"DBVECTORPATH"`
+	DB_VECTOR_DIMS       int    `yaml:"DB_VECTOR_DIMS" json:"DBVECTORDIMS"`
+	DB_VECTOR_SIMILARITY string `yaml:"DB_VECTOR_SIMILARITY" json:"DBVECTORSIMILARITY"`
 }
 
 // Initialize conifg dict
