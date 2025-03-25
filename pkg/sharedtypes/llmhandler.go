@@ -14,7 +14,7 @@ type HandlerRequest struct {
 	ConversationHistory []HistoricMessage `json:"conversationHistory"`        // only relevant if "isConversation" is true
 	GeneralContext      string            `json:"generalContext"`             // any added context you might need
 	MsgContext          string            `json:"msgContext"`                 // any added context you might need
-	SystemPrompt        string            `json:"systemPrompt"`               // only relevant if "chatRequestType" is "general"
+	SystemPrompt        interface{}       `json:"systemPrompt"`               // only relevant if "chatRequestType" is "general"
 	ModelOptions        ModelOptions      `json:"modelOptions,omitempty"`     // only relevant if "adapter" is "chat"
 	EmbeddingOptions    EmbeddingOptions  `json:"embeddingOptions,omitempty"` // only relevant if "adapter" is "embeddings"
 }
