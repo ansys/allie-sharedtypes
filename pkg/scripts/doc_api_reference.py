@@ -15,6 +15,7 @@ repo_name = sys.argv[2]
 
 # Set environment variables for file paths
 DOC_BUILD_HTML = "documentation-html"
+# DOC_BUILD_HTML = "doc/_build/html"
 SOURCE_FILE = os.path.join(DOC_BUILD_HTML, "api_reference", "test", "index.html")
 SOURCE_DIRECTORY = f"dist/pkg/github.com/{repo_owner}/{repo_name}/pkg/"
 REPLACEMENT_DIRECTORY = os.path.join(DOC_BUILD_HTML, "api_reference", "pkg")
@@ -98,7 +99,7 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
 
                 new_content = re.sub(
                     r'(<article class="bd-article">)[\s\S]*?(<\/article>)',
-                    r'\1' + replacementBodyContent + r'\2',
+                    rf'\1{replacementBodyContent}\2',  # Using an f-string with raw string
                     source_content
                 )
 
