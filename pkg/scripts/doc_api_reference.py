@@ -88,7 +88,7 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
                     + re.escape(repo_owner)
                     + '/'
                     + re.escape(repo_name)
-                    + r'/">' 
+                    + r'/">'
                     + re.escape("GoPages | Auto-generated docs")
                     + r'</a></div>'
                     + r'[\s\S]*?<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>'
@@ -98,8 +98,8 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
                 # Read source file and replace content
                 with open(SOURCE_FILE, 'r') as f:
                     source_content = f.read()
-                    
-                escaped_replacement = replacementBodyContent.replace("\\", "\\\\") 
+
+                escaped_replacement = replacementBodyContent.replace("\\", "\\\\")
 
                 new_content = re.sub(
                     r'(<article class="bd-article">)[\s\S]*?(<\/article>)',
