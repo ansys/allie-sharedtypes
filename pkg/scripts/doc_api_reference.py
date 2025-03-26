@@ -14,7 +14,7 @@ repo_owner = sys.argv[1]
 repo_name = sys.argv[2]
 
 # Set environment variables for file paths
-DOC_BUILD_HTML = "documentation-html"
+DOC_BUILD_HTML = "doc/_build/html"
 SOURCE_FILE = os.path.join(DOC_BUILD_HTML, "api_reference", "test", "index.html")
 SOURCE_DIRECTORY = f"dist/pkg/github.com/{repo_owner}/{repo_name}/pkg/"
 REPLACEMENT_DIRECTORY = os.path.join(DOC_BUILD_HTML, "api_reference", "pkg")
@@ -83,12 +83,12 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
             if match:
                 replacementBodyContent = match.group(1)
                 search_pattern = (
-                    '<div class="top-heading" id="heading-wide"><a href="/pkg/github.com/'
+                    r'<div class="top-heading" id="heading-wide"><a href="/pkg/github.com/'
                     + re.escape(repo_owner)
                     + '/'
                     + re.escape(repo_name)
-                    + '/">GoPages \| Auto-generated docs</a></div>'
-                    + '[\\s\\S]*?<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>'
+                    + r'/">GoPages \| Auto-generated docs</a></div>'
+                    + r'[\s\S]*?<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>'
                 )
                 replacementBodyContent = re.sub(search_pattern, '', replacementBodyContent)
 
