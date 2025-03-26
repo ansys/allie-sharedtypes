@@ -83,12 +83,14 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
             if match:
                 replacementBodyContent = match.group(1)
                 search_pattern = (
-                    '<div class="top-heading" id="heading-wide"><a href="/pkg/github.com/'
+                    r'<div class="top-heading" id="heading-wide"><a href="/pkg/github.com/'
                     + re.escape(repo_owner)
                     + '/'
                     + re.escape(repo_name)
-                    + '/">GoPages \| Auto-generated docs</a></div>'
-                    + '[\\s\\S]*?<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>'
+                    + r'/">'
+                    + re.escape("GoPages | Auto-generated docs")
+                    + r'</a></div>'
+                    + r'[\s\S]*?<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>'
                 )
                 replacementBodyContent = re.sub(search_pattern, '', replacementBodyContent)
 
@@ -96,9 +98,11 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
                 with open(SOURCE_FILE, 'r') as f:
                     source_content = f.read()
 
+                escaped_replacement = replacementBodyContent.replace("\\", "\\\\")
+
                 new_content = re.sub(
                     r'(<article class="bd-article">)[\s\S]*?(<\/article>)',
-                    r'\1' + replacementBodyContent + r'\2',
+                    rf'\1{escaped_replacement}\2',
                     source_content
                 )
 
