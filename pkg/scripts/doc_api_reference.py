@@ -15,7 +15,7 @@ repo_name = sys.argv[2]
 
 # Set environment variables for file paths
 DOC_BUILD_HTML = "documentation-html"
-# DOC_BUILD_HTML = "doc/_build/html"
+#DOC_BUILD_HTML = "doc/_build/html"
 SOURCE_FILE = os.path.join(DOC_BUILD_HTML, "api_reference", "test", "index.html")
 SOURCE_DIRECTORY = f"dist/pkg/github.com/{repo_owner}/{repo_name}/pkg/"
 REPLACEMENT_DIRECTORY = os.path.join(DOC_BUILD_HTML, "api_reference", "pkg")
@@ -88,7 +88,9 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
                     + re.escape(repo_owner)
                     + '/'
                     + re.escape(repo_name)
-                    + r'/">GoPages \| Auto-generated docs</a></div>'
+                    + r'/">' 
+                    + re.escape("GoPages | Auto-generated docs")
+                    + r'</a></div>'
                     + r'[\s\S]*?<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>'
                 )
                 replacementBodyContent = re.sub(search_pattern, '', replacementBodyContent)
@@ -96,10 +98,12 @@ for root, dirs, files in os.walk(REPLACEMENT_DIRECTORY):
                 # Read source file and replace content
                 with open(SOURCE_FILE, 'r') as f:
                     source_content = f.read()
+                    
+                escaped_replacement = replacementBodyContent.replace("\\", "\\\\") 
 
                 new_content = re.sub(
                     r'(<article class="bd-article">)[\s\S]*?(<\/article>)',
-                    rf'\1{replacementBodyContent}\2',  # Using an f-string with raw string
+                    rf'\1{escaped_replacement}\2',
                     source_content
                 )
 
