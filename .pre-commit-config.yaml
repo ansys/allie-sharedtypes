@@ -1,4 +1,4 @@
-exclude: ^(pkg/allieflowkitgrpc)
+exclude: ^(pkg/allieflowkitgrpc|pkg/allieagentgrpc)
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.3.0
