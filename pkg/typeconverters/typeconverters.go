@@ -369,6 +369,16 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			return nil, err
 		}
 		return output, nil
+	case "ModelOptions":
+		if value == "" {
+			value = "{}"
+		}
+		output := sharedtypes.ModelOptions{}
+		err := json.Unmarshal([]byte(value), &output)
+		if err != nil {
+			return nil, err
+		}
+		return output, nil
 	case "[]DbJsonFilter":
 		if value == "" {
 			value = "[]"
@@ -633,6 +643,12 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 		return string(output), nil
 	case "DbFilters":
 		output, err := json.Marshal(value.(sharedtypes.DbFilters))
+		if err != nil {
+			return "", err
+		}
+		return string(output), nil
+	case "ModelOptions":
+		output, err := json.Marshal(value.(sharedtypes.ModelOptions))
 		if err != nil {
 			return "", err
 		}
