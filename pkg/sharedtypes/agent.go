@@ -14,6 +14,11 @@ type SessionContext struct {
 	ExecId      string            `json:"exec_id,omitempty"`     // Unique identifier of connecting Exec, only relevant if "session_type" is "exec"
 	WorkflowId  string            `json:"workflow_id,omitempty"` // Workflow ID, only relevant if "workflow_endpoint" is "custom"
 	Variables   map[string]string `json:"variables,omitempty"`   // Variables to be passed to the workflow
+	// Snapshot logic
+	SnapshotId     string `json:"snapshot_id,omitempty"`     // Snapshot ID, only relevant if "session_type" is "workflow"; if defined, the given snapshot will retrived from the database
+	WorkflowRunId  string `json:"workflow_run_id,omitempty"` // Workflow run ID, only relevant if "session_type" is "workflow"; if defined, mandatory if "snapshot_id" is defined in order to retrieve the snapshot from the database
+	UserId         string `json:"user_id,omitempty"`         // User ID, only relevant if "session_type" is "workflow"; if defined, mandatory if "snapshot_id" is defined in order to retrieve the snapshot from the database
+	StoreSnapshots bool   `json:"store_snapshots,omitempty"` // Store snapshots, only relevant if "session_type" is "workflow"; if true, all taken snapshots will be stored in the database
 }
 
 // SetSessionContext sets the SessionContext struct from the JSON payload
