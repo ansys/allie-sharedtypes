@@ -216,9 +216,17 @@ type SessionContext struct {
 	// Workflow ID for the workflow to be run
 	WorkflowId string `protobuf:"bytes,2,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
 	// Variables to be passed to the workflow
-	Variables     map[string]string `protobuf:"bytes,3,rep,name=variables,proto3" json:"variables,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Variables map[string]string `protobuf:"bytes,3,rep,name=variables,proto3" json:"variables,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Snapshot ID; if defined, the given snapshot will retrived from the database
+	SnapshotId string `protobuf:"bytes,4,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
+	// Workflow run ID; mandatory if "snapshot_id" is defined in order to retrieve the snapshot from the database
+	WorkflowRunId string `protobuf:"bytes,5,opt,name=workflow_run_id,json=workflowRunId,proto3" json:"workflow_run_id,omitempty"`
+	// User ID; mandatory if "snapshot_id" is defined in order to retrieve the snapshot from the database
+	UserId string `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// Store snapshots; if true, all taken snapshots will be stored in the database
+	StoreSnapshots bool `protobuf:"varint,7,opt,name=store_snapshots,json=storeSnapshots,proto3" json:"store_snapshots,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *SessionContext) Reset() {
@@ -272,12 +280,40 @@ func (x *SessionContext) GetVariables() map[string]string {
 	return nil
 }
 
+func (x *SessionContext) GetSnapshotId() string {
+	if x != nil {
+		return x.SnapshotId
+	}
+	return ""
+}
+
+func (x *SessionContext) GetWorkflowRunId() string {
+	if x != nil {
+		return x.WorkflowRunId
+	}
+	return ""
+}
+
+func (x *SessionContext) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *SessionContext) GetStoreSnapshots() bool {
+	if x != nil {
+		return x.StoreSnapshots
+	}
+	return false
+}
+
 // ClientRequest is the message to send a request to the server.
 type ClientRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Instruction ID which has to be equal to the instruction ID of the client response for chat interface interaction
 	InstructionId string `protobuf:"bytes,1,opt,name=instruction_id,json=instructionId,proto3" json:"instruction_id,omitempty"`
-	// Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive"
+	// Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive", "take_snapshot", "load_snapshot"
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// String input for chat interface interaction
 	Input string `protobuf:"bytes,3,opt,name=input,proto3" json:"input,omitempty"`
@@ -285,8 +321,10 @@ type ClientRequest struct {
 	Images []string `protobuf:"bytes,4,rep,name=images,proto3" json:"images,omitempty"`
 	// Variable values to be set for the workflow
 	VariableValues map[string]string `protobuf:"bytes,5,rep,name=variable_values,json=variableValues,proto3" json:"variable_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// ID of the snapshot to be loaded
+	SnapshotId    string `protobuf:"bytes,6,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClientRequest) Reset() {
@@ -354,13 +392,22 @@ func (x *ClientRequest) GetVariableValues() map[string]string {
 	return nil
 }
 
+func (x *ClientRequest) GetSnapshotId() string {
+	if x != nil {
+		return x.SnapshotId
+	}
+	return ""
+}
+
 // ConnectionStatus is the message to indicate the connection status after client sends a session context message.
 type ConnectionStatus struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Connection status; can be "success", "failed"
 	ConnectionStatus string `protobuf:"bytes,1,opt,name=connectionStatus,proto3" json:"connectionStatus,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Workflow Run ID; if the connection status is "success", this will be the ID of the workflow run
+	WorkflowRunId string `protobuf:"bytes,2,opt,name=workflow_run_id,json=workflowRunId,proto3" json:"workflow_run_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ConnectionStatus) Reset() {
@@ -396,6 +443,13 @@ func (*ConnectionStatus) Descriptor() ([]byte, []int) {
 func (x *ConnectionStatus) GetConnectionStatus() string {
 	if x != nil {
 		return x.ConnectionStatus
+	}
+	return ""
+}
+
+func (x *ConnectionStatus) GetWorkflowRunId() string {
+	if x != nil {
+		return x.WorkflowRunId
 	}
 	return ""
 }
@@ -451,7 +505,7 @@ type ClientResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Randomly generated instruction ID to be used in the client request
 	InstructionId string `protobuf:"bytes,1,opt,name=instruction_id,json=instructionId,proto3" json:"instruction_id,omitempty"`
-	// Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values"
+	// Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded"
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// Chat Interface properties
 	IsLast           bool   `protobuf:"varint,3,opt,name=is_last,json=isLast,proto3" json:"is_last,omitempty"`
@@ -463,10 +517,12 @@ type ClientResponse struct {
 	Context          string `protobuf:"bytes,9,opt,name=context,proto3" json:"context,omitempty"`
 	// Variable values properties
 	VariableValues map[string]string `protobuf:"bytes,10,rep,name=variable_values,json=variableValues,proto3" json:"variable_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Snapshot properties; id of the snapshot taken or loaded
+	SnapshotId string `protobuf:"bytes,11,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
 	// Error properties
-	Error *ErrorResponse `protobuf:"bytes,11,opt,name=error,proto3" json:"error,omitempty"`
+	Error *ErrorResponse `protobuf:"bytes,12,opt,name=error,proto3" json:"error,omitempty"`
 	// Info properties
-	InfoMessage   *string `protobuf:"bytes,12,opt,name=info_message,json=infoMessage,proto3,oneof" json:"info_message,omitempty"`
+	InfoMessage   *string `protobuf:"bytes,13,opt,name=info_message,json=infoMessage,proto3,oneof" json:"info_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -571,6 +627,13 @@ func (x *ClientResponse) GetVariableValues() map[string]string {
 	return nil
 }
 
+func (x *ClientResponse) GetSnapshotId() string {
+	if x != nil {
+		return x.SnapshotId
+	}
+	return ""
+}
+
 func (x *ClientResponse) GetError() *ErrorResponse {
 	if x != nil {
 		return x.Error
@@ -653,28 +716,36 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\x11connection_status\x18\x01 \x01(\v2 .allieagentgrpc.ConnectionStatusH\x00R\x10connectionStatus\x12[\n" +
 	"\x15authentication_status\x18\x02 \x01(\v2$.allieagentgrpc.AuthenticationStatusH\x00R\x14authenticationStatus\x12I\n" +
 	"\x0fclient_response\x18\x03 \x01(\v2\x1e.allieagentgrpc.ClientResponseH\x00R\x0eclientResponseB\x0e\n" +
-	"\fmessage_type\"\xd9\x01\n" +
+	"\fmessage_type\"\xe4\x02\n" +
 	"\x0eSessionContext\x12\x1b\n" +
 	"\tjwt_token\x18\x01 \x01(\tR\bjwtToken\x12\x1f\n" +
 	"\vworkflow_id\x18\x02 \x01(\tR\n" +
 	"workflowId\x12K\n" +
-	"\tvariables\x18\x03 \x03(\v2-.allieagentgrpc.SessionContext.VariablesEntryR\tvariables\x1a<\n" +
+	"\tvariables\x18\x03 \x03(\v2-.allieagentgrpc.SessionContext.VariablesEntryR\tvariables\x12\x1f\n" +
+	"\vsnapshot_id\x18\x04 \x01(\tR\n" +
+	"snapshotId\x12&\n" +
+	"\x0fworkflow_run_id\x18\x05 \x01(\tR\rworkflowRunId\x12\x17\n" +
+	"\auser_id\x18\x06 \x01(\tR\x06userId\x12'\n" +
+	"\x0fstore_snapshots\x18\a \x01(\bR\x0estoreSnapshots\x1a<\n" +
 	"\x0eVariablesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x97\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb8\x02\n" +
 	"\rClientRequest\x12%\n" +
 	"\x0einstruction_id\x18\x01 \x01(\tR\rinstructionId\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x14\n" +
 	"\x05input\x18\x03 \x01(\tR\x05input\x12\x16\n" +
 	"\x06images\x18\x04 \x03(\tR\x06images\x12Z\n" +
-	"\x0fvariable_values\x18\x05 \x03(\v21.allieagentgrpc.ClientRequest.VariableValuesEntryR\x0evariableValues\x1aA\n" +
+	"\x0fvariable_values\x18\x05 \x03(\v21.allieagentgrpc.ClientRequest.VariableValuesEntryR\x0evariableValues\x12\x1f\n" +
+	"\vsnapshot_id\x18\x06 \x01(\tR\n" +
+	"snapshotId\x1aA\n" +
 	"\x13VariableValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\">\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"f\n" +
 	"\x10ConnectionStatus\x12*\n" +
-	"\x10connectionStatus\x18\x01 \x01(\tR\x10connectionStatus\"J\n" +
+	"\x10connectionStatus\x18\x01 \x01(\tR\x10connectionStatus\x12&\n" +
+	"\x0fworkflow_run_id\x18\x02 \x01(\tR\rworkflowRunId\"J\n" +
 	"\x14AuthenticationStatus\x122\n" +
-	"\x14authenticationStatus\x18\x01 \x01(\tR\x14authenticationStatus\"\xc8\x04\n" +
+	"\x14authenticationStatus\x18\x01 \x01(\tR\x14authenticationStatus\"\xe9\x04\n" +
 	"\x0eClientResponse\x12%\n" +
 	"\x0einstruction_id\x18\x01 \x01(\tR\rinstructionId\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x17\n" +
@@ -686,9 +757,11 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\x12output_token_count\x18\b \x01(\x05R\x10outputTokenCount\x12\x18\n" +
 	"\acontext\x18\t \x01(\tR\acontext\x12[\n" +
 	"\x0fvariable_values\x18\n" +
-	" \x03(\v22.allieagentgrpc.ClientResponse.VariableValuesEntryR\x0evariableValues\x123\n" +
-	"\x05error\x18\v \x01(\v2\x1d.allieagentgrpc.ErrorResponseR\x05error\x12&\n" +
-	"\finfo_message\x18\f \x01(\tH\x00R\vinfoMessage\x88\x01\x01\x1aA\n" +
+	" \x03(\v22.allieagentgrpc.ClientResponse.VariableValuesEntryR\x0evariableValues\x12\x1f\n" +
+	"\vsnapshot_id\x18\v \x01(\tR\n" +
+	"snapshotId\x123\n" +
+	"\x05error\x18\f \x01(\v2\x1d.allieagentgrpc.ErrorResponseR\x05error\x12&\n" +
+	"\finfo_message\x18\r \x01(\tH\x00R\vinfoMessage\x88\x01\x01\x1aA\n" +
 	"\x13VariableValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +

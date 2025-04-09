@@ -45,6 +45,18 @@ message SessionContext {
 
     // Variables to be passed to the workflow
     map<string, string> variables = 3;
+
+    // Snapshot ID; if defined, the given snapshot will retrived from the database
+    string snapshot_id = 4; 
+
+    // Workflow run ID; mandatory if "snapshot_id" is defined in order to retrieve the snapshot from the database
+    string workflow_run_id = 5;
+
+    // User ID; mandatory if "snapshot_id" is defined in order to retrieve the snapshot from the database
+    string user_id = 6;
+
+    // Store snapshots; if true, all taken snapshots will be stored in the database
+    bool store_snapshots = 7;
 }
 
 // ClientRequest is the message to send a request to the server.
@@ -52,7 +64,7 @@ message ClientRequest {
     // Instruction ID which has to be equal to the instruction ID of the client response for chat interface interaction
     string instruction_id = 1;
 
-    // Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive"
+    // Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive", "take_snapshot", "load_snapshot"
     string type = 2;
 
     // String input for chat interface interaction
@@ -63,12 +75,18 @@ message ClientRequest {
 
     // Variable values to be set for the workflow
     map<string, string> variable_values = 5;
+
+    // ID of the snapshot to be loaded
+    string snapshot_id = 6; 
 }
 
 // ConnectionStatus is the message to indicate the connection status after client sends a session context message.
 message ConnectionStatus {
     // Connection status; can be "success", "failed"
     string connectionStatus = 1;
+
+    // Workflow Run ID; if the connection status is "success", this will be the ID of the workflow run
+    string workflow_run_id = 2;
 }
 
 // AuthenticationStatus is the message to indicate failing authentication after client sends a session context message with authentication enabled.
@@ -82,7 +100,7 @@ message ClientResponse {
     // Randomly generated instruction ID to be used in the client request
     string instruction_id = 1;
 
-    // Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values"
+    // Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded"
     string type = 2;
 
     // Chat Interface properties
@@ -97,11 +115,14 @@ message ClientResponse {
     // Variable values properties
     map<string, string> variable_values = 10;
 
+    // Snapshot properties; id of the snapshot taken or loaded
+    string snapshot_id = 11;
+
     // Error properties
-    ErrorResponse error = 11;
+    ErrorResponse error = 12;
 
     // Info properties
-    optional string info_message = 12;
+    optional string info_message = 13;
 }
 
 // ErrorResponse is the message to send an error response to the client.
