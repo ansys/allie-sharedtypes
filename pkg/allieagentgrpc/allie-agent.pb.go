@@ -313,7 +313,7 @@ type ClientRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Instruction ID which has to be equal to the instruction ID of the client response for chat interface interaction
 	InstructionId string `protobuf:"bytes,1,opt,name=instruction_id,json=instructionId,proto3" json:"instruction_id,omitempty"`
-	// Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive", "take_snapshot", "load_snapshot"
+	// Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive", "take_snapshot", "load_snapshot", "get_slash_commands"
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// String input for chat interface interaction
 	Input string `protobuf:"bytes,3,opt,name=input,proto3" json:"input,omitempty"`
@@ -505,7 +505,7 @@ type ClientResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Randomly generated instruction ID to be used in the client request
 	InstructionId string `protobuf:"bytes,1,opt,name=instruction_id,json=instructionId,proto3" json:"instruction_id,omitempty"`
-	// Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded"
+	// Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded", "slash_commands"
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// Chat Interface properties
 	IsLast           bool   `protobuf:"varint,3,opt,name=is_last,json=isLast,proto3" json:"is_last,omitempty"`
@@ -519,10 +519,12 @@ type ClientResponse struct {
 	VariableValues map[string]string `protobuf:"bytes,10,rep,name=variable_values,json=variableValues,proto3" json:"variable_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Snapshot properties; id of the snapshot taken or loaded
 	SnapshotId string `protobuf:"bytes,11,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
+	// Slash command properties; list of slash commands supported by the workflow
+	SlashCommands []string `protobuf:"bytes,12,rep,name=slash_commands,json=slashCommands,proto3" json:"slash_commands,omitempty"`
 	// Error properties
-	Error *ErrorResponse `protobuf:"bytes,12,opt,name=error,proto3" json:"error,omitempty"`
+	Error *ErrorResponse `protobuf:"bytes,13,opt,name=error,proto3" json:"error,omitempty"`
 	// Info properties
-	InfoMessage   *string `protobuf:"bytes,13,opt,name=info_message,json=infoMessage,proto3,oneof" json:"info_message,omitempty"`
+	InfoMessage   *string `protobuf:"bytes,14,opt,name=info_message,json=infoMessage,proto3,oneof" json:"info_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -632,6 +634,13 @@ func (x *ClientResponse) GetSnapshotId() string {
 		return x.SnapshotId
 	}
 	return ""
+}
+
+func (x *ClientResponse) GetSlashCommands() []string {
+	if x != nil {
+		return x.SlashCommands
+	}
+	return nil
 }
 
 func (x *ClientResponse) GetError() *ErrorResponse {
@@ -745,7 +754,7 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\x10connectionStatus\x18\x01 \x01(\tR\x10connectionStatus\x12&\n" +
 	"\x0fworkflow_run_id\x18\x02 \x01(\tR\rworkflowRunId\"J\n" +
 	"\x14AuthenticationStatus\x122\n" +
-	"\x14authenticationStatus\x18\x01 \x01(\tR\x14authenticationStatus\"\xe9\x04\n" +
+	"\x14authenticationStatus\x18\x01 \x01(\tR\x14authenticationStatus\"\x90\x05\n" +
 	"\x0eClientResponse\x12%\n" +
 	"\x0einstruction_id\x18\x01 \x01(\tR\rinstructionId\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x17\n" +
@@ -759,9 +768,10 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\x0fvariable_values\x18\n" +
 	" \x03(\v22.allieagentgrpc.ClientResponse.VariableValuesEntryR\x0evariableValues\x12\x1f\n" +
 	"\vsnapshot_id\x18\v \x01(\tR\n" +
-	"snapshotId\x123\n" +
-	"\x05error\x18\f \x01(\v2\x1d.allieagentgrpc.ErrorResponseR\x05error\x12&\n" +
-	"\finfo_message\x18\r \x01(\tH\x00R\vinfoMessage\x88\x01\x01\x1aA\n" +
+	"snapshotId\x12%\n" +
+	"\x0eslash_commands\x18\f \x03(\tR\rslashCommands\x123\n" +
+	"\x05error\x18\r \x01(\v2\x1d.allieagentgrpc.ErrorResponseR\x05error\x12&\n" +
+	"\finfo_message\x18\x0e \x01(\tH\x00R\vinfoMessage\x88\x01\x01\x1aA\n" +
 	"\x13VariableValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
