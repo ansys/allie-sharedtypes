@@ -406,8 +406,10 @@ type ConnectionStatus struct {
 	ConnectionStatus string `protobuf:"bytes,1,opt,name=connectionStatus,proto3" json:"connectionStatus,omitempty"`
 	// Workflow Run ID; if the connection status is "success", this will be the ID of the workflow run
 	WorkflowRunId string `protobuf:"bytes,2,opt,name=workflow_run_id,json=workflowRunId,proto3" json:"workflow_run_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Maximum number of snapshots that can be stored in the database per workflow run
+	MaxNumberOfSnapshots int32 `protobuf:"varint,3,opt,name=max_number_of_snapshots,json=maxNumberOfSnapshots,proto3" json:"max_number_of_snapshots,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ConnectionStatus) Reset() {
@@ -452,6 +454,13 @@ func (x *ConnectionStatus) GetWorkflowRunId() string {
 		return x.WorkflowRunId
 	}
 	return ""
+}
+
+func (x *ConnectionStatus) GetMaxNumberOfSnapshots() int32 {
+	if x != nil {
+		return x.MaxNumberOfSnapshots
+	}
+	return 0
 }
 
 // AuthenticationStatus is the message to indicate failing authentication after client sends a session context message with authentication enabled.
@@ -749,10 +758,11 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"snapshotId\x1aA\n" +
 	"\x13VariableValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"f\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9d\x01\n" +
 	"\x10ConnectionStatus\x12*\n" +
 	"\x10connectionStatus\x18\x01 \x01(\tR\x10connectionStatus\x12&\n" +
-	"\x0fworkflow_run_id\x18\x02 \x01(\tR\rworkflowRunId\"J\n" +
+	"\x0fworkflow_run_id\x18\x02 \x01(\tR\rworkflowRunId\x125\n" +
+	"\x17max_number_of_snapshots\x18\x03 \x01(\x05R\x14maxNumberOfSnapshots\"J\n" +
 	"\x14AuthenticationStatus\x122\n" +
 	"\x14authenticationStatus\x18\x01 \x01(\tR\x14authenticationStatus\"\x90\x05\n" +
 	"\x0eClientResponse\x12%\n" +
