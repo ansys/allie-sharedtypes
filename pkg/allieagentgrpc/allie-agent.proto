@@ -87,6 +87,9 @@ message ConnectionStatus {
 
     // Workflow Run ID; if the connection status is "success", this will be the ID of the workflow run
     string workflow_run_id = 2;
+
+    // Maximum number of snapshots that can be stored in the database per workflow run
+    int32 max_number_of_snapshots = 3; 
 }
 
 // AuthenticationStatus is the message to indicate failing authentication after client sends a session context message with authentication enabled.
