@@ -132,6 +132,10 @@ type Config struct {
 	ELASTICSEARCH_INSECURE_CONNECTION  bool     `yaml:"ELASTICSEARCH_INSECURE_CONNECTION" json:"ELASTICSEARCHINSECURECONNECTION"`
 	DATABASE_TYPE                      string   `yaml:"DATABASE_TYPE" json:"DATABASETYPE"` // milvus or elasticsearch
 
+	// qdrant config
+	QDRANT_HOST string `yaml:"QDRANT_HOST" json:"QDRANTHOST"`
+	QDRANT_PORT int    `yaml:"QDRANT_PORT" json:"QDRANTPORT"`
+
 	// Aali Exec
 	//////////////
 	EXEC_ID             string `yaml:"EXEC_ID" json:"EXECID"`
