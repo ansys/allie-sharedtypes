@@ -124,6 +124,13 @@ type Config struct {
 
 	// Workflow Store
 	WORKFLOW_CONFIG_VARIABLES map[string]string `yaml:"WORKFLOW_CONFIG_VARIABLES" json:"WORKFLOWCONFIGVARIABLES"`
+
+	// Allie Database
+	/////////////////
+	// kv db
+	KVDB_ADDRESS   string `yaml:"KVDB_ADDRESS" json:"KVDBADDRESS"`
+	KVDB_PATH      string `yaml:"KVDB_PATH" json:"KVDBPATH"`
+	KVDB_IN_MEMORY bool   `yaml:"KVDB_IN_MEMORY" json:"KVDBINMEMORY"`
 }
 
 // Initialize conifg dict
