@@ -130,7 +130,7 @@ type Config struct {
 	// Allie Database
 	/////////////////
 	// kv db
-	KVDB_PORT      string `yaml:"KVDB_PORT" json:"KVDBPORT"`
+	KVDB_ADDRESS   string `yaml:"KVDB_ADDRESS" json:"KVDBADDRESS"`
 	KVDB_PATH      string `yaml:"KVDB_PATH" json:"KVDBPATH"`
 	KVDB_IN_MEMORY bool   `yaml:"KVDB_IN_MEMORY" json:"KVDBINMEMORY"`
 }
