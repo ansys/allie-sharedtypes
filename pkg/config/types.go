@@ -71,6 +71,8 @@ type Config struct {
 	MONGO_DB_ENDPOINT                    string `yaml:"MONGO_DB_ENDPOINT" json:"MONGODBENDPOINT"`
 	MILLISECONDS_MONGODB_UPDATE_INTERVAL int    `yaml:"MILLISECONDS_MONGODB_UPDATE_INTERVAL" json:"MILLISECONDSMONGODBUPDATEINTERVAL"`
 	EXEC_FILE_STORE_PATH                 string `yaml:"EXEC_FILE_STORE_PATH" json:"EXECFILESTOREPATH"`
+	// DB Connection
+	KVDB_ENDPOINT string `yaml:"KVDB_ENDPOINT" json:"KVDBENDPOINT"`
 
 	// Allie Flowkit
 	/////////////////
@@ -128,7 +130,7 @@ type Config struct {
 	// Allie Database
 	/////////////////
 	// kv db
-	KVDB_ADDRESS   string `yaml:"KVDB_ADDRESS" json:"KVDBADDRESS"`
+	KVDB_PORT      string `yaml:"KVDB_PORT" json:"KVDBPORT"`
 	KVDB_PATH      string `yaml:"KVDB_PATH" json:"KVDBPATH"`
 	KVDB_IN_MEMORY bool   `yaml:"KVDB_IN_MEMORY" json:"KVDBINMEMORY"`
 }
