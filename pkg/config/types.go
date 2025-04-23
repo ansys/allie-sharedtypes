@@ -136,6 +136,9 @@ type Config struct {
 	QDRANT_HOST string `yaml:"QDRANT_HOST" json:"QDRANTHOST"`
 	QDRANT_PORT int    `yaml:"QDRANT_PORT" json:"QDRANTPORT"`
 
+	// graph db config
+	GRAPHDB_ADDRESS string `yaml:"GRAPHDB_ADDRESS" json:"GRAPHDBADDRESS"`
+
 	// Aali Exec
 	//////////////
 	EXEC_ID             string `yaml:"EXEC_ID" json:"EXECID"`
