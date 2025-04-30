@@ -64,7 +64,7 @@ message ClientRequest {
     // Instruction ID which has to be equal to the instruction ID of the client response for chat interface interaction
     string instruction_id = 1;
 
-    // Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive", "take_snapshot", "load_snapshot", "get_slash_commands"
+    // Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive", "take_snapshot", "load_snapshot", "get_slash_commands", "feedback"
     string type = 2;
 
     // String input for chat interface interaction
@@ -78,6 +78,21 @@ message ClientRequest {
 
     // ID of the snapshot to be loaded
     string snapshot_id = 6; 
+
+    // Feedback for the workflow run
+    WorkflowFeedback feedback = 7; // Feedback for the workflow run
+}
+
+// WorkflowFeedback is the message to send feedback to the server.
+message WorkflowFeedback {
+    // Message ID which has to be equal to the message ID in the conversation history for which the feedback is given
+    string message_id = 1;
+
+    // Positive or negative feedback can either be added or removed to the message ID in the conversation history
+    bool add_positive = 2;
+    bool add_negative = 3;
+    bool remove_positive = 4;
+    bool remove_negative = 5;
 }
 
 // ConnectionStatus is the message to indicate the connection status after client sends a session context message.
@@ -103,7 +118,7 @@ message ClientResponse {
     // Randomly generated instruction ID to be used in the client request
     string instruction_id = 1;
 
-    // Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded", "slash_commands"
+    // Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded", "slash_commands", "feedback_triggered"
     string type = 2;
 
     // Chat Interface properties

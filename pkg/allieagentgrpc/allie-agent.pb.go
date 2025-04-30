@@ -313,7 +313,7 @@ type ClientRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Instruction ID which has to be equal to the instruction ID of the client response for chat interface interaction
 	InstructionId string `protobuf:"bytes,1,opt,name=instruction_id,json=instructionId,proto3" json:"instruction_id,omitempty"`
-	// Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive", "take_snapshot", "load_snapshot", "get_slash_commands"
+	// Type of the request; can be "message", "get_variable_values", "set_variable_values", "keepalive", "take_snapshot", "load_snapshot", "get_slash_commands", "feedback"
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// String input for chat interface interaction
 	Input string `protobuf:"bytes,3,opt,name=input,proto3" json:"input,omitempty"`
@@ -322,7 +322,9 @@ type ClientRequest struct {
 	// Variable values to be set for the workflow
 	VariableValues map[string]string `protobuf:"bytes,5,rep,name=variable_values,json=variableValues,proto3" json:"variable_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the snapshot to be loaded
-	SnapshotId    string `protobuf:"bytes,6,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
+	SnapshotId string `protobuf:"bytes,6,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
+	// Feedback for the workflow run
+	Feedback      *WorkflowFeedback `protobuf:"bytes,7,opt,name=feedback,proto3" json:"feedback,omitempty"` // Feedback for the workflow run
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -399,6 +401,92 @@ func (x *ClientRequest) GetSnapshotId() string {
 	return ""
 }
 
+func (x *ClientRequest) GetFeedback() *WorkflowFeedback {
+	if x != nil {
+		return x.Feedback
+	}
+	return nil
+}
+
+// WorkflowFeedback is the message to send feedback to the server.
+type WorkflowFeedback struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Message ID which has to be equal to the message ID in the conversation history for which the feedback is given
+	MessageId string `protobuf:"bytes,1,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	// Positive or negative feedback can either be added or removed to the message ID in the conversation history
+	AddPositive    bool `protobuf:"varint,2,opt,name=add_positive,json=addPositive,proto3" json:"add_positive,omitempty"`
+	AddNegative    bool `protobuf:"varint,3,opt,name=add_negative,json=addNegative,proto3" json:"add_negative,omitempty"`
+	RemovePositive bool `protobuf:"varint,4,opt,name=remove_positive,json=removePositive,proto3" json:"remove_positive,omitempty"`
+	RemoveNegative bool `protobuf:"varint,5,opt,name=remove_negative,json=removeNegative,proto3" json:"remove_negative,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *WorkflowFeedback) Reset() {
+	*x = WorkflowFeedback{}
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WorkflowFeedback) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WorkflowFeedback) ProtoMessage() {}
+
+func (x *WorkflowFeedback) ProtoReflect() protoreflect.Message {
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WorkflowFeedback.ProtoReflect.Descriptor instead.
+func (*WorkflowFeedback) Descriptor() ([]byte, []int) {
+	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *WorkflowFeedback) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+func (x *WorkflowFeedback) GetAddPositive() bool {
+	if x != nil {
+		return x.AddPositive
+	}
+	return false
+}
+
+func (x *WorkflowFeedback) GetAddNegative() bool {
+	if x != nil {
+		return x.AddNegative
+	}
+	return false
+}
+
+func (x *WorkflowFeedback) GetRemovePositive() bool {
+	if x != nil {
+		return x.RemovePositive
+	}
+	return false
+}
+
+func (x *WorkflowFeedback) GetRemoveNegative() bool {
+	if x != nil {
+		return x.RemoveNegative
+	}
+	return false
+}
+
 // ConnectionStatus is the message to indicate the connection status after client sends a session context message.
 type ConnectionStatus struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -414,7 +502,7 @@ type ConnectionStatus struct {
 
 func (x *ConnectionStatus) Reset() {
 	*x = ConnectionStatus{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[4]
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -426,7 +514,7 @@ func (x *ConnectionStatus) String() string {
 func (*ConnectionStatus) ProtoMessage() {}
 
 func (x *ConnectionStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[4]
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -439,7 +527,7 @@ func (x *ConnectionStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConnectionStatus.ProtoReflect.Descriptor instead.
 func (*ConnectionStatus) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{4}
+	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ConnectionStatus) GetConnectionStatus() string {
@@ -474,7 +562,7 @@ type AuthenticationStatus struct {
 
 func (x *AuthenticationStatus) Reset() {
 	*x = AuthenticationStatus{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[5]
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -486,7 +574,7 @@ func (x *AuthenticationStatus) String() string {
 func (*AuthenticationStatus) ProtoMessage() {}
 
 func (x *AuthenticationStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[5]
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -499,7 +587,7 @@ func (x *AuthenticationStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuthenticationStatus.ProtoReflect.Descriptor instead.
 func (*AuthenticationStatus) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{5}
+	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AuthenticationStatus) GetAuthenticationStatus() string {
@@ -514,7 +602,7 @@ type ClientResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Randomly generated instruction ID to be used in the client request
 	InstructionId string `protobuf:"bytes,1,opt,name=instruction_id,json=instructionId,proto3" json:"instruction_id,omitempty"`
-	// Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded", "slash_commands"
+	// Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded", "slash_commands", "feedback_triggered"
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// Chat Interface properties
 	IsLast           bool   `protobuf:"varint,3,opt,name=is_last,json=isLast,proto3" json:"is_last,omitempty"`
@@ -540,7 +628,7 @@ type ClientResponse struct {
 
 func (x *ClientResponse) Reset() {
 	*x = ClientResponse{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[6]
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -552,7 +640,7 @@ func (x *ClientResponse) String() string {
 func (*ClientResponse) ProtoMessage() {}
 
 func (x *ClientResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[6]
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -565,7 +653,7 @@ func (x *ClientResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClientResponse.ProtoReflect.Descriptor instead.
 func (*ClientResponse) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{6}
+	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ClientResponse) GetInstructionId() string {
@@ -679,7 +767,7 @@ type ErrorResponse struct {
 
 func (x *ErrorResponse) Reset() {
 	*x = ErrorResponse{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[7]
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -691,7 +779,7 @@ func (x *ErrorResponse) String() string {
 func (*ErrorResponse) ProtoMessage() {}
 
 func (x *ErrorResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[7]
+	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -704,7 +792,7 @@ func (x *ErrorResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ErrorResponse.ProtoReflect.Descriptor instead.
 func (*ErrorResponse) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{7}
+	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ErrorResponse) GetCode() int32 {
@@ -747,7 +835,7 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\x0fstore_snapshots\x18\a \x01(\bR\x0estoreSnapshots\x1a<\n" +
 	"\x0eVariablesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb8\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf6\x02\n" +
 	"\rClientRequest\x12%\n" +
 	"\x0einstruction_id\x18\x01 \x01(\tR\rinstructionId\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x14\n" +
@@ -755,10 +843,18 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\x06images\x18\x04 \x03(\tR\x06images\x12Z\n" +
 	"\x0fvariable_values\x18\x05 \x03(\v21.allieagentgrpc.ClientRequest.VariableValuesEntryR\x0evariableValues\x12\x1f\n" +
 	"\vsnapshot_id\x18\x06 \x01(\tR\n" +
-	"snapshotId\x1aA\n" +
+	"snapshotId\x12<\n" +
+	"\bfeedback\x18\a \x01(\v2 .allieagentgrpc.WorkflowFeedbackR\bfeedback\x1aA\n" +
 	"\x13VariableValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9d\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc9\x01\n" +
+	"\x10WorkflowFeedback\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x01 \x01(\tR\tmessageId\x12!\n" +
+	"\fadd_positive\x18\x02 \x01(\bR\vaddPositive\x12!\n" +
+	"\fadd_negative\x18\x03 \x01(\bR\vaddNegative\x12'\n" +
+	"\x0fremove_positive\x18\x04 \x01(\bR\x0eremovePositive\x12'\n" +
+	"\x0fremove_negative\x18\x05 \x01(\bR\x0eremoveNegative\"\x9d\x01\n" +
 	"\x10ConnectionStatus\x12*\n" +
 	"\x10connectionStatus\x18\x01 \x01(\tR\x10connectionStatus\x12&\n" +
 	"\x0fworkflow_run_id\x18\x02 \x01(\tR\rworkflowRunId\x125\n" +
@@ -804,37 +900,39 @@ func file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP() []byte {
 	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescData
 }
 
-var file_pkg_allieagentgrpc_allie_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_pkg_allieagentgrpc_allie_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_pkg_allieagentgrpc_allie_agent_proto_goTypes = []any{
 	(*ClientMessage)(nil),        // 0: allieagentgrpc.ClientMessage
 	(*ServerMessage)(nil),        // 1: allieagentgrpc.ServerMessage
 	(*SessionContext)(nil),       // 2: allieagentgrpc.SessionContext
 	(*ClientRequest)(nil),        // 3: allieagentgrpc.ClientRequest
-	(*ConnectionStatus)(nil),     // 4: allieagentgrpc.ConnectionStatus
-	(*AuthenticationStatus)(nil), // 5: allieagentgrpc.AuthenticationStatus
-	(*ClientResponse)(nil),       // 6: allieagentgrpc.ClientResponse
-	(*ErrorResponse)(nil),        // 7: allieagentgrpc.ErrorResponse
-	nil,                          // 8: allieagentgrpc.SessionContext.VariablesEntry
-	nil,                          // 9: allieagentgrpc.ClientRequest.VariableValuesEntry
-	nil,                          // 10: allieagentgrpc.ClientResponse.VariableValuesEntry
+	(*WorkflowFeedback)(nil),     // 4: allieagentgrpc.WorkflowFeedback
+	(*ConnectionStatus)(nil),     // 5: allieagentgrpc.ConnectionStatus
+	(*AuthenticationStatus)(nil), // 6: allieagentgrpc.AuthenticationStatus
+	(*ClientResponse)(nil),       // 7: allieagentgrpc.ClientResponse
+	(*ErrorResponse)(nil),        // 8: allieagentgrpc.ErrorResponse
+	nil,                          // 9: allieagentgrpc.SessionContext.VariablesEntry
+	nil,                          // 10: allieagentgrpc.ClientRequest.VariableValuesEntry
+	nil,                          // 11: allieagentgrpc.ClientResponse.VariableValuesEntry
 }
 var file_pkg_allieagentgrpc_allie_agent_proto_depIdxs = []int32{
 	2,  // 0: allieagentgrpc.ClientMessage.session_context:type_name -> allieagentgrpc.SessionContext
 	3,  // 1: allieagentgrpc.ClientMessage.client_request:type_name -> allieagentgrpc.ClientRequest
-	4,  // 2: allieagentgrpc.ServerMessage.connection_status:type_name -> allieagentgrpc.ConnectionStatus
-	5,  // 3: allieagentgrpc.ServerMessage.authentication_status:type_name -> allieagentgrpc.AuthenticationStatus
-	6,  // 4: allieagentgrpc.ServerMessage.client_response:type_name -> allieagentgrpc.ClientResponse
-	8,  // 5: allieagentgrpc.SessionContext.variables:type_name -> allieagentgrpc.SessionContext.VariablesEntry
-	9,  // 6: allieagentgrpc.ClientRequest.variable_values:type_name -> allieagentgrpc.ClientRequest.VariableValuesEntry
-	10, // 7: allieagentgrpc.ClientResponse.variable_values:type_name -> allieagentgrpc.ClientResponse.VariableValuesEntry
-	7,  // 8: allieagentgrpc.ClientResponse.error:type_name -> allieagentgrpc.ErrorResponse
-	0,  // 9: allieagentgrpc.WorkflowRun.RunWorkflow:input_type -> allieagentgrpc.ClientMessage
-	1,  // 10: allieagentgrpc.WorkflowRun.RunWorkflow:output_type -> allieagentgrpc.ServerMessage
-	10, // [10:11] is the sub-list for method output_type
-	9,  // [9:10] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	5,  // 2: allieagentgrpc.ServerMessage.connection_status:type_name -> allieagentgrpc.ConnectionStatus
+	6,  // 3: allieagentgrpc.ServerMessage.authentication_status:type_name -> allieagentgrpc.AuthenticationStatus
+	7,  // 4: allieagentgrpc.ServerMessage.client_response:type_name -> allieagentgrpc.ClientResponse
+	9,  // 5: allieagentgrpc.SessionContext.variables:type_name -> allieagentgrpc.SessionContext.VariablesEntry
+	10, // 6: allieagentgrpc.ClientRequest.variable_values:type_name -> allieagentgrpc.ClientRequest.VariableValuesEntry
+	4,  // 7: allieagentgrpc.ClientRequest.feedback:type_name -> allieagentgrpc.WorkflowFeedback
+	11, // 8: allieagentgrpc.ClientResponse.variable_values:type_name -> allieagentgrpc.ClientResponse.VariableValuesEntry
+	8,  // 9: allieagentgrpc.ClientResponse.error:type_name -> allieagentgrpc.ErrorResponse
+	0,  // 10: allieagentgrpc.WorkflowRun.RunWorkflow:input_type -> allieagentgrpc.ClientMessage
+	1,  // 11: allieagentgrpc.WorkflowRun.RunWorkflow:output_type -> allieagentgrpc.ServerMessage
+	11, // [11:12] is the sub-list for method output_type
+	10, // [10:11] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_pkg_allieagentgrpc_allie_agent_proto_init() }
@@ -851,14 +949,14 @@ func file_pkg_allieagentgrpc_allie_agent_proto_init() {
 		(*ServerMessage_AuthenticationStatus)(nil),
 		(*ServerMessage_ClientResponse)(nil),
 	}
-	file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[6].OneofWrappers = []any{}
+	file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pkg_allieagentgrpc_allie_agent_proto_rawDesc), len(file_pkg_allieagentgrpc_allie_agent_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
