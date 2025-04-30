@@ -118,7 +118,7 @@ message ClientResponse {
     // Randomly generated instruction ID to be used in the client request
     string instruction_id = 1;
 
-    // Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded", "slash_commands", "feedback_triggered"
+    // Type of the response; can be "message", "stream", "info_message", "info_stream", "error", "info", "varaible_values", "snapshot_taken", "snapshot_loaded", "slash_commands", "feedback_received"
     string type = 2;
 
     // Chat Interface properties
