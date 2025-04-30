@@ -21,6 +21,26 @@ type SessionContext struct {
 	StoreSnapshots bool   `json:"store_snapshots,omitempty"` // Store snapshots, only relevant if "session_type" is "workflow"; if true, all taken snapshots will be stored in the database
 }
 
+// ConversationHistoryMessage is a structure that contains the message ID, role, content, and images of a conversation history message.
+type ConversationHistoryMessage struct {
+	MessageId        string   `json:"message_id"`
+	Role             string   `json:"role"`
+	Content          string   `json:"content"`
+	Images           []string `json:"images"` // image in base64 format
+	PositiveFeedback bool     `json:"positive_feedback"`
+	NegativeFeedback bool     `json:"negative_feedback"`
+}
+
+// Feedback is a structure that contains the conversation history, message ID, and feedback options of a workflow feedback.
+type Feedback struct {
+	ConversationHistory []ConversationHistoryMessage `json:"conversation"`
+	MessageId           string                       `json:"message_id"`
+	AddPositive         bool                         `json:"add_positive"`
+	AddNegative         bool                         `json:"add_negative"`
+	RemovePositive      bool                         `json:"remove_positive"`
+	RemoveNegative      bool                         `json:"remove_negative"`
+}
+
 // SetSessionContext sets the SessionContext struct from the JSON payload
 //
 // Parameters:
