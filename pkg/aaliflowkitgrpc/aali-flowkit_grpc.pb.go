@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v3.21.12
-// source: pkg/allieflowkitgrpc/allie-flowkit.proto
+// source: pkg/aaliflowkitgrpc/aali-flowkit.proto
 
-package allieflowkitgrpc
+package aaliflowkitgrpc
 
 import (
 	context "context"
@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ExternalFunctions_ListFunctions_FullMethodName  = "/allieflowkitgrpc.ExternalFunctions/ListFunctions"
-	ExternalFunctions_RunFunction_FullMethodName    = "/allieflowkitgrpc.ExternalFunctions/RunFunction"
-	ExternalFunctions_StreamFunction_FullMethodName = "/allieflowkitgrpc.ExternalFunctions/StreamFunction"
+	ExternalFunctions_ListFunctions_FullMethodName  = "/aaliflowkitgrpc.ExternalFunctions/ListFunctions"
+	ExternalFunctions_RunFunction_FullMethodName    = "/aaliflowkitgrpc.ExternalFunctions/RunFunction"
+	ExternalFunctions_StreamFunction_FullMethodName = "/aaliflowkitgrpc.ExternalFunctions/StreamFunction"
 )
 
 // ExternalFunctionsClient is the client API for ExternalFunctions service.
@@ -190,7 +190,7 @@ type ExternalFunctions_StreamFunctionServer = grpc.ServerStreamingServer[StreamO
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ExternalFunctions_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "allieflowkitgrpc.ExternalFunctions",
+	ServiceName: "aaliflowkitgrpc.ExternalFunctions",
 	HandlerType: (*ExternalFunctionsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -209,5 +209,5 @@ var ExternalFunctions_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "pkg/allieflowkitgrpc/allie-flowkit.proto",
+	Metadata: "pkg/aaliflowkitgrpc/aali-flowkit.proto",
 }

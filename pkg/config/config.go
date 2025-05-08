@@ -20,10 +20,10 @@ import (
 )
 
 ////////////////////////////////////////////
-// Standard Config init for Allie Go Modules
+// Standard Config init for Aali Go Modules
 ////////////////////////////////////////////
 
-// InitConfig initializes the configuration for the Allie service.
+// InitConfig initializes the configuration for the Aali service.
 //
 // Parameters:
 //   - requiredProperties: The list of required properties.
@@ -31,7 +31,7 @@ import (
 func InitConfig(requiredProperties []string, optionalDefaultValues map[string]interface{}) {
 	// Get config file location
 	// 1st option: read from environment variable
-	configFile := os.Getenv("ALLIE_CONFIG_PATH")
+	configFile := os.Getenv("AALI_CONFIG_PATH")
 	if configFile == "" {
 		// 2nd option: read from default location... root directory
 		configFile = "config.yaml"

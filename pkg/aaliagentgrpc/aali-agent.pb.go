@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v3.21.12
-// source: pkg/allieagentgrpc/allie-agent.proto
+// source: pkg/aaliagentgrpc/aali-agent.proto
 
-package allieagentgrpc
+package aaliagentgrpc
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -35,7 +35,7 @@ type ClientMessage struct {
 
 func (x *ClientMessage) Reset() {
 	*x = ClientMessage{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[0]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +47,7 @@ func (x *ClientMessage) String() string {
 func (*ClientMessage) ProtoMessage() {}
 
 func (x *ClientMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[0]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +60,7 @@ func (x *ClientMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClientMessage.ProtoReflect.Descriptor instead.
 func (*ClientMessage) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{0}
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ClientMessage) GetMessageType() isClientMessage_MessageType {
@@ -121,7 +121,7 @@ type ServerMessage struct {
 
 func (x *ServerMessage) Reset() {
 	*x = ServerMessage{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[1]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -133,7 +133,7 @@ func (x *ServerMessage) String() string {
 func (*ServerMessage) ProtoMessage() {}
 
 func (x *ServerMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[1]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -146,7 +146,7 @@ func (x *ServerMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServerMessage.ProtoReflect.Descriptor instead.
 func (*ServerMessage) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{1}
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ServerMessage) GetMessageType() isServerMessage_MessageType {
@@ -231,7 +231,7 @@ type SessionContext struct {
 
 func (x *SessionContext) Reset() {
 	*x = SessionContext{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[2]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -243,7 +243,7 @@ func (x *SessionContext) String() string {
 func (*SessionContext) ProtoMessage() {}
 
 func (x *SessionContext) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[2]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -256,7 +256,7 @@ func (x *SessionContext) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SessionContext.ProtoReflect.Descriptor instead.
 func (*SessionContext) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{2}
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SessionContext) GetJwtToken() string {
@@ -331,7 +331,7 @@ type ClientRequest struct {
 
 func (x *ClientRequest) Reset() {
 	*x = ClientRequest{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[3]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -343,7 +343,7 @@ func (x *ClientRequest) String() string {
 func (*ClientRequest) ProtoMessage() {}
 
 func (x *ClientRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[3]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -356,7 +356,7 @@ func (x *ClientRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClientRequest.ProtoReflect.Descriptor instead.
 func (*ClientRequest) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{3}
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ClientRequest) GetInstructionId() string {
@@ -424,7 +424,7 @@ type WorkflowFeedback struct {
 
 func (x *WorkflowFeedback) Reset() {
 	*x = WorkflowFeedback{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[4]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -436,7 +436,7 @@ func (x *WorkflowFeedback) String() string {
 func (*WorkflowFeedback) ProtoMessage() {}
 
 func (x *WorkflowFeedback) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[4]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -449,7 +449,7 @@ func (x *WorkflowFeedback) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowFeedback.ProtoReflect.Descriptor instead.
 func (*WorkflowFeedback) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{4}
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *WorkflowFeedback) GetMessageId() string {
@@ -502,7 +502,7 @@ type ConnectionStatus struct {
 
 func (x *ConnectionStatus) Reset() {
 	*x = ConnectionStatus{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[5]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -514,7 +514,7 @@ func (x *ConnectionStatus) String() string {
 func (*ConnectionStatus) ProtoMessage() {}
 
 func (x *ConnectionStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[5]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -527,7 +527,7 @@ func (x *ConnectionStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConnectionStatus.ProtoReflect.Descriptor instead.
 func (*ConnectionStatus) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{5}
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ConnectionStatus) GetConnectionStatus() string {
@@ -562,7 +562,7 @@ type AuthenticationStatus struct {
 
 func (x *AuthenticationStatus) Reset() {
 	*x = AuthenticationStatus{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[6]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -574,7 +574,7 @@ func (x *AuthenticationStatus) String() string {
 func (*AuthenticationStatus) ProtoMessage() {}
 
 func (x *AuthenticationStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[6]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -587,7 +587,7 @@ func (x *AuthenticationStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuthenticationStatus.ProtoReflect.Descriptor instead.
 func (*AuthenticationStatus) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{6}
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AuthenticationStatus) GetAuthenticationStatus() string {
@@ -628,7 +628,7 @@ type ClientResponse struct {
 
 func (x *ClientResponse) Reset() {
 	*x = ClientResponse{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[7]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -640,7 +640,7 @@ func (x *ClientResponse) String() string {
 func (*ClientResponse) ProtoMessage() {}
 
 func (x *ClientResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[7]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -653,7 +653,7 @@ func (x *ClientResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClientResponse.ProtoReflect.Descriptor instead.
 func (*ClientResponse) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{7}
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ClientResponse) GetInstructionId() string {
@@ -767,7 +767,7 @@ type ErrorResponse struct {
 
 func (x *ErrorResponse) Reset() {
 	*x = ErrorResponse{}
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[8]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -779,7 +779,7 @@ func (x *ErrorResponse) String() string {
 func (*ErrorResponse) ProtoMessage() {}
 
 func (x *ErrorResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[8]
+	mi := &file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -792,7 +792,7 @@ func (x *ErrorResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ErrorResponse.ProtoReflect.Descriptor instead.
 func (*ErrorResponse) Descriptor() ([]byte, []int) {
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP(), []int{8}
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ErrorResponse) GetCode() int32 {
@@ -809,25 +809,25 @@ func (x *ErrorResponse) GetMessage() string {
 	return ""
 }
 
-var File_pkg_allieagentgrpc_allie_agent_proto protoreflect.FileDescriptor
+var File_pkg_aaliagentgrpc_aali_agent_proto protoreflect.FileDescriptor
 
-const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
+const file_pkg_aaliagentgrpc_aali_agent_proto_rawDesc = "" +
 	"\n" +
-	"$pkg/allieagentgrpc/allie-agent.proto\x12\x0eallieagentgrpc\"\xb2\x01\n" +
-	"\rClientMessage\x12I\n" +
-	"\x0fsession_context\x18\x01 \x01(\v2\x1e.allieagentgrpc.SessionContextH\x00R\x0esessionContext\x12F\n" +
-	"\x0eclient_request\x18\x02 \x01(\v2\x1d.allieagentgrpc.ClientRequestH\x00R\rclientRequestB\x0e\n" +
-	"\fmessage_type\"\x98\x02\n" +
-	"\rServerMessage\x12O\n" +
-	"\x11connection_status\x18\x01 \x01(\v2 .allieagentgrpc.ConnectionStatusH\x00R\x10connectionStatus\x12[\n" +
-	"\x15authentication_status\x18\x02 \x01(\v2$.allieagentgrpc.AuthenticationStatusH\x00R\x14authenticationStatus\x12I\n" +
-	"\x0fclient_response\x18\x03 \x01(\v2\x1e.allieagentgrpc.ClientResponseH\x00R\x0eclientResponseB\x0e\n" +
-	"\fmessage_type\"\xe4\x02\n" +
+	"\"pkg/aaliagentgrpc/aali-agent.proto\x12\raaliagentgrpc\"\xb0\x01\n" +
+	"\rClientMessage\x12H\n" +
+	"\x0fsession_context\x18\x01 \x01(\v2\x1d.aaliagentgrpc.SessionContextH\x00R\x0esessionContext\x12E\n" +
+	"\x0eclient_request\x18\x02 \x01(\v2\x1c.aaliagentgrpc.ClientRequestH\x00R\rclientRequestB\x0e\n" +
+	"\fmessage_type\"\x95\x02\n" +
+	"\rServerMessage\x12N\n" +
+	"\x11connection_status\x18\x01 \x01(\v2\x1f.aaliagentgrpc.ConnectionStatusH\x00R\x10connectionStatus\x12Z\n" +
+	"\x15authentication_status\x18\x02 \x01(\v2#.aaliagentgrpc.AuthenticationStatusH\x00R\x14authenticationStatus\x12H\n" +
+	"\x0fclient_response\x18\x03 \x01(\v2\x1d.aaliagentgrpc.ClientResponseH\x00R\x0eclientResponseB\x0e\n" +
+	"\fmessage_type\"\xe3\x02\n" +
 	"\x0eSessionContext\x12\x1b\n" +
 	"\tjwt_token\x18\x01 \x01(\tR\bjwtToken\x12\x1f\n" +
 	"\vworkflow_id\x18\x02 \x01(\tR\n" +
-	"workflowId\x12K\n" +
-	"\tvariables\x18\x03 \x03(\v2-.allieagentgrpc.SessionContext.VariablesEntryR\tvariables\x12\x1f\n" +
+	"workflowId\x12J\n" +
+	"\tvariables\x18\x03 \x03(\v2,.aaliagentgrpc.SessionContext.VariablesEntryR\tvariables\x12\x1f\n" +
 	"\vsnapshot_id\x18\x04 \x01(\tR\n" +
 	"snapshotId\x12&\n" +
 	"\x0fworkflow_run_id\x18\x05 \x01(\tR\rworkflowRunId\x12\x17\n" +
@@ -835,16 +835,16 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\x0fstore_snapshots\x18\a \x01(\bR\x0estoreSnapshots\x1a<\n" +
 	"\x0eVariablesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf6\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf4\x02\n" +
 	"\rClientRequest\x12%\n" +
 	"\x0einstruction_id\x18\x01 \x01(\tR\rinstructionId\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x14\n" +
 	"\x05input\x18\x03 \x01(\tR\x05input\x12\x16\n" +
-	"\x06images\x18\x04 \x03(\tR\x06images\x12Z\n" +
-	"\x0fvariable_values\x18\x05 \x03(\v21.allieagentgrpc.ClientRequest.VariableValuesEntryR\x0evariableValues\x12\x1f\n" +
+	"\x06images\x18\x04 \x03(\tR\x06images\x12Y\n" +
+	"\x0fvariable_values\x18\x05 \x03(\v20.aaliagentgrpc.ClientRequest.VariableValuesEntryR\x0evariableValues\x12\x1f\n" +
 	"\vsnapshot_id\x18\x06 \x01(\tR\n" +
-	"snapshotId\x12<\n" +
-	"\bfeedback\x18\a \x01(\v2 .allieagentgrpc.WorkflowFeedbackR\bfeedback\x1aA\n" +
+	"snapshotId\x12;\n" +
+	"\bfeedback\x18\a \x01(\v2\x1f.aaliagentgrpc.WorkflowFeedbackR\bfeedback\x1aA\n" +
 	"\x13VariableValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc9\x01\n" +
@@ -860,7 +860,7 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\x0fworkflow_run_id\x18\x02 \x01(\tR\rworkflowRunId\x125\n" +
 	"\x17max_number_of_snapshots\x18\x03 \x01(\x05R\x14maxNumberOfSnapshots\"J\n" +
 	"\x14AuthenticationStatus\x122\n" +
-	"\x14authenticationStatus\x18\x01 \x01(\tR\x14authenticationStatus\"\x90\x05\n" +
+	"\x14authenticationStatus\x18\x01 \x01(\tR\x14authenticationStatus\"\x8e\x05\n" +
 	"\x0eClientResponse\x12%\n" +
 	"\x0einstruction_id\x18\x01 \x01(\tR\rinstructionId\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x17\n" +
@@ -870,13 +870,13 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\x0fcode_validation\x18\x06 \x01(\tR\x0ecodeValidation\x12*\n" +
 	"\x11input_token_count\x18\a \x01(\x05R\x0finputTokenCount\x12,\n" +
 	"\x12output_token_count\x18\b \x01(\x05R\x10outputTokenCount\x12\x18\n" +
-	"\acontext\x18\t \x01(\tR\acontext\x12[\n" +
+	"\acontext\x18\t \x01(\tR\acontext\x12Z\n" +
 	"\x0fvariable_values\x18\n" +
-	" \x03(\v22.allieagentgrpc.ClientResponse.VariableValuesEntryR\x0evariableValues\x12\x1f\n" +
+	" \x03(\v21.aaliagentgrpc.ClientResponse.VariableValuesEntryR\x0evariableValues\x12\x1f\n" +
 	"\vsnapshot_id\x18\v \x01(\tR\n" +
 	"snapshotId\x12%\n" +
-	"\x0eslash_commands\x18\f \x03(\tR\rslashCommands\x123\n" +
-	"\x05error\x18\r \x01(\v2\x1d.allieagentgrpc.ErrorResponseR\x05error\x12&\n" +
+	"\x0eslash_commands\x18\f \x03(\tR\rslashCommands\x122\n" +
+	"\x05error\x18\r \x01(\v2\x1c.aaliagentgrpc.ErrorResponseR\x05error\x12&\n" +
 	"\finfo_message\x18\x0e \x01(\tH\x00R\vinfoMessage\x88\x01\x01\x1aA\n" +
 	"\x13VariableValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -884,50 +884,50 @@ const file_pkg_allieagentgrpc_allie_agent_proto_rawDesc = "" +
 	"\r_info_message\"=\n" +
 	"\rErrorResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2`\n" +
-	"\vWorkflowRun\x12Q\n" +
-	"\vRunWorkflow\x12\x1d.allieagentgrpc.ClientMessage\x1a\x1d.allieagentgrpc.ServerMessage\"\x00(\x010\x01B\x12Z\x10./allieagentgrpcb\x06proto3"
+	"\amessage\x18\x02 \x01(\tR\amessage2^\n" +
+	"\vWorkflowRun\x12O\n" +
+	"\vRunWorkflow\x12\x1c.aaliagentgrpc.ClientMessage\x1a\x1c.aaliagentgrpc.ServerMessage\"\x00(\x010\x01B\x11Z\x0f./aaliagentgrpcb\x06proto3"
 
 var (
-	file_pkg_allieagentgrpc_allie_agent_proto_rawDescOnce sync.Once
-	file_pkg_allieagentgrpc_allie_agent_proto_rawDescData []byte
+	file_pkg_aaliagentgrpc_aali_agent_proto_rawDescOnce sync.Once
+	file_pkg_aaliagentgrpc_aali_agent_proto_rawDescData []byte
 )
 
-func file_pkg_allieagentgrpc_allie_agent_proto_rawDescGZIP() []byte {
-	file_pkg_allieagentgrpc_allie_agent_proto_rawDescOnce.Do(func() {
-		file_pkg_allieagentgrpc_allie_agent_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_pkg_allieagentgrpc_allie_agent_proto_rawDesc), len(file_pkg_allieagentgrpc_allie_agent_proto_rawDesc)))
+func file_pkg_aaliagentgrpc_aali_agent_proto_rawDescGZIP() []byte {
+	file_pkg_aaliagentgrpc_aali_agent_proto_rawDescOnce.Do(func() {
+		file_pkg_aaliagentgrpc_aali_agent_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_pkg_aaliagentgrpc_aali_agent_proto_rawDesc), len(file_pkg_aaliagentgrpc_aali_agent_proto_rawDesc)))
 	})
-	return file_pkg_allieagentgrpc_allie_agent_proto_rawDescData
+	return file_pkg_aaliagentgrpc_aali_agent_proto_rawDescData
 }
 
-var file_pkg_allieagentgrpc_allie_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
-var file_pkg_allieagentgrpc_allie_agent_proto_goTypes = []any{
-	(*ClientMessage)(nil),        // 0: allieagentgrpc.ClientMessage
-	(*ServerMessage)(nil),        // 1: allieagentgrpc.ServerMessage
-	(*SessionContext)(nil),       // 2: allieagentgrpc.SessionContext
-	(*ClientRequest)(nil),        // 3: allieagentgrpc.ClientRequest
-	(*WorkflowFeedback)(nil),     // 4: allieagentgrpc.WorkflowFeedback
-	(*ConnectionStatus)(nil),     // 5: allieagentgrpc.ConnectionStatus
-	(*AuthenticationStatus)(nil), // 6: allieagentgrpc.AuthenticationStatus
-	(*ClientResponse)(nil),       // 7: allieagentgrpc.ClientResponse
-	(*ErrorResponse)(nil),        // 8: allieagentgrpc.ErrorResponse
-	nil,                          // 9: allieagentgrpc.SessionContext.VariablesEntry
-	nil,                          // 10: allieagentgrpc.ClientRequest.VariableValuesEntry
-	nil,                          // 11: allieagentgrpc.ClientResponse.VariableValuesEntry
+var file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_pkg_aaliagentgrpc_aali_agent_proto_goTypes = []any{
+	(*ClientMessage)(nil),        // 0: aaliagentgrpc.ClientMessage
+	(*ServerMessage)(nil),        // 1: aaliagentgrpc.ServerMessage
+	(*SessionContext)(nil),       // 2: aaliagentgrpc.SessionContext
+	(*ClientRequest)(nil),        // 3: aaliagentgrpc.ClientRequest
+	(*WorkflowFeedback)(nil),     // 4: aaliagentgrpc.WorkflowFeedback
+	(*ConnectionStatus)(nil),     // 5: aaliagentgrpc.ConnectionStatus
+	(*AuthenticationStatus)(nil), // 6: aaliagentgrpc.AuthenticationStatus
+	(*ClientResponse)(nil),       // 7: aaliagentgrpc.ClientResponse
+	(*ErrorResponse)(nil),        // 8: aaliagentgrpc.ErrorResponse
+	nil,                          // 9: aaliagentgrpc.SessionContext.VariablesEntry
+	nil,                          // 10: aaliagentgrpc.ClientRequest.VariableValuesEntry
+	nil,                          // 11: aaliagentgrpc.ClientResponse.VariableValuesEntry
 }
-var file_pkg_allieagentgrpc_allie_agent_proto_depIdxs = []int32{
-	2,  // 0: allieagentgrpc.ClientMessage.session_context:type_name -> allieagentgrpc.SessionContext
-	3,  // 1: allieagentgrpc.ClientMessage.client_request:type_name -> allieagentgrpc.ClientRequest
-	5,  // 2: allieagentgrpc.ServerMessage.connection_status:type_name -> allieagentgrpc.ConnectionStatus
-	6,  // 3: allieagentgrpc.ServerMessage.authentication_status:type_name -> allieagentgrpc.AuthenticationStatus
-	7,  // 4: allieagentgrpc.ServerMessage.client_response:type_name -> allieagentgrpc.ClientResponse
-	9,  // 5: allieagentgrpc.SessionContext.variables:type_name -> allieagentgrpc.SessionContext.VariablesEntry
-	10, // 6: allieagentgrpc.ClientRequest.variable_values:type_name -> allieagentgrpc.ClientRequest.VariableValuesEntry
-	4,  // 7: allieagentgrpc.ClientRequest.feedback:type_name -> allieagentgrpc.WorkflowFeedback
-	11, // 8: allieagentgrpc.ClientResponse.variable_values:type_name -> allieagentgrpc.ClientResponse.VariableValuesEntry
-	8,  // 9: allieagentgrpc.ClientResponse.error:type_name -> allieagentgrpc.ErrorResponse
-	0,  // 10: allieagentgrpc.WorkflowRun.RunWorkflow:input_type -> allieagentgrpc.ClientMessage
-	1,  // 11: allieagentgrpc.WorkflowRun.RunWorkflow:output_type -> allieagentgrpc.ServerMessage
+var file_pkg_aaliagentgrpc_aali_agent_proto_depIdxs = []int32{
+	2,  // 0: aaliagentgrpc.ClientMessage.session_context:type_name -> aaliagentgrpc.SessionContext
+	3,  // 1: aaliagentgrpc.ClientMessage.client_request:type_name -> aaliagentgrpc.ClientRequest
+	5,  // 2: aaliagentgrpc.ServerMessage.connection_status:type_name -> aaliagentgrpc.ConnectionStatus
+	6,  // 3: aaliagentgrpc.ServerMessage.authentication_status:type_name -> aaliagentgrpc.AuthenticationStatus
+	7,  // 4: aaliagentgrpc.ServerMessage.client_response:type_name -> aaliagentgrpc.ClientResponse
+	9,  // 5: aaliagentgrpc.SessionContext.variables:type_name -> aaliagentgrpc.SessionContext.VariablesEntry
+	10, // 6: aaliagentgrpc.ClientRequest.variable_values:type_name -> aaliagentgrpc.ClientRequest.VariableValuesEntry
+	4,  // 7: aaliagentgrpc.ClientRequest.feedback:type_name -> aaliagentgrpc.WorkflowFeedback
+	11, // 8: aaliagentgrpc.ClientResponse.variable_values:type_name -> aaliagentgrpc.ClientResponse.VariableValuesEntry
+	8,  // 9: aaliagentgrpc.ClientResponse.error:type_name -> aaliagentgrpc.ErrorResponse
+	0,  // 10: aaliagentgrpc.WorkflowRun.RunWorkflow:input_type -> aaliagentgrpc.ClientMessage
+	1,  // 11: aaliagentgrpc.WorkflowRun.RunWorkflow:output_type -> aaliagentgrpc.ServerMessage
 	11, // [11:12] is the sub-list for method output_type
 	10, // [10:11] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -935,36 +935,36 @@ var file_pkg_allieagentgrpc_allie_agent_proto_depIdxs = []int32{
 	0,  // [0:10] is the sub-list for field type_name
 }
 
-func init() { file_pkg_allieagentgrpc_allie_agent_proto_init() }
-func file_pkg_allieagentgrpc_allie_agent_proto_init() {
-	if File_pkg_allieagentgrpc_allie_agent_proto != nil {
+func init() { file_pkg_aaliagentgrpc_aali_agent_proto_init() }
+func file_pkg_aaliagentgrpc_aali_agent_proto_init() {
+	if File_pkg_aaliagentgrpc_aali_agent_proto != nil {
 		return
 	}
-	file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[0].OneofWrappers = []any{
+	file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[0].OneofWrappers = []any{
 		(*ClientMessage_SessionContext)(nil),
 		(*ClientMessage_ClientRequest)(nil),
 	}
-	file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[1].OneofWrappers = []any{
+	file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[1].OneofWrappers = []any{
 		(*ServerMessage_ConnectionStatus)(nil),
 		(*ServerMessage_AuthenticationStatus)(nil),
 		(*ServerMessage_ClientResponse)(nil),
 	}
-	file_pkg_allieagentgrpc_allie_agent_proto_msgTypes[7].OneofWrappers = []any{}
+	file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pkg_allieagentgrpc_allie_agent_proto_rawDesc), len(file_pkg_allieagentgrpc_allie_agent_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pkg_aaliagentgrpc_aali_agent_proto_rawDesc), len(file_pkg_aaliagentgrpc_aali_agent_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_pkg_allieagentgrpc_allie_agent_proto_goTypes,
-		DependencyIndexes: file_pkg_allieagentgrpc_allie_agent_proto_depIdxs,
-		MessageInfos:      file_pkg_allieagentgrpc_allie_agent_proto_msgTypes,
+		GoTypes:           file_pkg_aaliagentgrpc_aali_agent_proto_goTypes,
+		DependencyIndexes: file_pkg_aaliagentgrpc_aali_agent_proto_depIdxs,
+		MessageInfos:      file_pkg_aaliagentgrpc_aali_agent_proto_msgTypes,
 	}.Build()
-	File_pkg_allieagentgrpc_allie_agent_proto = out.File
-	file_pkg_allieagentgrpc_allie_agent_proto_goTypes = nil
-	file_pkg_allieagentgrpc_allie_agent_proto_depIdxs = nil
+	File_pkg_aaliagentgrpc_aali_agent_proto = out.File
+	file_pkg_aaliagentgrpc_aali_agent_proto_goTypes = nil
+	file_pkg_aaliagentgrpc_aali_agent_proto_depIdxs = nil
 }

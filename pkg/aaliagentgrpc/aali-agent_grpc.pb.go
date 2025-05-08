@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v3.21.12
-// source: pkg/allieagentgrpc/allie-agent.proto
+// source: pkg/aaliagentgrpc/aali-agent.proto
 
-package allieagentgrpc
+package aaliagentgrpc
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	WorkflowRun_RunWorkflow_FullMethodName = "/allieagentgrpc.WorkflowRun/RunWorkflow"
+	WorkflowRun_RunWorkflow_FullMethodName = "/aaliagentgrpc.WorkflowRun/RunWorkflow"
 )
 
 // WorkflowRunClient is the client API for WorkflowRun service.
@@ -106,7 +106,7 @@ type WorkflowRun_RunWorkflowServer = grpc.BidiStreamingServer[ClientMessage, Ser
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var WorkflowRun_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "allieagentgrpc.WorkflowRun",
+	ServiceName: "aaliagentgrpc.WorkflowRun",
 	HandlerType: (*WorkflowRunServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
@@ -117,5 +117,5 @@ var WorkflowRun_ServiceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "pkg/allieagentgrpc/allie-agent.proto",
+	Metadata: "pkg/aaliagentgrpc/aali-agent.proto",
 }

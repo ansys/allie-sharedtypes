@@ -1,4 +1,4 @@
-Allie Shared types documentation |version|
+Aali Shared types documentation |version|
 #################################################
 
 
@@ -15,7 +15,7 @@ Allie Shared types documentation |version|
 
       :material-regular:`code;48px`
 
-      Details the Allie Shared types API, offering a comprehensive
+      Details the Aali Shared types API, offering a comprehensive
       reference for developers and users.
 
       +++
