@@ -6,12 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/ansys/allie-sharedtypes/pkg/allieflowkitgrpc"
-	"github.com/ansys/allie-sharedtypes/pkg/logging"
-	"github.com/ansys/allie-sharedtypes/pkg/sharedtypes"
-	"github.com/ansys/allie-sharedtypes/pkg/typeconverters"
+	"github.com/ansys/aali-sharedtypes/pkg/aaliflowkitgrpc"
+	"github.com/ansys/aali-sharedtypes/pkg/logging"
+	"github.com/ansys/aali-sharedtypes/pkg/sharedtypes"
+	"github.com/ansys/aali-sharedtypes/pkg/typeconverters"
 
-	"github.com/ansys/allie-sharedtypes/pkg/config"
+	"github.com/ansys/aali-sharedtypes/pkg/config"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
@@ -47,7 +47,7 @@ func ListFunctionsAndSaveToInteralStates(ctx *logging.ContextMap) error {
 	defer cancel()
 
 	// Call ListFunctions
-	listResp, err := c.ListFunctions(ctxWithCancel, &allieflowkitgrpc.ListFunctionsRequest{})
+	listResp, err := c.ListFunctions(ctxWithCancel, &aaliflowkitgrpc.ListFunctionsRequest{})
 	if err != nil {
 		return fmt.Errorf("error in external function gRPC ListFunctions: %v", err)
 	}
@@ -128,7 +128,7 @@ func RunFunction(ctx *logging.ContextMap, functionName string, inputs map[string
 	}
 
 	// Convert inputs to gRPC format based on order from function definition
-	input := []*allieflowkitgrpc.FunctionInput{}
+	input := []*aaliflowkitgrpc.FunctionInput{}
 	for _, inputDef := range functionDef.Inputs {
 		// Get the input value
 		value, ok := inputs[inputDef.Name]
@@ -143,7 +143,7 @@ func RunFunction(ctx *logging.ContextMap, functionName string, inputs map[string
 		}
 
 		// Convert the input value to gRPC format
-		input = append(input, &allieflowkitgrpc.FunctionInput{
+		input = append(input, &aaliflowkitgrpc.FunctionInput{
 			Name:   inputDef.Name,
 			GoType: inputDef.GoType,
 			Value:  stringValue,
@@ -151,7 +151,7 @@ func RunFunction(ctx *logging.ContextMap, functionName string, inputs map[string
 	}
 
 	// Call RunFunction
-	runResp, err := c.RunFunction(ctxWithCancel, &allieflowkitgrpc.FunctionInputs{
+	runResp, err := c.RunFunction(ctxWithCancel, &aaliflowkitgrpc.FunctionInputs{
 		Name:   functionName,
 		Inputs: input,
 	})
@@ -215,7 +215,7 @@ func StreamFunction(ctx *logging.ContextMap, functionName string, inputs map[str
 	}
 
 	// Convert inputs to gRPC format based on order from function definition
-	input := []*allieflowkitgrpc.FunctionInput{}
+	input := []*aaliflowkitgrpc.FunctionInput{}
 	for _, inputDef := range functionDef.Inputs {
 		// Get the input value
 		value, ok := inputs[inputDef.Name]
@@ -234,7 +234,7 @@ func StreamFunction(ctx *logging.ContextMap, functionName string, inputs map[str
 		}
 
 		// Convert the input value to gRPC format
-		input = append(input, &allieflowkitgrpc.FunctionInput{
+		input = append(input, &aaliflowkitgrpc.FunctionInput{
 			Name:   inputDef.Name,
 			GoType: inputDef.GoType,
 			Value:  stringValue,
@@ -242,7 +242,7 @@ func StreamFunction(ctx *logging.ContextMap, functionName string, inputs map[str
 	}
 
 	// Call StreamFunction
-	stream, err := c.StreamFunction(ctxWithCancel, &allieflowkitgrpc.FunctionInputs{
+	stream, err := c.StreamFunction(ctxWithCancel, &aaliflowkitgrpc.FunctionInputs{
 		Name:   functionName,
 		Inputs: input,
 	})
@@ -266,7 +266,7 @@ func StreamFunction(ctx *logging.ContextMap, functionName string, inputs map[str
 // Parameters:
 //   - stream: the stream from the server
 //   - streamChannel: the channel to send the stream to
-func receiveStreamFromServer(ctx *logging.ContextMap, stream allieflowkitgrpc.ExternalFunctions_StreamFunctionClient, streamChannel *chan string, conn *grpc.ClientConn, cancel context.CancelFunc) {
+func receiveStreamFromServer(ctx *logging.ContextMap, stream aaliflowkitgrpc.ExternalFunctions_StreamFunctionClient, streamChannel *chan string, conn *grpc.ClientConn, cancel context.CancelFunc) {
 	defer func() {
 		r := recover()
 		if r != nil {
@@ -302,7 +302,7 @@ func receiveStreamFromServer(ctx *logging.ContextMap, stream allieflowkitgrpc.Ex
 //   - client: the client to the external functions gRPC
 //   - connection: the connection to the external functions gRPC
 //   - err: an error message if the client creation fails
-func createClient() (client allieflowkitgrpc.ExternalFunctionsClient, connection *grpc.ClientConn, err error) {
+func createClient() (client aaliflowkitgrpc.ExternalFunctionsClient, connection *grpc.ClientConn, err error) {
 	// check if EXTERNALFUNCTIONS_ENDPOINT is set
 	if config.GlobalConfig.EXTERNALFUNCTIONS_ENDPOINT == "" {
 		return nil, nil, fmt.Errorf("config variable 'EXTERNALFUNCTIONS_ENDPOINT' is not set")
@@ -350,7 +350,7 @@ func createClient() (client allieflowkitgrpc.ExternalFunctionsClient, connection
 	}
 
 	// Return the client
-	c := allieflowkitgrpc.NewExternalFunctionsClient(conn)
+	c := aaliflowkitgrpc.NewExternalFunctionsClient(conn)
 	return c, conn, nil
 }
 

@@ -3,7 +3,7 @@ package sharedtypes
 import (
 	"encoding/json"
 
-	"github.com/ansys/allie-sharedtypes/pkg/logging"
+	"github.com/ansys/aali-sharedtypes/pkg/logging"
 )
 
 // Message represents the JSON message you are expecting
