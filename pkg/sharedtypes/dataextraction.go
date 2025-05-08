@@ -22,11 +22,13 @@
 
 package sharedtypes
 
+import "github.com/google/uuid"
+
 // DataExtractionDocumentData represents the data extracted from a document.
 type DataExtractionDocumentData struct {
 	DocumentName      string    `json:"documentName"`
 	DocumentId        string    `json:"documentId"`
-	Guid              string    `json:"guid"`
+	Guid              uuid.UUID `json:"guid"`
 	Level             string    `json:"level"`
 	ChildIds          []string  `json:"childIds"`
 	ParentId          string    `json:"parentId"`
@@ -41,7 +43,7 @@ type DataExtractionDocumentData struct {
 }
 
 type CodeGenerationElement struct {
-	Guid string             `json:"guid"`
+	Guid uuid.UUID          `json:"guid"`
 	Type CodeGenerationType `json:"type"`
 
 	NamePseudocode string `json:"name_pseudocode"` // Function name without dependencies
@@ -93,7 +95,7 @@ type XMLMemberParam struct {
 }
 
 type CodeGenerationExample struct {
-	Guid                   string            `json:"guid"`
+	Guid                   uuid.UUID         `json:"guid"`
 	Name                   string            `json:"name"`
 	Dependencies           []string          `json:"dependencies"`
 	DependencyEquivalences map[string]string `json:"dependency_equivalences"`

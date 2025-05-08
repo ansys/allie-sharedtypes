@@ -22,6 +22,8 @@
 
 package sharedtypes
 
+import "github.com/google/uuid"
+
 // DbFilters represents the filters for the database.
 type DbFilters struct {
 	// Filters for string fields
@@ -54,7 +56,7 @@ type DbJsonFilter struct {
 
 // DbData represents the data stored in the database.
 type DbData struct {
-	Guid              string                 `json:"guid"`
+	Guid              uuid.UUID              `json:"guid"`
 	DocumentId        string                 `json:"document_id"`
 	DocumentName      string                 `json:"document_name"`
 	Text              string                 `json:"text"`
@@ -63,19 +65,19 @@ type DbData struct {
 	Embedding         []float32              `json:"embeddings"`
 	Tags              []string               `json:"tags"`
 	Metadata          map[string]interface{} `json:"metadata"`
-	ParentId          string                 `json:"parent_id"`
-	ChildIds          []string               `json:"child_ids"`
-	PreviousSiblingId string                 `json:"previous_sibling_id"`
-	NextSiblingId     string                 `json:"next_sibling_id"`
-	LastChildId       string                 `json:"last_child_id"`
-	FirstChildId      string                 `json:"first_child_id"`
+	ParentId          *uuid.UUID             `json:"parent_id"`
+	ChildIds          []uuid.UUID            `json:"child_ids"`
+	PreviousSiblingId *uuid.UUID             `json:"previous_sibling_id"`
+	NextSiblingId     *uuid.UUID             `json:"next_sibling_id"`
+	LastChildId       *uuid.UUID             `json:"last_child_id"`
+	FirstChildId      *uuid.UUID             `json:"first_child_id"`
 	Level             string                 `json:"level"`
 	HasNeo4jEntry     bool                   `json:"has_neo4j_entry"`
 }
 
 // DbResponse represents the response from the database.
 type DbResponse struct {
-	Guid              string                 `json:"guid"`
+	Guid              uuid.UUID              `json:"guid"`
 	DocumentId        string                 `json:"document_id"`
 	DocumentName      string                 `json:"document_name"`
 	Text              string                 `json:"text"`
@@ -84,12 +86,12 @@ type DbResponse struct {
 	Embedding         []float32              `json:"embeddings"`
 	Tags              []string               `json:"tags"`
 	Metadata          map[string]interface{} `json:"metadata"`
-	ParentId          string                 `json:"parent_id"`
-	ChildIds          []string               `json:"child_ids"`
-	PreviousSiblingId string                 `json:"previous_sibling_id"`
-	NextSiblingId     string                 `json:"next_sibling_id"`
-	LastChildId       string                 `json:"last_child_id"`
-	FirstChildId      string                 `json:"first_child_id"`
+	ParentId          *uuid.UUID             `json:"parent_id"`
+	ChildIds          []uuid.UUID            `json:"child_ids"`
+	PreviousSiblingId *uuid.UUID             `json:"previous_sibling_id"`
+	NextSiblingId     *uuid.UUID             `json:"next_sibling_id"`
+	LastChildId       *uuid.UUID             `json:"last_child_id"`
+	FirstChildId      *uuid.UUID             `json:"first_child_id"`
 	Distance          float64                `json:"distance"`
 	Level             string                 `json:"level"`
 	HasNeo4jEntry     bool                   `json:"has_neo4j_entry"`
@@ -138,10 +140,10 @@ type value struct {
 
 // props represents the properties from the Neo4j query.
 type props struct {
-	CollectionName string   `json:"collectionName"`
-	DocumentId     string   `json:"documentId"`
-	DocumentTypes  []string `json:"documentTypes,omitempty"`
-	Guid           string   `json:"guid,omitempty"`
+	CollectionName string    `json:"collectionName"`
+	DocumentId     string    `json:"documentId"`
+	DocumentTypes  []string  `json:"documentTypes,omitempty"`
+	Guid           uuid.UUID `json:"guid,omitempty"`
 }
 
 // summaryCounters represents the summary counters from the Neo4j query.
