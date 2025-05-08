@@ -1,5 +1,5 @@
 Aali Shared types
-[Aa]llie
+[Aa]ali
 (?i)Ansys
 API
 knowledgedb
