@@ -6,7 +6,7 @@ API reference
 +---------------------------------------------------+
 | Module                                            |
 +===================================================+
-| `aaliflowkitgrpc <aaliflowkitgrpc/index.html>`_ |
+| `aaliflowkitgrpc <aaliflowkitgrpc/index.html>`_   |
 +---------------------------------------------------+
 | `config <config/index.html>`_                     |
 +---------------------------------------------------+
