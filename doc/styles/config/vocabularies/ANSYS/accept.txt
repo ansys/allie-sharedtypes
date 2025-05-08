@@ -1,4 +1,4 @@
-Allie Shared types
+Aali Shared types
 [Aa]llie
 (?i)Ansys
 API

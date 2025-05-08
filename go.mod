@@ -1,4 +1,4 @@
-module github.com/ansys/allie-sharedtypes
+module github.com/ansys/aali-sharedtypes
 
 go 1.23.0
 
@@ -8,6 +8,7 @@ require (
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.17.1
 	github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.8.2
 	github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets v1.3.1
+	github.com/ansys/allie-sharedtypes v0.0.0-20250430150515-63bf6e010b06
 	google.golang.org/grpc v1.71.0
 	google.golang.org/protobuf v1.36.6
 )

@@ -10,7 +10,7 @@ on:
 
 env:
   MAIN_PYTHON_VERSION: '3.12'
-  DOCUMENTATION_CNAME: 'ansys.github.io/allie-sharedtypes'
+  DOCUMENTATION_CNAME: 'ansys.github.io/aali-sharedtypes'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -98,8 +98,8 @@ jobs:
 
       - name: Compile protofiles
         run: |
-          protoc --go_out=pkg --go-grpc_out=pkg ./pkg/allieflowkitgrpc/allie-flowkit.proto
-          protoc --go_out=pkg --go-grpc_out=pkg ./pkg/allieagentgrpc/allie-agent.proto
+          protoc --go_out=pkg --go-grpc_out=pkg ./pkg/aaliflowkitgrpc/aali-flowkit.proto
+          protoc --go_out=pkg --go-grpc_out=pkg ./pkg/aaliagentgrpc/aali-agent.proto
           go mod tidy
           go mod verify
 
@@ -163,7 +163,7 @@ jobs:
       - name: Build GoPages
         run: |
           go install github.com/johnstarich/go/gopages@latest
-          gopages -internal -source-link "https://github.com/ansys/allie-sharedtypes/blob/main/{{.Path}}{{if .Line}}#L{{.Line}}{{end}}"
+          gopages -internal -source-link "https://github.com/ansys/aali-sharedtypes/blob/main/{{.Path}}{{if .Line}}#L{{.Line}}{{end}}"
 
       - name: Download HTML documentation artifacts
         uses: actions/download-artifact@v4
@@ -172,7 +172,7 @@ jobs:
           path: documentation-html
 
       - name: Run Python script
-        run: python pkg/scripts/doc_api_reference.py ansys allie-sharedtypes
+        run: python pkg/scripts/doc_api_reference.py ansys aali-sharedtypes
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

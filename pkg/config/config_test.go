@@ -28,14 +28,14 @@ func TestDefineOptionalProperties(t *testing.T) {
 				"LOCAL_LOGS":                 true,
 				"NUMBER_OF_WORKFLOW_WORKERS": 5,
 				"WEBSERVER_PORT":             "8080",
-				"SERVICE_NAME":               "AllieService",
+				"SERVICE_NAME":               "AaliService",
 			},
 			expectedConfig: Config{
 				LOG_LEVEL:                  "info",
 				LOCAL_LOGS:                 true,
 				NUMBER_OF_WORKFLOW_WORKERS: 5,
 				WEBSERVER_PORT:             "8080",
-				SERVICE_NAME:               "AllieService",
+				SERVICE_NAME:               "AaliService",
 			},
 		},
 		{
@@ -52,7 +52,7 @@ func TestDefineOptionalProperties(t *testing.T) {
 				"LOCAL_LOGS":                 true,
 				"NUMBER_OF_WORKFLOW_WORKERS": 10,
 				"WEBSERVER_PORT":             "9090",
-				"SERVICE_NAME":               "AllieService",
+				"SERVICE_NAME":               "AaliService",
 			},
 			expectedConfig: Config{
 				LOG_LEVEL:                  "debug",
@@ -76,7 +76,7 @@ func TestDefineOptionalProperties(t *testing.T) {
 				"LOCAL_LOGS":                 false,
 				"NUMBER_OF_WORKFLOW_WORKERS": 5,
 				"WEBSERVER_PORT":             "8080",
-				"SERVICE_NAME":               "AllieService",
+				"SERVICE_NAME":               "AaliService",
 			},
 			expectedConfig: Config{
 				LOG_LEVEL:                  "warn",

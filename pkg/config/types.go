@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Config contains all the configuration settings for the Allie service.
+// Config contains all the configuration settings for the Aali service.
 type Config struct {
 
 	// Logging
@@ -39,7 +39,7 @@ type Config struct {
 	AZURE_KEY_VAULT_NAME                string `yaml:"AZURE_KEY_VAULT_NAME" json:"AZUREKEYVAULTNAME"`
 	AZURE_MANAGED_IDENTITY_ID           string `yaml:"AZURE_MANAGED_IDENTITY_ID" json:"AZUREMANAGEDIDENTITYID"`
 
-	// Allie Agent
+	// Aali Agent
 	///////////////
 	PRODUCTION_MODE            bool   `yaml:"PRODUCTION_MODE" json:"PRODUCTIONMODE"` // If true, the agent error messages will be generic
 	AGENT_PORT                 string `yaml:"AGENT_PORT" json:"AGENTPORT"`
@@ -74,21 +74,21 @@ type Config struct {
 	// DB Connection
 	KVDB_ENDPOINT string `yaml:"KVDB_ENDPOINT" json:"KVDBENDPOINT"`
 
-	// Allie Flowkit
+	// Aali Flowkit
 	/////////////////
 	EXTERNALFUNCTIONS_GRPC_PORT string `yaml:"EXTERNALFUNCTIONS_GRPC_PORT" json:"EXTERNALFUNCTIONSGRPCPORT"`
 	FLOWKIT_API_KEY             string `yaml:"FLOWKIT_API_KEY" json:"FLOWKITAPIKEY"`
-	// Allie Modules
+	// Aali Modules
 	LLM_HANDLER_ENDPOINT  string `yaml:"LLM_HANDLER_ENDPOINT" json:"LLMHANDLERENDPOINT"`
 	KNOWLEDGE_DB_ENDPOINT string `yaml:"KNOWLEDGE_DB_ENDPOINT" json:"KNOWLEDGEDBENDPOINT"`
 
-	// Allie LLM
+	// Aali LLM
 	/////////////
 	WEBSERVER_PORT         string `yaml:"WEBSERVER_PORT" json:"WEBSERVERPORT"`
 	MODELS_CONFIG_LOCATION string `yaml:"MODELS_CONFIG_LOCATION" json:"MODELSCONFIGLOCATION"`
 	LLM_API_KEY            string `yaml:"LLM_API_KEY" json:"LLMAPIKEY"`
 
-	// Allie DB
+	// Aali DB
 	///////////
 	WEBSERVER_PORT_DB                  string   `yaml:"WEBSERVER_PORT_DB" json:"WEBSERVERPORTDB"`
 	EMBEDDINGS_DIMENSIONS              int      `yaml:"EMBEDDINGS_DIMENSIONS" json:"EMBEDDINGSDIMENSIONS"`
@@ -110,7 +110,7 @@ type Config struct {
 	ELASTICSEARCH_INSECURE_CONNECTION  bool     `yaml:"ELASTICSEARCH_INSECURE_CONNECTION" json:"ELASTICSEARCHINSECURECONNECTION"`
 	DATABASE_TYPE                      string   `yaml:"DATABASE_TYPE" json:"DATABASETYPE"` // milvus or elasticsearch
 
-	// Allie Exec
+	// Aali Exec
 	//////////////
 	EXEC_ID             string `yaml:"EXEC_ID" json:"EXECID"`
 	WEBSERVER_PORT_EXEC string `yaml:"WEBSERVER_PORT_EXEC" json:"WEBSERVERPORTEXEC"`
@@ -127,7 +127,7 @@ type Config struct {
 	// Workflow Store
 	WORKFLOW_CONFIG_VARIABLES map[string]string `yaml:"WORKFLOW_CONFIG_VARIABLES" json:"WORKFLOWCONFIGVARIABLES"`
 
-	// Allie Database
+	// Aali Database
 	/////////////////
 	// kv db
 	KVDB_ADDRESS   string `yaml:"KVDB_ADDRESS" json:"KVDBADDRESS"`
