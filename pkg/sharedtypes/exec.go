@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-// ExecRequest represents the requests that can be sent to allie-exec
+// ExecRequest represents the requests that can be sent to aali-exec
 type ExecRequest struct {
 	Type                 string                       `json:"type"`   // "code", "flowkit"
 	Action               string                       `json:"action"` // type "code":"execute", "append", "cancel", "status"; for type "flowkit": "<functionName>"
@@ -13,14 +13,14 @@ type ExecRequest struct {
 	Inputs               map[string]FilledInputOutput `json:"inputs"`               // only for type "flowkit"
 }
 
-// ExecutionInstruction contain an array of strings that represent the code to be executed in allie-exec
+// ExecutionInstruction contain an array of strings that represent the code to be executed in aali-exec
 type ExecutionInstruction struct {
 	CodeType       string   `json:"codeType"` // "python", "bash"
 	Code           []string `json:"code"`
 	VenvExecutable string   `json:"venvExecutable"`
 }
 
-// ExecResponse represents the response that allie-exec sends back
+// ExecResponse represents the response that aali-exec sends back
 type ExecResponse struct {
 	Type             string                       `json:"type"` // "status", "flowkit", "file", "error"
 	InstructionGuid  string                       `json:"instructionGuid"`

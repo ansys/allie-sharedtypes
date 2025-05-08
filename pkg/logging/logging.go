@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/ansys/allie-sharedtypes/pkg/config"
+	"github.com/ansys/aali-sharedtypes/pkg/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

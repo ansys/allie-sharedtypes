@@ -7,10 +7,10 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/ansys/allie-sharedtypes/pkg/clients/flowkitclient"
-	"github.com/ansys/allie-sharedtypes/pkg/config"
-	"github.com/ansys/allie-sharedtypes/pkg/sharedtypes"
-	"github.com/ansys/allie-sharedtypes/pkg/typeconverters"
+	"github.com/ansys/aali-sharedtypes/pkg/clients/flowkitclient"
+	"github.com/ansys/aali-sharedtypes/pkg/config"
+	"github.com/ansys/aali-sharedtypes/pkg/sharedtypes"
+	"github.com/ansys/aali-sharedtypes/pkg/typeconverters"
 )
 
 // ListFunctionsAndSaveToInteralStates calls the FlowKit-Python API and saves the functions to internal states
