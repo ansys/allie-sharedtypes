@@ -110,27 +110,12 @@ type Config struct {
 	MODELS_CONFIG_LOCATION string `yaml:"MODELS_CONFIG_LOCATION" json:"MODELSCONFIGLOCATION"`
 	LLM_API_KEY            string `yaml:"LLM_API_KEY" json:"LLMAPIKEY"`
 
-	// Aali DB
-	///////////
-	WEBSERVER_PORT_DB                  string   `yaml:"WEBSERVER_PORT_DB" json:"WEBSERVERPORTDB"`
-	EMBEDDINGS_DIMENSIONS              int      `yaml:"EMBEDDINGS_DIMENSIONS" json:"EMBEDDINGSDIMENSIONS"`
-	MILVUS_INDEX_TYPE                  string   `yaml:"MILVUS_INDEX_TYPE" json:"MILVUSINDEXTYPE"`
-	MILVUS_METRIC_TYPE                 string   `yaml:"MILVUS_METRIC_TYPE" json:"MILVUSMETRICTYPE"` // cosine, l2 or ip
-	MILVUS_HOST                        string   `yaml:"MILVUS_HOST" json:"MILVUSHOST"`
-	MILVUS_PORT                        string   `yaml:"MILVUS_PORT" json:"MILVUSPORT"`
-	NEO4J_DB                           bool     `yaml:"NEO4J_DB" json:"NEO4JDB"`
-	NEO4J_URI                          string   `yaml:"NEO4J_URI" json:"NEO4JURI"`
-	NEO4J_USERNAME                     string   `yaml:"NEO4J_USERNAME" json:"NEO4JUSERNAME"`
-	NEO4J_PASSWORD                     string   `yaml:"NEO4J_PASSWORD" json:"NEO4JPASSWORD"`
-	TEMP_COLLECTION_NAME               string   `yaml:"TEMP_COLLECTION_NAME" json:"TEMPCOLLECTIONNAME"`
-	ELASTICSEARCH_HOST                 string   `yaml:"ELASTICSEARCH_HOST" json:"ELASTICSEARCHHOST"`
-	ELASTICSEARCH_PORT                 string   `yaml:"ELASTICSEARCH_PORT" json:"ELASTICSEARCHPORT"`
-	ELASTICSEARCH_USERNAME             string   `yaml:"ELASTICSEARCH_USERNAME" json:"ELASTICSEARCHUSERNAME"`
-	ELASTICSEARCH_PASSWORD             string   `yaml:"ELASTICSEARCH_PASSWORD" json:"ELASTICSEARCHPASSWORD"`
-	ELASTICSEARCH_INDEX_TYPE           string   `yaml:"ELASTICSEARCH_INDEX_TYPE" json:"ELASTICSEARCHINDEXTYPE"`                     // cosineSimilarity or dotProduct
-	ELASTICSEARCH_TRUSTED_CERTIFICATES []string `yaml:"ELASTICSEARCH_TRUSTED_CERTIFICATES" json:"ELASTICSEARCHTRUSTEDCERTIFICATES"` // list of paths to trusted certificates
-	ELASTICSEARCH_INSECURE_CONNECTION  bool     `yaml:"ELASTICSEARCH_INSECURE_CONNECTION" json:"ELASTICSEARCHINSECURECONNECTION"`
-	DATABASE_TYPE                      string   `yaml:"DATABASE_TYPE" json:"DATABASETYPE"` // milvus or elasticsearch
+	// qdrant config
+	QDRANT_HOST string `yaml:"QDRANT_HOST" json:"QDRANTHOST"`
+	QDRANT_PORT int    `yaml:"QDRANT_PORT" json:"QDRANTPORT"`
+
+	// graph db config
+	GRAPHDB_ADDRESS string `yaml:"GRAPHDB_ADDRESS" json:"GRAPHDBADDRESS"`
 
 	// Aali Exec
 	//////////////
