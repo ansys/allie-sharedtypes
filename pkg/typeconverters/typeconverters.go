@@ -177,6 +177,11 @@ func ConvertStringToGivenType(value string, goType string) (output interface{}, 
 			return nil, err
 		}
 		return uint32(valueUint64), nil
+	case "uint64":
+		if value == "" {
+			value = "0"
+		}
+		return strconv.ParseUint(value, 10, 64)
 	case "bool":
 		if value == "" {
 			value = "false"
@@ -548,6 +553,8 @@ func ConvertGivenTypeToString(value interface{}, goType string) (output string, 
 		return strconv.Itoa(value.(int)), nil
 	case "uint32":
 		return strconv.FormatUint(uint64(value.(uint32)), 10), nil
+	case "uint64":
+		return strconv.FormatUint(value.(uint64), 10), nil
 	case "bool":
 		return strconv.FormatBool(value.(bool)), nil
 	case "interface{}":
