@@ -434,7 +434,12 @@ func InitGlobalConfigFromAzureKeyVault() (err error) {
 						// Set the field to the new value
 						switch field.Kind() {
 						case reflect.String:
-							field.SetString(*resp.Value)
+							value := *resp.Value
+							unquoted, err := strconv.Unquote(`"` + strings.ReplaceAll(value, `"`, `\"`) + `"`)
+							if err == nil {
+								value = unquoted
+							}
+							field.SetString(value)
 						case reflect.Bool:
 							// Convert string to bool
 							value, err := strconv.ParseBool(*resp.Value)
